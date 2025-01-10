@@ -120,7 +120,8 @@
             "rate": 71,
             "url": "/peterhof/nizhniy_park",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/77852f207abaa1029d14037564aedd47.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/nizhniy_park"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/nizhniy_park",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/77852f207abaa1029d14037564aedd47.png"
         },
         {
             "title": "Верхний сад",
@@ -137,7 +138,8 @@
             "rate": 69,
             "url": "/peterhof/verhniy_sad",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240531/caf5c719d260e3672bcb817d7962a247.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/verhniy_sad"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/verhniy_sad",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240531/caf5c719d260e3672bcb817d7962a247.jpg"
         },
         {
             "title": "Большой петергофский дворец",
@@ -157,7 +159,8 @@
             "rate": 63,
             "url": "/peterhof/bolshoy_petergofskiy_dvorets",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/10172d0211930e9597271faceb09c8cd.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshoy_petergofskiy_dvorets"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshoy_petergofskiy_dvorets",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/10172d0211930e9597271faceb09c8cd.png"
         },
         {
             "title": "Музей «Особая кладовая»",
@@ -177,7 +180,8 @@
             "rate": 60,
             "url": "/peterhof/muzei_osobaya_kladovaya",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/d81b80402f179e65aa0293607af7a560.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_osobaya_kladovaya"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_osobaya_kladovaya",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20190828/86101426977e7184e8d61bcba5a161d7.jpg"
         },
         {
             "title": "Музей «Церковный корпус»",
@@ -197,7 +201,8 @@
             "rate": 52,
             "url": "/peterhof/tserkovniy_korpus",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/b99002c1e354861aa8100ada55d96355.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/tserkovniy_korpus"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/tserkovniy_korpus",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20190828/726a7927ec6017f389e703303dcff9df.jpg"
         },
         {
             "title": "Музей «Банный корпус»",
@@ -217,7 +222,8 @@
             "rate": 59,
             "url": "/peterhof/muzei_banniy_korpus",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/425f8c26f05633c455f236c2581542ac.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_banniy_korpus"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_banniy_korpus",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20150419/59ddb0d75d69781b1f129149c93cebfd.jpg"
         },
         {
             "title": "Музей «Екатерининский корпус»",
@@ -237,7 +243,8 @@
             "rate": 58,
             "url": "/peterhof/muzei_ekaterininskiy_korpus",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/ae4d25a72e45786bf8f961c0347b7cd0.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_ekaterininskiy_korpus"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_ekaterininskiy_korpus",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20220330/fbcf0fdf1b2fdb0e1766c3c225b3b17c.jpg"
         },
         {
             "title": "Историко-культурный проект «Государевы потехи»",
@@ -257,7 +264,8 @@
             "rate": 56,
             "url": "/peterhof/istoriko_kulturniy_proekt_gosudarevi_potehi",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/d314264582869a91cfe77488149d51e7.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/istoriko_kulturniy_proekt_gosudarevi_potehi"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/istoriko_kulturniy_proekt_gosudarevi_potehi",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/d314264582869a91cfe77488149d51e7.jpg"
         },
         {
             "title": "Дом игральных карт",
@@ -277,7 +285,8 @@
             "rate": 55,
             "url": "/peterhof/muzei_igralnih_kart",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20181226/42a084add1599a7e673a616848c649d2.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_igralnih_kart"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_igralnih_kart",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20181226/42a084add1599a7e673a616848c649d2.jpg"
         },
         {
             "title": "Музей коллекционеров",
@@ -294,7 +303,8 @@
             "rate": 54,
             "url": "/peterhof/muzei_kollektsionerov",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20170913/a8a5eed276788caf97cccddf717e06a9.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_kollektsionerov"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_kollektsionerov",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20170913/a8a5eed276788caf97cccddf717e06a9.jpg"
         },
         {
             "title": "Культурно-выставочное пространство «Большая Оранжерея»",
@@ -314,7 +324,8 @@
             "rate": 14,
             "url": "/peterhof/bolshaya_oranzhereya",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20230828/197f93e235994db93bc225b5fece838c.jpeg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshaya_oranzhereya"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshaya_oranzhereya",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20230828/197f93e235994db93bc225b5fece838c.jpeg"
         },
         {
             "title": "Музей семьи Бенуа",
@@ -331,7 +342,8 @@
             "rate": 12,
             "url": "/peterhof/muzei_semyi_benua",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/d795370d6bb47431048e96ca1d66efa9.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_semyi_benua"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_semyi_benua",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/bd94ab0ae8bb5b97472307dc8075796d.jpg"
         },
         {
             "title": "Павильон «Эрмитаж»",
@@ -351,7 +363,8 @@
             "rate": 49,
             "url": "/peterhof/pavilion_ermitazh",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/cca3c25e800c036f132991c9680e0984.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/pavilion_ermitazh"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/pavilion_ermitazh",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/cca3c25e800c036f132991c9680e0984.jpg"
         },
         {
             "title": "Дворец «Марли»",
@@ -371,7 +384,8 @@
             "rate": 48,
             "url": "/peterhof/dvorets_marli",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/bb23bbbe0ad665e7160adac2e9867658.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/dvorets_marli"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/dvorets_marli",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220329/fa6bff883ab9918aec785d47b53abc29.jpg"
         },
         {
             "title": "Музей фонтанного дела",
@@ -391,7 +405,8 @@
             "rate": 46,
             "url": "/peterhof/muzei_fontannogo_dela",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/efbcc9cab9c47a191274e5e8dbffa05d.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_fontannogo_dela"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_fontannogo_dela",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/efbcc9cab9c47a191274e5e8dbffa05d.jpg"
         },
         {
             "title": "Музей «Гроты Большого каскада»",
@@ -411,7 +426,8 @@
             "rate": 47,
             "url": "/peterhof/muzei_groti_bolshogo_kaskada",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/30cfc083a5189a6355a9412e9d27ac1b.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_groti_bolshogo_kaskada"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_groti_bolshogo_kaskada",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/03825dc690329ab7081344eab0ffab1e.jpg"
         },
         {
             "title": "Вольеры",
@@ -433,7 +449,8 @@
             "rate": 45,
             "url": "/peterhof/volyeri",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/261ae66cff72fe08abc1ddddb4fe753d.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/volyeri"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/volyeri",
+            "image_url_v2": "https://rekord-plast.com/wp-content/uploads/2019/11/6-500x500-1.jpg"
         },
         {
             "title": "Музей «Императорские яхты»",
@@ -450,7 +467,8 @@
             "rate": 11,
             "url": "/peterhof/muzei_imperatorskiye_yahti",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/90b27ba92ab31a941ead3e8529a737a3.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_imperatorskiye_yahti"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/muzei_imperatorskiye_yahti",
+            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsbZXaMkOFNHM_qoQUDdeq8oxJyRsLsOfL3A&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_83\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHPOX5m2LpJT6VXJCOwGNEww-lQE56mq3iBQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_93\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGgDXlKh519WTbIi7hgL_p1bI7xz2QGJ9Cwg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_191\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRus-yrYcP5K7NsLaHFoPaFhCOancrfz5pGDg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_195\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndf0BqUHdhozgSdpy_pKycGEkMSu5Ae-coA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_205\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlI6WKJOtzhfoAufym9ooCNT2ukKVJfxWLlQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_231\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN8hJwsZi2RG5z_xhaiqFhlrzzOTuTgIGIGQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_235\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0aPc2HYid6Q1Sdqo8-KaWdo85EifgSUvxEg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_327\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGDyLpIe87BCCGNGPaz7CFuSi6YIHTmJ-eiQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_325\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrTrd_lWAISuXasVJIkELjQu-O_mRJlcIBg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_321\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0T6SGJiJoyD2KcjsJkfD_Da-eAfwazAruGg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_315\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgbK_fejiMf1xyLvVGDfBObF3p8Qt6oMlBRw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_307\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyfBcW3rrgyvL0OSMwloCjI9lEjetwQIdp_w&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_301\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYZePbEOLpY365qG0M16uQn1M-fKrTZGPB4w&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_311\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5sgaZCfM5_7kSVUcJSjTZ2FIeX9XDt6pHyQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_359\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Kv60ItgmeyVqhwBGJ2Kv0b5hzzbQs6zFbg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_289\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwDlfJtIG7oulAIHx1OXYT5qOa5FZi60FWg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_367\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYoCzCYZZTXMtrsoOjopnzOKr_FWbN1InF6Q&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_286\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU8HCee0GfkYGMZCF5OldUNHFvyYKFUInUQQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_279\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBDfILc_Ou1Hdq_yVc6uM4N-TUJ5JGQAh1OQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_389\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmlcjJdqeYWgGyFb5Q5k0gLgSKVNuLHDHNNQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_261\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRoOyuXQJs7iHCOIcx4apILc4uWE759krYoA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_259\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXRWS3baJdl4HoY4tuDdVZvFeFY-VAiHuoZg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_255\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Ve721c-X7NBl0wnJKKhlbcwSn4Z2aMA3rg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_253\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ED2LxgGkB9AdzBAzDWEIkM6iTvXJFFKCbQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_247\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlubnHcdCHPZhWwtu2t0eG20xum4T995VUdw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyX5ZMQkxemPv7fMSFob_xa_pFXFc7bUWRnQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_11\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTKQG1Y0NVKYWPH-OX5Uzd5WiYAzVT7TG2vQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_51\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgSlc89S05GY2JKofxolkirKgBun4npIZnzw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_55\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1ndFHDNkcl2ausNEVWscFUFeUs3RWEI5AwA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_89\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwqgDcCEe69yIwuFc6AFM26ve4GCGo0UE0Kg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_95\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9X7bD1hpIYI3jito2vplPH63C972CQQqImw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_129\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWDZaUonznz2Q7OiwbtR0Hb5UO1q5m9lvjdw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_189\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOgTg6AXK8XFzXP85RxeEfILM8dqhWwwUNmw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_193\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKJTsI9XTslaXQHWswlzgNEUKs7VnDPqzxkw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeWqBPD-YqR60vPI0rZHqAuUc85qrfF-swEg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP01nSXGBIVc9JGNcsxvAbY7a-sawrvCnPYw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_215\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT7zp1zzJwh5_TydnQjLV2OJ8JB0toEWRMKQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_217\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfVnBn7TmCKa6_-hEbQheGdXStIy9lt_mAJg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH-rQl-4VwR3izHAVmZK8RLAawa0H4kUzevw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtO7TY7jpCYZYCDp_pCEDXoL79nHPzY_LAwg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_169\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsE0QmGiXvkLCBYFuudH2tbfKZNivZYK-png"
         },
         {
             "title": "Большой каскад",
@@ -471,7 +489,8 @@
             "rate": 44,
             "url": "/peterhof/bolshoy_kaskad",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/4e5e28f229077ab6ad1b776fe92ca63c.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshoy_kaskad"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/bolshoy_kaskad",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/90655145ed757f2850a27f6ecd56c180.jpg"
         },
         {
             "title": "Фонтан «Самсон»",
@@ -492,7 +511,8 @@
             "rate": 70,
             "url": "/peterhof/fontan_samson",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/0a90b907bc48be46848cd034bd7cbe91.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_samson"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_samson",
+            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkCFJ8ncWTQf6fypJzTQW2jOx5IFjSMbgm_A&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_129\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg4APK3VIBrMvirwv8KvDFxQbfHlkX0OBSiw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaqCMdxRHWXa2d324FVNntY9cvKHi1RoX_mQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_203\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxJVkNLT_RW5GfaqRVouZwXJJy1Mtut1xQhA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_209\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_XIDYlhkXTqjpaBFpwmZhCxrWwEk9sJ6mxA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_245\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgFly1PyNyk_mb-zVP1f66f2rWDde59BAypg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_265\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ZSbHOe9jkxhtqTdFMzNhARNMCSaES-PKqg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_271\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ36zrgpXbBa_38XTNMgshep97jnp9xc9EJZw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_281\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsfbfD95Mxh9QcJs01vDIZrFmDAzEiEteYow&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_283\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VvjmoxvKkkmCJP3c-iOatS5CW4mqtOprGA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_293\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZAyFXwz_3hn5sHdc8pCA0Srld5PtjX3JBw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_295\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2e4-KAGcJ8tuqKYYt8P_81HEq6P8zf74NA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_343\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqi6_NorMX2Fy-QDPZiKIkIeEdhuaHMq7Pmg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_353\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw2BujcyWGNEFZltNVOOnAn35TcCMTtoP4bw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_365\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQB8nZ5SAo6Ku4NjsZAp42r-lUgx7GY6pvpA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_385\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3BQ-WIpivZnM9QVt3IueOc-FtbxJfl-LMTg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_381\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTfOmy6iodgSeXMIpViVaafl_3NTwY6BN9CA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_383\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5E3eADrLW7np8Ek156_a-BlCjuJfTZNnwPw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_377\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4jQ7USLcfsbppUwPuPCPR65AeCRRkTBGo-A&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_333\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDP_6WsKhVhx3JEUgbXI6OYWDMSrcONob9Sw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_331\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaU3OXLMo1vlOjd_4AXamFMoQR2yHr3KoTlA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_329\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_OaSR7GTU_IG3fQm0KZoyhFRNMVWSxu_ZxRLSIfVyUd2cThKqZl4A&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_355\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIC3-p_pmW7HhNLYJVso-JnORtZ4a1Lo3x8D9hVzOKNvI5XV7-dM1V&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_351\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQV9aKBMuHBTl_evY68QiqVG94SSimb5NBHsXaSBqF1JcW6eMeOGyw&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_423\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMiV_1LFAc2tI4fDlCyYQMq-SzE4s6KOH0TQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_319\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxmc1LiiJPxWa_OMSRO9iWf0cpWbgAXgsCTg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_313\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsMqR9fvq01hazQhv7fIL_N19MUYqP1NruHw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_27\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzkvipRoJaFPEiftMvd1CUHcUX5-73w_3g_Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_53\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4qFzHm7EEJb---JGB_Nyk3bn_stavgBREcA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_51\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQasESWXdyk4Dh-8O1Jlyt2RxOC30wSwIcyPQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_59\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8dBKgBpl2kIz9Y-DGKZy1jDCMClcnDaooew&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_61\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz0KO_beY-htyBilMDN1e0d-KywIJk_ki-w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_95\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnjXiklyTgHn2egE70HuBe1dD4Tu7mwZVxKQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_87\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReOpjbcun4p6YCIEjI2HoStOrtiOx70H0usg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_153\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjeQ1H5BQiitWNAAqS17bMeyBKHUc68QW9Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_155\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtH6jdB26SQ-ym4NZAzlJvsteS7d0-xeaYdw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_191\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRnF4VTe1NmtFOXB4AKmTgUGpSIofiQeUEzg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBV-TxqTxbetaaY37-u8C8AihAXIWaacFsw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_205\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTlujARBhCja5Mtoif8lp5bUNg5aHiXXCyEw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_215\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF0Blze2mwQ4otrQoPQoeRMIlLWzPBvNvCLQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_231\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmceeKoH2qlpPcyGDyzgsLlWoGkt7uk2_dSg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_251\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ7gAwyBQC2sUAKpqfFRjZrd5t1ZYtgUOaXA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuhyfazbxLEx-3ZYu8qvqd8-6IDv7p_3SYeA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_247\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd5hZuSr1o2lts97qh0QrLmh2GttPq-O7lAg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_267\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9DNQ8D-ftc9pNRhXDE2e5_45M18Mnl3W6SA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_229\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYUcP2f7iEgj9PGUV_w1mDyktwXbTCFQFZ7g&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_219\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoHhvmt2zmNmJDOCDUz6aBcntrgfkqSUV9RA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_189\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQPybbZLSeM-Hq9rMA9poNsx7v-mTcLv-B6Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQV9aKBMuHBTl_evY68QiqVG94SSimb5NBHsXaSBqF1JcW6eMeOGyw&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_213\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIC3-p_pmW7HhNLYJVso-JnORtZ4a1Lo3x8D9hVzOKNvI5XV7-dM1V&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNK8NYDT40m3xTh4wtInQOiAkkTinTdqyw-nm3c8xmwnau2tWFIMy-&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_173\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA74YiwzWwhhSfwCZVkc8n9iKqgYDfoGY6xA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_171\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1ZXnbR0arqI6_gug054gplABbaHu5uFeJ0w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_163\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIEESKbKd2V_JCCLAj92Gn8n9N47cNuKThQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_165\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_5pil7uNEcB5rq6RDcd84i_rRCVlrA2WuNQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_159\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSifvEdZOwbMHmpIgKpiiv-7afQ5roDTOk1Tw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_157\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBK47xmB4unzZbEQzsJB0zOzLZ1jEq3cg7w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_341\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7x-DWrzxQukypaaradqUGYWC07_4yG4d8XQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_139\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnpIZRtDlR_I4Y93NLDA5LOvIcFm4x1EXQlA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_135\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTp2bf8O_lMOFehkqFQWn7GHDwlRO4LQ6MWw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_137\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtwec_9EJhqLbmp"
         },
         {
             "title": "Фонтаны «Чаши»",
@@ -515,7 +535,8 @@
             "rate": 41,
             "url": "/peterhof/fontani_chashi",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/b49d10ba1a49cfbbeb8e9f362fffd65a.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_chashi"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_chashi",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/d5a3aec0307243ae9d8df2eb1f78e734.jpg"
         },
         {
             "title": "Воронихинские колоннады",
@@ -537,7 +558,8 @@
             "rate": 43,
             "url": "/peterhof/voronihinskiye_kolonnadi",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/fa3345c8d6b0e62720def2708c338c7b.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/voronihinskiye_kolonnadi"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/voronihinskiye_kolonnadi",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/2d6d2d60737b9aba485bbfd91e863912.jpg"
         },
         {
             "title": "Фонтаны мраморных скамей «Нимфа» и «Данаида»",
@@ -560,7 +582,8 @@
             "rate": 39,
             "url": "/peterhof/fontani_mramornih_skamey",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/b32c575f20319571087534a1d96bd6b8.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_mramornih_skamey"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_mramornih_skamey",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/b32c575f20319571087534a1d96bd6b8.jpg"
         },
         {
             "title": "Фонтан «Фаворитка»",
@@ -581,7 +604,8 @@
             "rate": 24,
             "url": "/peterhof/fontan_favoritkniy",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/9df6e116cc41b8cfe030489524ddc51d.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_favoritkniy"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_favoritkniy",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/5/54/%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%2C_%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA._%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD_%C2%AB%D0%A4%D0%B0%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D0%BA%D0%B0%C2%BB_1.jpg"
         },
         {
             "title": "Лабиринт",
@@ -602,7 +626,8 @@
             "rate": 42,
             "url": "/peterhof/labirint",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/f9196cbf3e27d3fb0b07830b0cd30740.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/labirint"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/labirint",
+            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsf9ZYkp9J2D6btqJ9cdrVIt11dAU68bccQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_171\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf-DpFc8Uayrsmi3MUuk9sQBUlV6KUVz4MQA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzyRMPZF6cRyhGcY5rSv-eKEq1TPZpS8woEQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_211\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRujJbmXAglVtDi6mkT_HLLc1cNbGbvabxZtA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcaEIRlKcMHNANm-niV4-H6ZjAXqocAGSfOQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_271\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZjNyTKmqXnV2MFy0RHkfjOWVZWARa75Z-fw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_267\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uf8KRoheTaOxeLq4Q7CH5_3NsFMdCTlP0A&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_295\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFucKx1plEZMk5g_v0fIBaeoQ0n4QrDYSfPA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_291\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIOvMIFYAhTlyEnocLDT5KEzs7TFKYn6cGQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_301\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFFAzAxGbQRGNq_9Rjiwv47qgYDNeOqiOmZA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_303\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0FfH0Lcx2R03YCrhkK3Go-0px_D8Z0boV5g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_343\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2s9xEvmq9i0s0GWXFp8J0buHMSBObtGcZvw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_351\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV4piHXGBbyceXrIBVArf9PqdHzrQtNQSQzg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_353\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZQ_YbCazvvyPUj2W6xIn9ySTfS4kZYfDkg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_383\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-CG8stCgrMJ-ZFB-lJZ7M0CKSUpiqrbOyQQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_385\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWLc0xwik_qk5FFejoc_FMAlbVLv_XyyMlFA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_389\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbPT0XK7USGWopdUkOSYk7SWj915Jy7RY_SA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_377\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5G-9eXg4waBL8cTTDSHwIiIAuPInSQOwwVQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_411\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgLmUtmpRrSB34gz4tZ7kIgXkR4wxveuMrNw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_341\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOddq7Gqow9RxUQ35NZdyyw6IjurBBPQnL_g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_339\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtuoHskXq3C6_YHqMOnkmMtY7Q4OC7gZU1nii2Cy2cm0nK5q3RG-6&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_373\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtuoHskXq3C6_YHqMOnkmMtY7Q4OC7gZU1nii2Cy2cm0nK5q3RG-6&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_355\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsaJR5_JNXZIBra85zCsibRabCMNANuQiBAVEnDKSk&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_417\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbNVyVA91WExsPGJesgLyAaRbI-UVj599mHA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_327\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQALK5AhZKSIc8VdHCGjpbiAh0KO_SQsHO1rg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_319\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXeIte3nVDkmuHu0RDEt7_XG5IuSKMMd9tHg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_21\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz-_q3ywMXj-XYFG1QCkvOTSJbcIQJml3tVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_53\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHIRVdJ2MfI1gz4d4s4Atfz2Ne8fqyNSqFSA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_55\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT20mY03ukMpRYD-tWX-zvlvy8PTCEOKq6oVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_59\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl8hCabc-oUqjtI6JDMBzzdxe5zY8e3slbxw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_87\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7PAr0JbIjSY9YEMzJrteq4Ubd9u9ZOIvlog&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_93\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8lpF4tKvU1jByOTZkT53UXtZIxRxosb9Xg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_90\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl9H9x8RRY_L8gNy-85MxAVtZ0tv-Xq6nwIQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_139\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc1_NegB77rKfkE6REu_81lOGtKykYOkPr8g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_145\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe6L5hh6foeeR0mc56vp-7cyG5K7IV2FnFZw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDxxg9USa5XA7HFXmYBxSmblaTxdTPMCZpVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_201\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7lcvv6w1vJaFDDldHTV_2jysUn2_HWSWwFw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_209\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGIWsDWd7CseMsdcOPxmNX5hKZBG_PktojmA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_219\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRmTz7G_c5h5fLn4iHlM28imrYqohWfWvdAw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_229\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKWYFIgBa4gspvSezO_FB1iCGMNU30FXRURA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_253\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmaLeqUoANGFsLW2DSwwaG1Djtf86IuAMMUQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_255\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrOHjFK-674qwa65bnwnZPvSEtLvi8HgbfIw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_243\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRKkL97tG2ul8ICFUuDGO2Q-LopTzB_xPshQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_237\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrDlzxJm8lqnWgfQvcTmORid7Rb55eXQ9tg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_269\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn07ef_CIOYuAhB-VI6vs--XXOU0CLYHYK9Q&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_274\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwsBZJa-qpsfMr05UKCfe1qY2nWQUr2gf8ig&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_199\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1srk_sxu9fGe0rikUp4HHb_q5O1xXpSUJVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Oa8uawd33IFDx_DMet3BFewqos5eBu0KpXyEF72xcE8SlLNlT3vu&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_203\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtGF86HioJqdDhcWN_EP7HTGwC1Ev4XarhlagRHObKHA73z9pgnhq&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_195\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsoOHBakWPlvqh95jzZopR4qSSOo8V55RelI0MoJE6sPZaXH7xagLt&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmbH09xRS3dJbeJo1hTrS0MFCNgjohict1qA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_179\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj11zkFsxVzGO5KPMvh6cRcgosPgJfTR607Q&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_169\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiRADSfb777-IEivSOln4gUF5hpf-BcWuUGw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_167\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSTExUYUKJAdNbTol4BHqCdGDlhsyOv6nKsw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_165\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGm-X28cPM_yR6t39-R03LaBlOSDlsBGeZyw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_163\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwtLkzqMMujU_3S47omS17hirhwMYxHO6dfw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_159\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtYbmp"
         },
         {
             "title": "Террасные фонтаны",
@@ -625,7 +650,8 @@
             "rate": 40,
             "url": "/peterhof/terrasniye_fontani",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/45ee6b0d794fd5e01a377a75417b8188.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/terrasniye_fontani"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/terrasniye_fontani",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/45ee6b0d794fd5e01a377a75417b8188.jpg"
         },
         {
             "title": "Аллея фонтанов",
@@ -648,7 +674,8 @@
             "rate": 38,
             "url": "/peterhof/alleya_fontanov",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/8c162a0f97a3bfd2f326e39ddadc4717.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/alleya_fontanov"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/alleya_fontanov",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/8c162a0f97a3bfd2f326e39ddadc4717.jpg"
         },
         {
             "title": "Фонтан «Тритон»",
@@ -669,7 +696,8 @@
             "rate": 37,
             "url": "/peterhof/fontan_triton",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20151014/004582cd6cf4dbbd72c5d1a639d23172.JPG",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_triton"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_triton",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20151014/004582cd6cf4dbbd72c5d1a639d23172.JPG"
         },
         {
             "title": "Каскад «Шахматная гора»",
@@ -690,7 +718,8 @@
             "rate": 36,
             "url": "/peterhof/kaskad_shahmatnaya_gora",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/3c0ea2d3f2524079beafddd86ed12589.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/kaskad_shahmatnaya_gora"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/kaskad_shahmatnaya_gora",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20230905/aca78d81c36e311bd476dfa56181acd9.jpg"
         },
         {
             "title": "Римские фонтаны",
@@ -713,7 +742,8 @@
             "rate": 35,
             "url": "/peterhof/fontani_rimskiye",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/ab9066daa8042537e3885c6efb2475cb.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_rimskiye"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_rimskiye",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/8/81/RimskyFountains_Peterhof.jpg"
         },
         {
             "title": "Фонтан «Пирамида»",
@@ -734,7 +764,8 @@
             "rate": 34,
             "url": "/peterhof/fontan_piramida",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/09f2b8c637c517188f064b327749ace4.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_piramida"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_piramida",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/ru/3/35/Petergof-piramida.jpg"
         },
         {
             "title": "Фонтан «Солнце»",
@@ -755,7 +786,8 @@
             "rate": 33,
             "url": "/peterhof/fontan_solntse",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/0d40aed61adb3e844d2d9d050acaf92c.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_solntse"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_solntse",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/488a064e566fc62c07d82912e8fde39a.jpg"
         },
         {
             "title": "Фонтан-шутиха «Елочки»",
@@ -776,7 +808,8 @@
             "rate": 32,
             "url": "/peterhof/fontan_shutiha_elochki",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150422/992491fdbf691df6e4b54d43f959bca4.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_elochki"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_elochki",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150422/992491fdbf691df6e4b54d43f959bca4.jpg"
         },
         {
             "title": "Фонтан-шутиха «Дубок»",
@@ -797,7 +830,8 @@
             "rate": 31,
             "url": "/peterhof/fontan_shutiha_dubok",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/102a4d81f3fce396896762ee885a5e82.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_dubok"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_dubok",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/102a4d81f3fce396896762ee885a5e82.jpg"
         },
         {
             "title": "Фонтан-шутиха «Зонтик»",
@@ -818,7 +852,8 @@
             "rate": 30,
             "url": "/peterhof/fontan_shutiha_kitaiskiy_zontik",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150630/606c44432d12d650f076bb06d8f5fbd7.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_kitaiskiy_zontik"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_kitaiskiy_zontik",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150630/606c44432d12d650f076bb06d8f5fbd7.png"
         },
         {
             "title": "Фонтан-шутиха «Водяная дорога»",
@@ -839,7 +874,8 @@
             "rate": 29,
             "url": "/peterhof/fontan_shutiha_vodyanaya_doroga",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/87c7bcbff5b921517f5abf33760b0a43.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_vodyanaya_doroga"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_vodyanaya_doroga",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/87c7bcbff5b921517f5abf33760b0a43.png"
         },
         {
             "title": "Фонтан-шутиха «Диванчики»",
@@ -862,7 +898,8 @@
             "rate": 28,
             "url": "/peterhof/fontan_shutiha_divanchiki",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/a94ae41516b7400cdd10fc1647f6ce04.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_divanchiki"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_shutiha_divanchiki",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/a94ae41516b7400cdd10fc1647f6ce04.jpg"
         },
         {
             "title": "Фонтан «Сноп»",
@@ -883,7 +920,8 @@
             "rate": 27,
             "url": "/peterhof/fontan_snop",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/d616e12a7858ae116c29648850fd4ed0.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_snop"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_snop",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/d616e12a7858ae116c29648850fd4ed0.jpg"
         },
         {
             "title": "Фонтаны «Колокола»",
@@ -910,7 +948,8 @@
             "rate": 26,
             "url": "/peterhof/fontani_kolokola",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/e5802d80638f123b209d17295c444183.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_kolokola"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_kolokola",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150421/e5802d80638f123b209d17295c444183.jpg"
         },
         {
             "title": "Фонтаны «Адам» и «Ева»",
@@ -933,7 +972,8 @@
             "rate": 25,
             "url": "/peterhof/fontani_adam_i_eva",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/f044a1e29b93cd054b6b4a5d26230120.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_adam_i_eva"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_adam_i_eva",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/dda097698cee2204a6fb218ae1c59470.jpg"
         },
         {
             "title": "Фонтан «Китовый»",
@@ -954,7 +994,8 @@
             "rate": 23,
             "url": "/peterhof/fontan_kitoviy",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/422eba074b9565a0e8bf8ef150b63e94.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_kitoviy"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_kitoviy",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/341b56e42be1845e5932ed9b5e0f442c.jpg"
         },
         {
             "title": "Львиный каскад",
@@ -975,7 +1016,8 @@
             "rate": 22,
             "url": "/peterhof/fontan_lviniy_kaskad",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/3a7319bda99e64611b9b71ad42b78e9a.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_lviniy_kaskad"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_lviniy_kaskad",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/6/64/%D0%9B%D1%8C%D0%B2%D0%B8%D0%BD%D1%8B%D0%B9_%28%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B9%29_%D0%BA%D0%B0%D1%81%D0%BA%D0%B0%D0%B4_%28%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%29.jpg"
         },
         {
             "title": "Фонтаны «Менажерные»",
@@ -998,7 +1040,8 @@
             "rate": 21,
             "url": "/peterhof/fontani_menazherniye",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/0fcab495f5348e4187c8f80e711f660b.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_menazherniye"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_menazherniye",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/4/4e/%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%2C_%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA._%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD%D1%8B_%C2%AB%D0%9C%D0%B5%D0%BD%D0%B0%D0%B6%D0%B5%D1%80%D0%BD%D1%8B%D0%B5%C2%BB_%28%D0%B4%D0%B2%D0%B0%29_1.jpg"
         },
         {
             "title": "Фонтаны «Тритоны-колокола»",
@@ -1019,7 +1062,8 @@
             "rate": 20,
             "url": "/peterhof/fontani_tritoni_kolokola",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20151012/301f5e3cb5d2393e0434e91389e03100.JPG",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_tritoni_kolokola"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_tritoni_kolokola",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20151012/301f5e3cb5d2393e0434e91389e03100.JPG"
         },
         {
             "title": "Каскад «Золотая гора»",
@@ -1040,7 +1084,8 @@
             "rate": 19,
             "url": "/peterhof/kaskad_zolotaya_gora",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20151012/965743ff2f15fa4d234b2df31df604e9.JPG",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/kaskad_zolotaya_gora"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/kaskad_zolotaya_gora",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20151012/965743ff2f15fa4d234b2df31df604e9.JPG"
         },
         {
             "title": "Дворец «Монплезир»",
@@ -1060,7 +1105,8 @@
             "rate": 7,
             "url": "/peterhof/dvorets_monplezir",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/a2a133a4cec57fe55585b0085b1063ca.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/dvorets_monplezir"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/dvorets_monplezir",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220330/429c890f5429c98518f54b337439583f.jpg"
         },
         {
             "title": "Фонтан «Нептун»",
@@ -1077,7 +1123,8 @@
             "rate": 18,
             "url": "/peterhof/fontan_neptun",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/9d1b119dea1380bd7301a1ea3407d1b5.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_neptun"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_neptun",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Neptune_fountain_in_Peterhof_DS32131.jpg"
         },
         {
             "title": "Фонтаны Квадратных прудов",
@@ -1094,7 +1141,8 @@
             "rate": 15,
             "url": "/peterhof/fontani_kvadratnih_prudov",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/73f40dcfe0d432157492d3f9789dcab1.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_kvadratnih_prudov"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontani_kvadratnih_prudov",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/73f40dcfe0d432157492d3f9789dcab1.png"
         },
         {
             "title": "Фонтан «Межеумный»",
@@ -1111,7 +1159,8 @@
             "rate": 16,
             "url": "/peterhof/fontan_mezheumniy",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/b76011b904d6d52a2052abbe2e73158c.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_mezheumniy"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_mezheumniy",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/9/92/Uncertainty_Fountain_at_Upper_Garden_of_Peterhof.jpg"
         },
         {
             "title": "Фонтан «Дубовый»",
@@ -1128,7 +1177,8 @@
             "rate": 17,
             "url": "/peterhof/fontan_duboviy",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/a4b73c9b914b9ef778f7162a9b366d34.png",
-            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_duboviy"
+            "full_url": "https://peterhofmuseum.ru/objects/peterhof/fontan_duboviy",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/1/19/%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD_%22%D0%94%D1%83%D0%B1%D0%BE%D0%B2%D1%8B%D0%B9%22.jpg"
         },
         {
             "title": "Сады на островах Колонистского парка",
@@ -1148,7 +1198,8 @@
             "rate": 6,
             "url": "/islands/sadi_na_ostrovah",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20210702/81b6212cc67e038ad6e4eac23539739d.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/islands/sadi_na_ostrovah"
+            "full_url": "https://peterhofmuseum.ru/objects/islands/sadi_na_ostrovah",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20210702/81b6212cc67e038ad6e4eac23539739d.jpg"
         },
         {
             "title": "Царицын и Ольгин павильоны",
@@ -1170,7 +1221,8 @@
             "rate": 5,
             "url": "/islands/tsaritsin_i_olgin_pavilioni",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20220425/1416e6ce25061b9940eb4652c9342d3d.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/islands/tsaritsin_i_olgin_pavilioni"
+            "full_url": "https://peterhofmuseum.ru/objects/islands/tsaritsin_i_olgin_pavilioni",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220425/1416e6ce25061b9940eb4652c9342d3d.jpg"
         },
         {
             "title": "Парк Александрия",
@@ -1194,7 +1246,8 @@
             "rate": 68,
             "url": "/aleksandriya/park_alexandriya",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150622/37cf5f724fcd139092ff220b3667f6a5.png",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/park_alexandriya"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/park_alexandriya",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220328/e05abc341efc682bbad5f9437ef43bff.jpg"
         },
         {
             "title": "Фермерский дворец",
@@ -1214,7 +1267,8 @@
             "rate": 67,
             "url": "/aleksandriya/fermerskiy_dvorets",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/03216873f1302bc36277aeb53970e602.png",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/fermerskiy_dvorets"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/fermerskiy_dvorets",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220330/c27e164d357860c13b474edf9c42ab99.jpg"
         },
         {
             "title": "Дворец «Коттедж»",
@@ -1234,7 +1288,8 @@
             "rate": 61,
             "url": "/aleksandriya/dvorets_kottedz",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/b40558f6de98999cd53186ae930e594f.png",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/dvorets_kottedz"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/dvorets_kottedz",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20220329/7d5e72078a59aeab9e0c2b78ee825ba2.jpg"
         },
         {
             "title": "Музей «Дворцовая телеграфная станция»",
@@ -1251,7 +1306,8 @@
             "rate": 66,
             "url": "/aleksandriya/dvortsovaya_telegrafnaya_stantsiya",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150611/a5e43a4c482042cb379e525a2a2cce50.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/dvortsovaya_telegrafnaya_stantsiya"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/dvortsovaya_telegrafnaya_stantsiya",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150611/a5e43a4c482042cb379e525a2a2cce50.jpg"
         },
         {
             "title": "Новая Ферма",
@@ -1271,7 +1327,8 @@
             "rate": 51,
             "url": "/aleksandriya/new_farm",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240205/c0926522036a2e1e92506533d200fe98.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/new_farm"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/new_farm",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240205/c0926522036a2e1e92506533d200fe98.jpg"
         },
         {
             "title": "Музей «Фельдъегерский домик»",
@@ -1288,7 +1345,8 @@
             "rate": 13,
             "url": "/aleksandriya/feldyegerskiy_dom",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/fcd042f25b7369507f3627c53a30733c.png",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/feldyegerskiy_dom"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/feldyegerskiy_dom",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220330/0d7e3bcc3852060466eb2855fde84a37.jpg"
         },
         {
             "title": "Готическая капелла",
@@ -1308,7 +1366,8 @@
             "rate": 10,
             "url": "/aleksandriya/goticheskaya_kapella",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/a98eed546d28207c4d22e3fc1b267fbd.png",
-            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/goticheskaya_kapella"
+            "full_url": "https://peterhofmuseum.ru/objects/aleksandriya/goticheskaya_kapella",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Gothic_Chapel_Peterhof_tonemapped.jpg"
         },
         {
             "title": "Парк Ораниенбаум",
@@ -1334,7 +1393,8 @@
             "rate": 65,
             "url": "/oranienbaum/park_oranienbaum",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/5ba2932b9cf01ab80690137c9105875f.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/park_oranienbaum"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/park_oranienbaum",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/5ba2932b9cf01ab80690137c9105875f.jpg"
         },
         {
             "title": "Большой Меншиковский дворец",
@@ -1354,7 +1414,8 @@
             "rate": 62,
             "url": "/oranienbaum/bolshoy_menshikovskiy_dvorets",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/2c4b4f755b7e696a52f3cc42b554744f.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/bolshoy_menshikovskiy_dvorets"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/bolshoy_menshikovskiy_dvorets",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/2c4b4f755b7e696a52f3cc42b554744f.jpg"
         },
         {
             "title": "Картинный дом",
@@ -1371,7 +1432,8 @@
             "rate": 53,
             "url": "/oranienbaum/kartinniy_dom",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/3d125a9eae58c9522e599e04d41f06ad.png",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/kartinniy_dom"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/kartinniy_dom",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20220330/6addcdd6c35419f171f0949562bea997.jpg"
         },
         {
             "title": "Павильон Катальной горки",
@@ -1391,7 +1453,8 @@
             "rate": 64,
             "url": "/oranienbaum/pavilion_katalnoy_gorki",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/ea1c7e249335f83a055ee01db877f362.png",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_katalnoy_gorki"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_katalnoy_gorki",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220808/548245fd3f16f42540f8811f0faecab1.jpg"
         },
         {
             "title": "Дворец Петра III",
@@ -1411,7 +1474,8 @@
             "rate": 57,
             "url": "/oranienbaum/dvorets_petra_III",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240403/c79ab7885486836ed8d3d1e1a2a90a85.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/dvorets_petra_III"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/dvorets_petra_III",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240403/c79ab7885486836ed8d3d1e1a2a90a85.jpg"
         },
         {
             "title": "Китайский дворец",
@@ -1431,7 +1495,8 @@
             "rate": 50,
             "url": "/oranienbaum/kitayskiy_dvorets",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/a28e2a079270a20467dbc5cf1795f943.png",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/kitayskiy_dvorets"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/kitayskiy_dvorets",
+            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Chinese_Palace_in_Oranienbaum.jpg"
         },
         {
             "title": "Павильон «Китайская кухня»",
@@ -1448,7 +1513,8 @@
             "rate": 9,
             "url": "/oranienbaum/pavilion_kitayskaya_kuhnya",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/13f7cc4b8624e7d24d86693f164432af.png",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_kitayskaya_kuhnya"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_kitayskaya_kuhnya",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/526cf7fd69ae3bd3f82b972505744c76.jpg"
         },
         {
             "title": "Павильон «Каменное зало»",
@@ -1465,7 +1531,8 @@
             "rate": 8,
             "url": "/oranienbaum/pavilion_kamennoye_zalo",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/ceaa11aa70fda009a60ad10cfab94c78.jpg",
-            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_kamennoye_zalo"
+            "full_url": "https://peterhofmuseum.ru/objects/oranienbaum/pavilion_kamennoye_zalo",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20240402/ceaa11aa70fda009a60ad10cfab94c78.jpg"
         },
         {
             "title": "Дворец Петра I в Стрельне",
@@ -1485,7 +1552,8 @@
             "rate": 2,
             "url": "/strelna/dvorets_petra_v_strelne",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/82b0744ba55f042b9ebe8a7199d8f0f2.png",
-            "full_url": "https://peterhofmuseum.ru/objects/strelna/dvorets_petra_v_strelne"
+            "full_url": "https://peterhofmuseum.ru/objects/strelna/dvorets_petra_v_strelne",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20220330/360a95897e38be1e1c4ff25f2833b314.jpg"
         },
         {
             "title": "Фруктовый сад и огород Стрельны",
@@ -1505,7 +1573,8 @@
             "rate": 3,
             "url": "/strelna/fruktoviy_sad_i_ogorodi_strelni",
             "image_url": "https://peterhofmuseum.ru/images/w1000-h1000/20150417/3b6935dd26961487f654951d0beb7644.png",
-            "full_url": "https://peterhofmuseum.ru/objects/strelna/fruktoviy_sad_i_ogorodi_strelni"
+            "full_url": "https://peterhofmuseum.ru/objects/strelna/fruktoviy_sad_i_ogorodi_strelni",
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/d1ba3a63338d647bf464e0b5b17002e9.jpg"
         }
     ],
     "parks": [
