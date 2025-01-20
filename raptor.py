@@ -119,7 +119,7 @@ class DataEnlarger():
         summaries = []
         for i in all_clusters:
             df_cluster = expanded_df[expanded_df["cluster"] == i]
-            formatted_txt = fmt_txt(df_cluster)
+            formatted_txt = fmt_txt(df_cluster)[:24000]
             prompt = get_prompt(formatted_txt)
             summaries.append(model.run(prompt).alternatives[0].text)
 
