@@ -1,4 +1,14 @@
 aiogram==2.25.2
+asyncio~=3.4.3
 python-dotenv
 yandex-cloud-ml-sdk
 yandex-speechkit
+pathlib
+numpy
+pandas
+umap-learn
+scikit-learn
+googletrans
+pymorphy2
+chromadb
+nltk

@@ -110,16 +110,16 @@ class DataEnlarger():
         # Summarization
         def get_prompt(context):
             return f"""Тебе будет данны документы с какой-то общей идеей. 
-Детально суммаризируй эти документы сохранив важные детали (особенно даты и места) и взаимосвязи между объектами и людьми.
-Документы:
-{context}
-"""
+        Детально суммаризируй эти документы сохранив важные детали (особенно даты и места) и взаимосвязи между объектами и людьми. Ты должен уложиться в 1800 токенов. Также сохрани структуру чанков, которые были переданы на вход 
+        Документы:
+        {context}
+        """
         model = self.llm
         # Format text within each cluster for summarization
         summaries = []
         for i in all_clusters:
             df_cluster = expanded_df[expanded_df["cluster"] == i]
-            formatted_txt = fmt_txt(df_cluster)[:24000]
+            formatted_txt = fmt_txt(df_cluster)[:6000]
             prompt = get_prompt(formatted_txt)
             summaries.append(model.run(prompt).alternatives[0].text)
 
@@ -311,7 +311,7 @@ def embed(texts, embd):
     Returns:
     - numpy.ndarray: An array of embeddings for the given text documents.
     """
-    text_embeddings = [embd.run(text) for text in texts]
+    text_embeddings = [embd.run(text[:2000]) for text in texts]
 
     # text_embeddings = embd.embed_documents(texts)
     text_embeddings_np = np.array(text_embeddings)

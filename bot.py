@@ -1,8 +1,12 @@
 import asyncio
 import json
+import linecache
 import random
 import re
+import sys
 from pathlib import Path
+from traceback import format_exception
+
 from aiogram import types
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -11,15 +15,19 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup,
                            ReplyKeyboardRemove, MediaGroup)
 from googletrans import Translator
-from rout_suggestion import get_route_suggestion
+from rout_suggestion import get_route_suggestion, change_route_by_message
 from utils import create_json_chunks
 from dotenv import load_dotenv
 from os import getenv, remove
-from yandex_cloud_ml_sdk import AsyncYCloudML, YCloudML
 from yandex_cloud_ml_sdk.search_indexes import StaticIndexChunkingStrategy, TextSearchIndexType
 from speechkit import model_repository, configure_credentials, creds
 from speechkit.stt import AudioProcessingType
+from chroma import init_chroma, create_or_update_chroma_collection, get_links
+from yandex_cloud_ml_sdk import AsyncYCloudML, YCloudML
 from raptor import DataEnlarger
+from utils import create_chunks
+import chromadb
+from chromadb.config import Settings
 
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
@@ -32,14 +40,16 @@ bot.sdk = None
 bot.files = None
 CIS_COUNTRIES = ['ru', 'ua', 'by', 'kz', 'kg', 'am', 'uz', 'tj', 'az', 'md']
 admin_chat = -1002411793280
+COLLECTION_NAME = "peterhof_docs"
+bot.chroma_collection = None
 
 
-async def files_delete():
+'''async def files_delete():
     async for file in bot.sdk.files.list():
         await file.delete()
 
 
-'''async def files_create():
+async def files_create():
     sdk = YCloudML(
         folder_id=getenv('FOLDER'),
         auth=getenv('AUTH'),
@@ -85,52 +95,65 @@ def translation(user_id, key):
 
 async def ru_to_en(text):
     async with Translator() as translator:
-        return (await translator.translate(text, src='ru', dest='en')).text
+        return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
 async def get_answer(question: str, user_id: int) -> str:
-    operation = await bot.sdk.search_indexes.create_deferred(
-        bot.files,
-        index_type=TextSearchIndexType(
-            chunking_strategy=StaticIndexChunkingStrategy(
-                max_chunk_size_tokens=700,
-                chunk_overlap_tokens=300,
-            )
-        )
+    sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
+    llm_model = sdk.models.completions("yandexgpt")
+    results = bot.chroma_collection.query(
+        query_texts=[question],
+        n_results=3
     )
-    search_index = await operation
-    tool = bot.sdk.tools.search_index(search_index)
+    print(results)
+    retrieved_docs = results.get('documents', [[]])[0]
+    relevant_context = "\n\n".join(retrieved_docs)
     memory = bot.user_settings[str(user_id)]['memory']
     random_route = '' if random.randint(1, 5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
     prompt = \
 f'''
-1. Контекст и цель:
-    - Вы являетесь виртуальным гидом для посетителей музея-заповедника Петергоф.
-    - Ваша цель — предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея и маршрутов, основываясь на доступной базе данных. Поддерживайте интерес посетителя к посещению музея.
+Контекст и цель:
 
-2. Коммуникация с пользователем:
-    - Всегда стремитесь ответить до 1000 символов. Я запрещаю отвечать длиной больше 1000 символов.
-    - Если вопрос не может быть решён на основе данных, вежливо признайте, что не имеете ответа, но предложите общую информацию о музее.
+Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
 
-3. Подача информации:
-    - При ответе на вопросы о конкретных объектах, предоставляйте название и завлекательное описание.
-    - Если вопрос касается маршрутов, укажите несколько рекомендованных объектов последовательно, формируя маршрут.
+Цель:
 
-4. Мотивация и вдохновение:
-    - Используйте вдохновляющий и побуждающий язык, чтобы заинтересовать пользователя в посещении музея.
-    - Подчеркните уникальные аспекты и ценность каждого объекта, сделав акцент на незабываемом опыте, который ждёт посетителя.
-    - Иногда включайте предложения посетить сайт музея для более полной информации, но не прикладывайте ссылку.
+Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
 
-5. Ограничения:
-    - Не используйте символы форматирования по типу \"**\" (звёздочки).
-    - Длина сообщения до 1000 символов.
-    - Отвечайте только на основе имеющейся информации. Если данных недостаточно, честно сообщите об этом, предлагая в качестве альтернативы общие советы по посещению музея.
+Коммуникация с пользователем:
 
-6. Обязательно В КОНЦЕ ответа предоставьте параметр image_url (ссылку на изображение объекта, про который ты пишешь); несколько ссылок, если в вопросе ИЛИ вашем ответе упоминается несколько ОБЪЕКТОВ; одну ссылку, если упоминается один объект; не писать ничего, если не упоминается ни один объект.
-    ещё раз, если ты сам в ответе упомянул какие-то объекты, например фонтаны, то приложи ссылки
-    {random_route}
-    Соблюдайте эти рекомендации, чтобы предоставить пользователям интересные, информативные и мотивирующие ответы, вдохновляя их на посещение музея Петергоф.
-'''
+1. Если пользователь здоровается, ответьте приветствием.
+2. Если вопрос связан с музеем, используйте найденный контекст, чтобы предоставить релевантный и точный ответ.
+3. Если вопрос не связан с музеем, вежливо сообщите: "К сожалению, я могу отвечать только на вопросы, связанные с музеем Петергоф, его объектами, маршрутами, билетами или сайтом."
+4. Общение должно быть дружелюбным и естественным, чтобы создать комфортную атмосферу для пользователя.
+
+Подача информации:
+
+- При ответе на вопросы о конкретных объектах предоставьте название и захватывающее описание.
+- Если вопрос касается маршрутов, укажите несколько рекомендованных объектов последовательно, формируя маршрут.
+- Если вопрос касается билетов или сайта, предоставьте актуальную информацию и рекомендации.
+
+Мотивация и вдохновение:
+
+Используйте вдохновляющий язык, чтобы заинтересовать пользователя. Подчеркните уникальные аспекты каждого объекта, делая акцент на уникальном опыте, который ждёт посетителя.
+
+Ограничения:
+
+- Длина ответа до 1000 символов.
+- Отвечайте только на основе имеющейся информации. Если данных недостаточно, честно сообщите об этом, предлагая общие советы.
+
+Обязательно в конце ответа:
+
+- Если в ответе упоминается один объект, приложите одну релевантную ссылку на изображение, взятую из контекста.
+- Если упоминается несколько объектов, приложите соответствующие ссылки.
+- Если объекты не упоминаются, не прикладывайте ссылки.
+
+Релевантный контекст для ответов (нужно определить его использование в каждом конкретном случае):
+
+{relevant_context}
+
+{random_route}
+'''.strip()
     memory_text = \
 f'''
 6. Память:
@@ -140,30 +163,24 @@ f'''
         3 (предпредпоследний): вопрос: {memory["questions"][2]}; ваш ответ: {memory["answers"][2]};
     \"-\" означает отсутствие запроса. Пользователь может использовать местоимения или говорить в контексте этих сообщений, учитывайте это.
 '''
-    assistant = await bot.sdk.assistants.create(
-        name='rag-assistant',
-        model='yandexgpt',
-        tools=[tool],
-        temperature=0.1,
-        instruction=prompt,
-        max_prompt_tokens=2000
-    )
-    thread = await bot.sdk.threads.create()
-    try:
-        await thread.write(question)
-        run = await assistant.run(thread)
-        result = await run
-        bot.user_settings[str(user_id)]['memory']['questions'] = [question, memory['questions'][0], memory['questions'][1]]
-        bot.user_settings[str(user_id)]['memory']['answers'] = [result.text.split('image_url')[0].strip(), memory['answers'][0], memory['answers'][1]]
-        write_dictionary(bot.user_settings)
-        result_text = result.text.replace('**', '')
-        if bot.user_settings[str(user_id)]['language'] == 'en':
-            result_text = await ru_to_en(result_text)
-        return result_text
-    finally:
-        await search_index.delete()
-        await thread.delete()
-        await assistant.delete()
+    result = llm_model.run(prompt)
+    print(result.alternatives[0])
+    answer_text = result.alternatives[0].text
+    bot.user_settings[str(user_id)]['memory']['questions'] = [
+        question,
+        memory['questions'][0],
+        memory['questions'][1]
+    ]
+    bot.user_settings[str(user_id)]['memory']['answers'] = [
+        answer_text.split('image_url')[0].strip(),
+        memory['answers'][0],
+        memory['answers'][1]
+    ]
+    write_dictionary(bot.user_settings)
+    result_text = answer_text.replace('**', '')
+    if bot.user_settings[str(user_id)]['language'] == 'en':
+        result_text = await ru_to_en(result_text)
+    return result_text
 
 
 def load_dictionary(path='users.json'):
@@ -180,7 +197,23 @@ async def help_command(message: types.Message):
     await message.reply(translation(message.from_user.id, 'help'))
 
 
+def escape_text_except_links(text):
+    links = re.findall(r'\[([^\]]+)\]\((https?:\/\/[^\)]+)\)', text)
+    placeholder = "LINK_PLACEHOLDER_{}"
+    link_map = {}
+    for i, (link_text, link_url) in enumerate(links):
+        placeholder_key = placeholder.format(i)
+        link_map[placeholder_key] = f"[{link_text}]({link_url})"
+        text = text.replace(f"[{link_text}]({link_url})", placeholder_key)
+    text = re.sub(r'([.\-!()])', r'\\\1', text)
+    for placeholder_key, original_link in link_map.items():
+        text = text.replace(placeholder_key, original_link)
+    return text
+
+
 async def get_route(user_id: int, request: str = None, latitude: str = None, longitude: str = None):
+    data_chunks = create_json_chunks()
+    coordinates = ['59.891802' if latitude is None else latitude, '29.913220' if longitude is None else longitude]
     if request is None:
         dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
         dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
@@ -188,19 +221,20 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
             {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
             {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
         ]
+        res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates, objects_number=5)
     else:
-        user_dialogues = [
-            {'user': f'Мои пожелания к маршруту: {request}'},
-            {'bot': 'Хорошо, я учту ваши пожелания при составлении маршрута'}
-        ]
-    data_chunks = create_json_chunks()
-    res = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=['59.891802' if latitude is None else latitude, '29.913220' if longitude is None else longitude], objects_number=5)
-    res_final = res.replace('**', '')
+        res, current_route_json = change_route_by_message(request, bot.route_data[user_id]['json'], data_chunks, initial_coordinates=coordinates)
+    if bot.route_data.get(user_id) is None:
+        bot.route_data[user_id] = {'geo': [None, None], 'request': None, 'json': None}
+    bot.route_data[user_id]['json'] = current_route_json
+    res_final = res.replace('*', '')
     if bot.user_settings[str(user_id)]['language'] == 'en':
         res_translated = await ru_to_en(res_final)
         res_final = ''
         for i in res_translated.split('\n'):
             res_final += f'{i}\n' if 'yandex.ru' not in i else i.replace(' ', '')
+    res_final = escape_text_except_links(res_final).replace(r'%2С', r'%2C')
+    print(res_final)
     return res_final
 
 
@@ -208,7 +242,7 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
 @dp.message_handler(lambda message: message.chat.type == 'private', commands=['route'])
 async def route(message: types.Message):
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
-    await msg.edit_text(await get_route(message.from_user.id))
+    await msg.edit_text(await get_route(message.from_user.id), parse_mode='MarkdownV2')
     await msg.edit_reply_markup(get_route_keyboard())
 
 
@@ -275,15 +309,16 @@ def get_route_keyboard():
 
 
 @dp.message_handler(state=GeoForm.name, content_types=['location'])
-async def handle_location(message: types.Message):
+async def handle_location(message: types.Message, state: FSMContext):
     msg = await message.reply(translation(message.from_user.id, 'creating_route_geo'), disable_web_page_preview=True)
     latitude, longitude = str(message.location.latitude), str(message.location.longitude)
     if bot.route_data.get(message.from_user.id) is None:
-        bot.route_data[message.from_user.id] = {'geo': [latitude, longitude], 'request': None}
+        bot.route_data[message.from_user.id] = {'geo': [latitude, longitude], 'request': None, 'json': None}
     else:
         bot.route_data[message.from_user.id]['geo'] = [latitude, longitude]
-    await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]))
+    await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
     await msg.edit_reply_markup(get_route_keyboard())
+    await state.finish()
 
 
 def get_support_keyboard(user_id: int):
@@ -450,10 +485,10 @@ def get_route_text(user_id):
 async def route_finish(message: types.Message, state: FSMContext):
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     if bot.route_data.get(message.from_user.id) is None:
-        bot.route_data[message.from_user.id] = {'geo': [None, None], 'request': message.text}
+        bot.route_data[message.from_user.id] = {'geo': [None, None], 'request': message.text, 'json': None}
     else:
-        bot.route_data[message.from_user.id]['request'] = [message.text, message.text]
-    await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]))
+        bot.route_data[message.from_user.id]['request'] = message.text
+    await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
     await msg.edit_reply_markup(get_route_keyboard())
     await state.finish()
 
@@ -494,6 +529,19 @@ def shorten_text(text, length=1020):
     return new_text
 
 
+async def print_exception(e: Exception):
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    linecache.checkcache(filename)
+    line = linecache.getline(filename, lineno, f.f_globals)
+    info, error = format_exception(exc_type, e, tb)[-2:]
+    error = error.replace("\n", "")
+    tts = f"Exception on line {lineno} ({error}) (строка {line})"
+    print(tts)
+
+
 @dp.edited_message_handler(lambda message: message.chat.type == 'private')
 @dp.message_handler(lambda message: message.chat.type == 'private')
 async def on_message(message: types.Message):
@@ -502,13 +550,16 @@ async def on_message(message: types.Message):
     try:
         answer = await get_answer(message.text, message.from_user.id)
         print(answer)
-        links = re.findall(r'https?://[^\s]+', answer)
+        links = get_links(answer)
+        print("Очищенные ссылки:", links)
         answer_split = answer.split('image_url')
+        print("answer_split:", answer_split)
+        print("Длина answer_split:", len(answer_split))
         answer = answer_split[0].strip()
-        if '/route' in answer_split[1]:
+        if len(answer_split) > 1 and '/route' in answer_split[1]:
             answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
     except Exception as e:
-        print(e)
+        await print_exception(e)
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
         return
     if len(links) == 0:
@@ -568,9 +619,8 @@ async def main():
             api_key=getenv('AUTH')
         )
     )
-    bot.sdk = AsyncYCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
-    await files_delete()
-    bot.files = await files_create()
+    bot.chroma_collection = init_chroma()
+    # create_or_update_chroma_collection(bot.chroma_collection)
     await dp.start_polling()
 
 
