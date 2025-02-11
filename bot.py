@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import linecache
 import random
@@ -7,6 +8,7 @@ import sys
 from pathlib import Path
 from traceback import format_exception
 
+import pytz
 from aiogram import types
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -19,15 +21,13 @@ from rout_suggestion import get_route_suggestion, change_route_by_message
 from utils import create_json_chunks
 from dotenv import load_dotenv
 from os import getenv, remove
-from yandex_cloud_ml_sdk.search_indexes import StaticIndexChunkingStrategy, TextSearchIndexType
 from speechkit import model_repository, configure_credentials, creds
 from speechkit.stt import AudioProcessingType
-from chroma import init_chroma, create_or_update_chroma_collection, get_links
-from yandex_cloud_ml_sdk import AsyncYCloudML, YCloudML
-from raptor import DataEnlarger
-from utils import create_chunks
-import chromadb
-from chromadb.config import Settings
+from chroma import init_chroma, get_links, create_or_update_chroma_collection
+from yandex_cloud_ml_sdk import YCloudML
+import requests
+from bs4 import BeautifulSoup
+from datetime import date
 
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
@@ -71,7 +71,7 @@ async def files_create():
         file = await bot.sdk.files.upload(file_name)
         files.append(file)
         remove(file_name)
-    return files'''
+    return files
 
 
 async def files_create():
@@ -86,7 +86,7 @@ async def files_create():
         file = await bot.sdk.files.upload(file_name)
         files.append(file)
         remove(file_name)
-    return files
+    return files'''
 
 
 def translation(user_id, key):
@@ -183,6 +183,13 @@ f'''
     return result_text
 
 
+async def is_news_useful(question: str) -> str:
+    sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
+    llm_model = sdk.models.completions("yandexgpt")
+    result = llm_model.run(f'Оцени полезность новости для посетителя музея от 1 до 10. В ответ напиши ТОЛЬКО число без лишнего текста. Полезность заключается в том, поможет ли эта новость непосредственному посетителю музея в Санкт-Петербурге, она не должна касаться каких-то людей и других мест/городов. Новость: {question}')
+    return result.alternatives[0].text
+
+
 def load_dictionary(path='users.json'):
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
@@ -244,6 +251,43 @@ async def route(message: types.Message):
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     await msg.edit_text(await get_route(message.from_user.id), parse_mode='MarkdownV2')
     await msg.edit_reply_markup(get_route_keyboard())
+
+
+async def news_task():
+    while True:
+        now = datetime.datetime.now(pytz.timezone("Europe/Moscow"))
+        target_time = now.replace(hour=9, minute=0, second=0, microsecond=0)
+        if now >= target_time:
+            target_time += datetime.timedelta(days=1)
+        sleep_time = (target_time - now).total_seconds()
+        await asyncio.sleep(sleep_time)
+        await add_news()
+
+
+async def add_news():
+    data = load_dictionary('news.json')
+    b = True
+    while b:
+        try:
+            news = f'https://peterhofmuseum.ru/news/{date.today().year}/{data["number"]}'
+            html = requests.get(news).text
+            soup = BeautifulSoup(html, "html.parser")
+            article = soup.find("article")
+            for img in article.find_all("img"):
+                img.decompose()
+            text = article.get_text(separator="\n", strip=True)
+            try:
+                usefulness = int(await is_news_useful(text))
+            except ValueError:
+                usefulness = 5
+            print(f'{news}: {usefulness}')
+            if usefulness >= 5:
+                data['news'] = [text] + ([data['news']][:9] if len(data['news']) == 10 else data['news'])
+            data["number"] += 1
+        except Exception:
+            b = False
+    print('method add_news ended')
+    write_dictionary(data, 'news.json')
 
 
 @dp.edited_message_handler(lambda message: message.chat.type == 'private', commands=['start'])
@@ -546,7 +590,6 @@ async def print_exception(e: Exception):
 @dp.message_handler(lambda message: message.chat.type == 'private')
 async def on_message(message: types.Message):
     msg = await message.reply(translation(message.from_user.id, 'loading'))
-    answer = ''
     try:
         answer = await get_answer(message.text, message.from_user.id)
         print(answer)
@@ -621,6 +664,7 @@ async def main():
     )
     bot.chroma_collection = init_chroma()
     # create_or_update_chroma_collection(bot.chroma_collection)
+    asyncio.create_task(news_task())
     await dp.start_polling()
 
 
