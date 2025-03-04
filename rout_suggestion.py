@@ -19,9 +19,21 @@ from nltk.stem.snowball import RussianStemmer
 YANDEX_FOLDER_ID = getenv('FOLDER')
 YANDEX_AUTH = getenv('AUTH')
 
-
 def calculate_distance(coord1, coord2):
-    return math.sqrt((float(coord1[0]) - float(coord2[0])) ** 2 + (float(coord1[1]) - float(coord2[1])) ** 2)
+    lat1, lon1 = map(float, coord1)
+    lat2, lon2 = map(float, coord2)
+
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    R = 6371000
+    distance = R * c
+    return distance
 
 def normilize_text(text):
     text = text.replace('ё', 'е')
@@ -38,6 +50,33 @@ def sort_json_by_distance(initial, json_list):
     ))
 
     return sorted_json_list
+
+def filter_route_by_distance(route, max_distance=5000):
+    """
+    Фильтрует список объектов маршрута: добавляет объект, если расстояние от него до хотя бы одного
+    из уже выбранных объектов не превышает max_distance.
+    """
+    if not route:
+        return []
+
+    filtered_route = [route[0]]
+    for obj in route[1:]:
+        obj_coords = (float(obj['coordinates']['lat']), float(obj['coordinates']['lon']))
+        meets_condition = False
+
+        for existing in filtered_route:
+            existing_coords = (float(existing['coordinates']['lat']), float(existing['coordinates']['lon']))
+            distance = calculate_distance(obj_coords, existing_coords)
+
+            if distance <= max_distance:
+                meets_condition = True
+                break
+
+        if meets_condition:
+            filtered_route.append(obj)
+
+
+    return filtered_route
 
 
 def generate_yandex_maps_route_url(coordinates,start_location_coordinates):
@@ -152,6 +191,7 @@ def get_route_suggestion(user_dialogues, data_chunks, initial_coordinates = ["59
     route = mentioned_objects + additional_objects
 
     route_sorted = sort_json_by_distance(initial_coordinates, route)
+    route_sorted = filter_route_by_distance(route_sorted, max_distance=5000)
 
     route_description = ""
     for index, obj in enumerate(route_sorted):
@@ -210,40 +250,6 @@ def update_route(user_message, route_json, relevant_objects, model):
 
 Обязательно ответь списком, как я тебе дал на входе
 """
-#     prompt = f"""
-# Ты — виртуальный гид музея Петергоф. Твоя задача — корректировать список объектов для посещения по запросу пользователя.
-#
-# У тебя есть:
-# - Список предложенных объектов.
-# - Сообщение пользователя, в котором он просит внести изменения.
-# - Дополнительные объекты для возможного добавления.
-#
-# Следуй этим простым правилам:
-#
-# 1) Добавление объектов. Если пользователь говорит, что хочет добавить что-то (например, "Добавь музей карт"), просто добавь это к текущему списку без удаления уже предложенных объектов.
-#
-# 2) Удаление объектов. Если пользователь явно говорит, что что-то ему не нравится или не хочет видеть, удали эти объекты из списка.
-#
-# 3) Замена объектов. Если пользователь просит внести изменения и уточняет, что нужно убрать или поменять, замени ненужные объекты на новые из предложенного списка.
-#
-# Всегда проверяй, ясно ли указания пользователя, и работай только с указанными объектами.
-#
-# Выводи только итоговый список объектов. Если нет подходящих объектов, выведи пустую строку.
-#
-# ## Примеры:
-# - Если пользователь просит добавить только один объект, просто дополните текущий список им.
-# - Если пользователь хочет что-то убрать и что-то добавить, выполняйте соответствующие изменения.
-#
-# ## Возможные объекты: ##
-# {relevant_objects}
-#
-# ## Сообщение пользователя: ##
-# {user_message}
-#
-# ## Текущий список объектов: ##
-# {objects_names}
-#
-# """
 
     result = model.run(prompt)
     return result.alternatives[0].text
@@ -299,6 +305,7 @@ def change_route_by_message(message, current_route_json, data_chunks, initial_co
     print("Updated names in chunks:")
     print(updated_objects_names)
     route_sorted = sort_json_by_distance(initial_coordinates, updated_objects_chunks)
+    route_sorted = filter_route_by_distance(route_sorted, max_distance=500)
 
     route_description = ""
     for index, obj in enumerate(route_sorted):
