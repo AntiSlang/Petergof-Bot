@@ -78,16 +78,15 @@ def answer_from_news(question: str, dialog_history:str, news_file_path="news.jso
     model = model.configure(temperature=0.5)
     result = model.run(prompt)
     return result.alternatives[0].text.strip()
-
-
-def classify_and_answer(user_question: str, user_dialogues: list, data_chunks: list) -> str:
-
-    if is_museum_question(user_question, user_dialogues):
-        route_description, _ = get_route_suggestion(user_dialogues, data_chunks)
-        return route_description
-    else:
-        return answer_from_news(user_question, user_dialogues)
-
+#
+#
+# def classify_and_answer(user_question: str, user_dialogues: list, data_chunks: list) -> str:
+#
+#     if is_museum_question(user_question, user_dialogues):
+#         route_description, _ = get_route_suggestion(user_dialogues, data_chunks)
+#         return route_description
+#     else:
+#         return answer_from_news(user_question, user_dialogues)
 
 
 if __name__ == "__main__":

@@ -29,6 +29,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
+from dialog_pipeline import answer_from_news, is_museum_question
+
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -100,18 +102,33 @@ async def ru_to_en(text):
 
 async def get_answer(question: str, user_id: int) -> str:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
-    llm_model = sdk.models.completions("yandexgpt")
-    results = bot.chroma_collection.query(
-        query_texts=[question],
-        n_results=3
-    )
-    print(results)
-    retrieved_docs = results.get('documents', [[]])[0]
-    relevant_context = "\n\n".join(retrieved_docs)
+
     memory = bot.user_settings[str(user_id)]['memory']
-    random_route = '' if random.randint(1, 5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
-    prompt = \
-f'''
+
+    user_dialogues = []
+    for i in range(min(3, len(memory['questions']))):
+        if memory['questions'][i] != '-':
+            user_dialogues.append({'user': memory['questions'][i]})
+        if memory['answers'][i] != '-':
+            user_dialogues.append({'bot': memory['answers'][i]})
+
+    user_dialogues.append({'user': question})
+
+    dialog_history = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items()])
+
+    try:
+        if is_museum_question(question, dialog_history):
+            results = bot.chroma_collection.query(
+                query_texts=[question],
+                n_results=3
+            )
+            retrieved_docs = results.get('documents', [[]])[0]
+            relevant_context = "\n\n".join(retrieved_docs)
+
+            llm_model = sdk.models.completions("yandexgpt")
+            random_route = '' if random.randint(1,
+                                                5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
+            prompt = f'''
 Контекст и цель:
 
 Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
@@ -120,52 +137,38 @@ f'''
 
 Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
 
-Коммуникация с пользователем:
-
-1. Если пользователь здоровается, ответьте приветствием.
-2. Если вопрос связан с музеем, используйте найденный контекст, чтобы предоставить релевантный и точный ответ.
-3. Если вопрос не связан с музеем, вежливо сообщите: "К сожалению, я могу отвечать только на вопросы, связанные с музеем Петергоф, его объектами, маршрутами, билетами или сайтом."
-4. Общение должно быть дружелюбным и естественным, чтобы создать комфортную атмосферу для пользователя.
-
-Подача информации:
-
-- При ответе на вопросы о конкретных объектах предоставьте название и захватывающее описание.
-- Если вопрос касается маршрутов, укажите несколько рекомендованных объектов последовательно, формируя маршрут.
-- Если вопрос касается билетов или сайта, предоставьте актуальную информацию и рекомендации.
-
-Мотивация и вдохновение:
-
-Используйте вдохновляющий язык, чтобы заинтересовать пользователя. Подчеркните уникальные аспекты каждого объекта, делая акцент на уникальном опыте, который ждёт посетителя.
-
-Ограничения:
-
-- Длина ответа до 1000 символов.
-- Отвечайте только на основе имеющейся информации. Если данных недостаточно, честно сообщите об этом, предлагая общие советы.
-
-Обязательно в конце ответа:
-
-- Если в ответе упоминается один объект, приложите одну релевантную ссылку на изображение, взятую из контекста.
-- Если упоминается несколько объектов, приложите соответствующие ссылки.
-- Если объекты не упоминаются, не прикладывайте ссылки.
-
-Релевантный контекст для ответов (нужно определить его использование в каждом конкретном случае):
+Релевантный контекст для ответов:
 
 {relevant_context}
 
 {random_route}
 '''.strip()
-    memory_text = \
-f'''
-6. Память:
-    - Вот 3 последних запроса пользователя к вам и ваши ответы на них:
-        1 (последний): вопрос: {memory["questions"][0]}; ваш ответ: {memory["answers"][0]};
-        2 (предпоследний): вопрос: {memory["questions"][1]}; ваш ответ: {memory["answers"][1]};
-        3 (предпредпоследний): вопрос: {memory["questions"][2]}; ваш ответ: {memory["answers"][2]};
-    \"-\" означает отсутствие запроса. Пользователь может использовать местоимения или говорить в контексте этих сообщений, учитывайте это.
-'''
-    result = llm_model.run(prompt)
-    print(result.alternatives[0])
-    answer_text = result.alternatives[0].text
+            result = llm_model.run(prompt)
+            answer_text = result.alternatives[0].text
+        else:
+            # Используем функцию для общих вопросов и новостей
+            answer_text = answer_from_news(question, dialog_history)
+    except Exception as e:
+        # ретраим
+        results = bot.chroma_collection.query(
+            query_texts=[question],
+            n_results=3
+        )
+        retrieved_docs = results.get('documents', [[]])[0]
+        relevant_context = "\n\n".join(retrieved_docs)
+
+        llm_model = sdk.models.completions("yandexgpt")
+        prompt = f'''
+Контекст и цель:
+Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
+
+Релевантный контекст для ответов:
+{relevant_context}
+'''.strip()
+        result = llm_model.run(prompt)
+        answer_text = result.alternatives[0].text
+        print(f"Ошибка в pipeline: {e}, использован запасной ответ")
+
     bot.user_settings[str(user_id)]['memory']['questions'] = [
         question,
         memory['questions'][0],
@@ -177,9 +180,11 @@ f'''
         memory['answers'][1]
     ]
     write_dictionary(bot.user_settings)
+
     result_text = answer_text.replace('**', '')
     if bot.user_settings[str(user_id)]['language'] == 'en':
         result_text = await ru_to_en(result_text)
+
     return result_text
 
 
