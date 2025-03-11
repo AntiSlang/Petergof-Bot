@@ -26,7 +26,7 @@ def is_museum_question(question: str, dialog_history: str) -> bool:
         auth=YANDEX_AUTH,
     )
     model = sdk.models.completions(model_name="yandexgpt")
-    model = model.configure(temperature=0.1)
+    model = model.configure(temperature=0.3)
 
     prompt = f"""
 Твоя задача — определить, требует ли следующий вопрос обращения к базе данных за информацией по отдельным объектам музея (например, конкретные экспонаты, памятники, маршруты, выставки), или же он носит общий характер про музей, его время работы или последние новости и не требует такого запроса в базу по объектам.
@@ -37,7 +37,6 @@ def is_museum_question(question: str, dialog_history: str) -> bool:
 История диалога: {dialog_history}
 """
 
-    print(prompt)
 
     result = model.run(prompt)
     answer = result.alternatives[0].text.strip().lower()
@@ -71,13 +70,12 @@ def answer_from_news(question: str, dialog_history:str, news_file_path="news.jso
 История диалога: {dialog_history}
 """
 
-    print(prompt)
     sdk = YCloudML(
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
     )
-    model = sdk.models.completions(model_name="llama")
-    model = model.configure(temperature=0.1)
+    model = sdk.models.completions(model_name="yandexgpt")
+    model = model.configure(temperature=0.5)
     result = model.run(prompt)
     return result.alternatives[0].text.strip()
 

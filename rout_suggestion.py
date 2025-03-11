@@ -1,5 +1,7 @@
 import pymorphy2
 import math
+
+from spyder.plugins.completion.providers.fallback.utils import kebab_regex
 from yandex_cloud_ml_sdk import YCloudML
 from utils import parse_dialogue
 import re
@@ -211,8 +213,8 @@ def update_route(user_message, route_json, relevant_objects, model):
 
     objects_names = ", ".join([obj["name"] for obj in route_json])
 
-    print("mentioned objects:")
-    print(objects_names)
+    # print("mentioned objects:")
+    # print(objects_names)
 
     prompt = f"""Ты умный гид музея Петергоф, и твоя задача — понять, какие объекты пользователь хочет увидеть, а какие нет.
 
@@ -236,8 +238,10 @@ def update_route(user_message, route_json, relevant_objects, model):
 - Важно избегать любых отсылок к другим темам или ресурсам, кроме органов управления объектами.
 
 ВАЖНО! Понять из сообщения пользователя, какие объекты нужно удалить, а какие добавлять, чтобы его маршрут стал более релевантным.
+ВАЖНО! Если пользователь не попросил уменьшить количество мест, то обязательно выведи 5 мест, если по контексту не ясно, что пользователь не хочет их видеть 
+ВАЖНО! Добавляй ответов всегда побольше чтобы пользователь мог выбрать сам (если только он не указал, что ему нужно меньше объектов)
 
-Выведи только итоговый список мест для посещения. Если подходящих мест нет, верни пустую строку.
+Выведи только итоговый список мест для посещения. Если подходящих мест нет, предложи самые подходящие альтернативы
 
 ## Возможные релевантные объекты для пользователя: ##
 {relevant_objects}
@@ -262,8 +266,8 @@ def change_route_by_message(message, current_route_json, data_chunks, initial_co
         auth=YANDEX_AUTH,
     )
 
-    model = sdk.models.completions(model_name="llama")
-    model = model.configure(temperature=0.1)
+    model = sdk.models.completions(model_name="yandexgpt")
+    model = model.configure(temperature=0.5)
 
     chroma_collection = init_chroma()
     collection_count = chroma_collection.count()
@@ -278,21 +282,23 @@ def change_route_by_message(message, current_route_json, data_chunks, initial_co
 
     results = chroma_collection.query(
         query_texts=[message],
-        n_results=4
+        n_results=10
     )
 
 
     retrieved_docs = results.get('documents', [[]])[0]
+    # print('Retrived docs')
+    # print(retrieved_docs)
     # for doc in retrieved_docs:
     #     print(doc)
     #     print("------------")
     relevant_context = "\n\n".join(retrieved_docs)
 
     updated_object_names = update_route(message, current_route_json, relevant_context, model)
-    print("____________________________")
-    print("updated_object_names:", updated_object_names)
+    # print("____________________________")
+    # print("updated_object_names:", updated_object_names)
     normilized_names = normilize_text(updated_object_names)
-    print(normilized_names)
+    # print(normilized_names)
 
     updated_objects_chunks = []
     updated_objects_names = []
@@ -302,10 +308,13 @@ def change_route_by_message(message, current_route_json, data_chunks, initial_co
             updated_objects_names.append(lemmatized_chunk_name)
             updated_objects_chunks.append(chunk)
 
-    print("Updated names in chunks:")
-    print(updated_objects_names)
+    # print("Updated names in chunks:")
+    # print(updated_objects_names)
     route_sorted = sort_json_by_distance(initial_coordinates, updated_objects_chunks)
+
     route_sorted = filter_route_by_distance(route_sorted, max_distance=500)
+    # print("Sorted route")
+    # print(route_sorted)
 
     route_description = ""
     for index, obj in enumerate(route_sorted):
@@ -316,5 +325,4 @@ def change_route_by_message(message, current_route_json, data_chunks, initial_co
     link = generate_yandex_maps_route_url(coordinates_list, initial_coordinates)
 
     route_description = suggest_route_by_gpt(model, route_description, link, message)
-
     return route_description, route_sorted
