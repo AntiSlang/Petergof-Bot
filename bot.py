@@ -7,7 +7,6 @@ import re
 import sys
 from pathlib import Path
 from traceback import format_exception
-
 import pytz
 from aiogram import types
 from aiogram import Bot, Dispatcher
@@ -28,9 +27,7 @@ from yandex_cloud_ml_sdk import YCloudML
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-
 from dialog_pipeline import answer_from_news, is_museum_question
-
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -100,7 +97,47 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer(question: str, user_id: int) -> str:
+async def get_answer_prompt(question, sdk, prompt_original=True):
+    results = bot.chroma_collection.query(
+        query_texts=[question],
+        n_results=3
+    )
+    retrieved_docs = results.get('documents', [[]])[0]
+    relevant_context = "\n\n".join(retrieved_docs)
+    links = get_links(relevant_context)
+    llm_model = sdk.models.completions("yandexgpt")
+    random_route = '' if random.randint(1,
+                                        5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
+    if prompt_original:
+        prompt = f'''
+        Контекст и цель:
+    
+        Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
+    
+        Цель:
+    
+        Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
+    
+        Релевантный контекст для ответов:
+    
+        {relevant_context}
+    
+        {random_route}
+        '''.strip()
+    else:
+        prompt = f'''
+        Контекст и цель:
+        Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
+
+        Релевантный контекст для ответов:
+        {relevant_context}
+        '''.strip()
+    result = llm_model.run(prompt)
+    answer_text = result.alternatives[0].text
+    return answer_text, links
+
+
+async def get_answer(question: str, user_id: int) -> tuple:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
 
     memory = bot.user_settings[str(user_id)]['memory']
@@ -115,67 +152,28 @@ async def get_answer(question: str, user_id: int) -> str:
     user_dialogues.append({'user': question})
 
     dialog_history = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items()])
-
+    links = []
     try:
-        if is_museum_question(question, dialog_history):
-            results = bot.chroma_collection.query(
-                query_texts=[question],
-                n_results=3
-            )
-            retrieved_docs = results.get('documents', [[]])[0]
-            relevant_context = "\n\n".join(retrieved_docs)
-
-            llm_model = sdk.models.completions("yandexgpt")
-            random_route = '' if random.randint(1,
-                                                5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
-            prompt = f'''
-Контекст и цель:
-
-Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
-
-Цель:
-
-Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
-
-Релевантный контекст для ответов:
-
-{relevant_context}
-
-{random_route}
-'''.strip()
-            result = llm_model.run(prompt)
-            answer_text = result.alternatives[0].text
+        is_museum = is_museum_question(question, dialog_history)
+        # print(is_museum)
+        if is_museum:
+            answer_text, links = await get_answer_prompt(question, sdk, True)
         else:
             # Используем функцию для общих вопросов и новостей
             answer_text = answer_from_news(question, dialog_history)
     except Exception as e:
         # ретраим
-        results = bot.chroma_collection.query(
-            query_texts=[question],
-            n_results=3
-        )
-        retrieved_docs = results.get('documents', [[]])[0]
-        relevant_context = "\n\n".join(retrieved_docs)
-
-        llm_model = sdk.models.completions("yandexgpt")
-        prompt = f'''
-Контекст и цель:
-Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
-
-Релевантный контекст для ответов:
-{relevant_context}
-'''.strip()
-        result = llm_model.run(prompt)
-        answer_text = result.alternatives[0].text
+        answer_text, links = await get_answer_prompt(question, sdk, False)
         print(f"Ошибка в pipeline: {e}, использован запасной ответ")
 
+    # print(f'answer_text: {answer_text}')
     bot.user_settings[str(user_id)]['memory']['questions'] = [
         question,
         memory['questions'][0],
         memory['questions'][1]
     ]
     bot.user_settings[str(user_id)]['memory']['answers'] = [
-        answer_text.split('image_url')[0].strip(),
+        answer_text,
         memory['answers'][0],
         memory['answers'][1]
     ]
@@ -185,7 +183,7 @@ async def get_answer(question: str, user_id: int) -> str:
     if bot.user_settings[str(user_id)]['language'] == 'en':
         result_text = await ru_to_en(result_text)
 
-    return result_text
+    return result_text, links
 
 
 async def is_news_useful(question: str) -> str:
@@ -226,16 +224,17 @@ def escape_text_except_links(text):
 async def get_route(user_id: int, request: str = None, latitude: str = None, longitude: str = None):
     data_chunks = create_json_chunks()
     coordinates = ['59.891802' if latitude is None else latitude, '29.913220' if longitude is None else longitude]
+    dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
+    dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
+    user_dialogues = [
+        {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
+        {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
+    ]
     if request is None:
-        dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
-        dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
-        user_dialogues = [
-            {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
-            {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
-        ]
-        res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates, objects_number=5)
+        res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates)
     else:
-        res, current_route_json = change_route_by_message(request, bot.route_data[user_id]['json'], data_chunks, initial_coordinates=coordinates)
+        res, current_route_json = change_route_by_message(request, bot.route_data[user_id]['json'], data_chunks, user_dialogues, initial_coordinates=coordinates)
+    user_dialogues.append({'bot': res})
     if bot.route_data.get(user_id) is None:
         bot.route_data[user_id] = {'geo': [None, None], 'request': None, 'json': None}
     bot.route_data[user_id]['json'] = current_route_json
@@ -596,13 +595,13 @@ async def print_exception(e: Exception):
 async def on_message(message: types.Message):
     msg = await message.reply(translation(message.from_user.id, 'loading'))
     try:
-        answer = await get_answer(message.text, message.from_user.id)
-        print(answer)
-        links = get_links(answer)
-        print("Очищенные ссылки:", links)
-        answer_split = answer.split('image_url')
-        print("answer_split:", answer_split)
-        print("Длина answer_split:", len(answer_split))
+        answer, links = await get_answer(message.text, message.from_user.id)
+        # print(answer)
+        # links = get_links(answer)
+        # print("Очищенные ссылки:", links)
+        answer_split = answer.split('Оценка объекта')
+        # print("answer_split:", answer_split)
+        # print("Длина answer_split:", len(answer_split))
         answer = answer_split[0].strip()
         if len(answer_split) > 1 and '/route' in answer_split[1]:
             answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
@@ -642,7 +641,7 @@ async def handle_voice_message(message: types.Message):
     text = recognize(local_file)
     text = text if text is not None and text != '' and len(text) >= 2 else '-'
     remove(local_file)
-    await msg.edit_text(f'Ваш вопрос: {quote_text(text)}\n\n{(await get_answer(text, message.from_user.id)).split("image_url")[0].strip()}', parse_mode='HTML')
+    await msg.edit_text(f'Ваш вопрос: {quote_text(text)}\n\n{(await get_answer(text, message.from_user.id))[0].strip()}', parse_mode='HTML')
 
 
 @dp.message_handler(content_types=[types.ContentType.ANY])
