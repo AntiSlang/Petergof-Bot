@@ -97,7 +97,7 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer_prompt(question, sdk, prompt_original=True):
+async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="none"):
     results = bot.chroma_collection.query(
         query_texts=[question],
         n_results=3
@@ -106,22 +106,42 @@ async def get_answer_prompt(question, sdk, prompt_original=True):
     relevant_context = "\n\n".join(retrieved_docs)
     links = get_links(relevant_context)
     llm_model = sdk.models.completions("yandexgpt")
+
     random_route = '' if random.randint(1,
                                         5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
+
+    greeting_instruction = ""
+    if greeting_style == "none":
+        greeting_instruction = """
+            Важно: не используй никаких приветствий в начале сообщения, если пользователь не поздоровался первым 
+            Начинай ответ сразу с информации по существу вопроса.
+            Не используй фразы типа "Здравствуйте", "Привет", "Добрый день" и другие формы приветствий, если пользователь не поздоровался первым 
+            """
+    elif greeting_style == "brief":
+        greeting_instruction = """
+            Используй только очень краткое приветствие, если это первое сообщение в диалоге.
+            В последующих сообщениях не используй приветствий вообще, если пользователь не поздоровался первым 
+            Избегай чрезмерной эмоциональности и длинных фраз вежливости.
+            """
+
     if prompt_original:
         prompt = f'''
         Контекст и цель:
-    
+
         Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
-    
+
         Цель:
-    
+
         Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
-    
+
+        {greeting_instruction}
+
+        Отвечай лаконично и по существу, избегая ненужных длинных введений.
+
         Релевантный контекст для ответов:
-    
+
         {relevant_context}
-    
+
         {random_route}
         '''.strip()
     else:
@@ -129,15 +149,26 @@ async def get_answer_prompt(question, sdk, prompt_original=True):
         Контекст и цель:
         Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
 
+        {greeting_instruction}
+
+        Отвечай лаконично и по существу.
+
         Релевантный контекст для ответов:
         {relevant_context}
         '''.strip()
+
     result = llm_model.run(prompt)
     answer_text = result.alternatives[0].text
     return answer_text, links
 
 
 async def get_answer(question: str, user_id: int) -> tuple:
+    """
+    Enhanced main answer generation function that:
+    1. Uses the improved classifier
+    2. Controls greeting style based on conversation state
+    3. Tracks conversation depth to adjust behavior
+    """
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
 
     memory = bot.user_settings[str(user_id)]['memory']
@@ -150,23 +181,24 @@ async def get_answer(question: str, user_id: int) -> tuple:
             user_dialogues.append({'bot': memory['answers'][i]})
 
     user_dialogues.append({'user': question})
-
     dialog_history = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items()])
+
+    is_first_interaction = all(q == '-' for q in memory['questions'])
+
+    greeting_style = "brief" if is_first_interaction else "none"
+
     links = []
     try:
         is_museum = is_museum_question(question, dialog_history)
-        # print(is_museum)
+
         if is_museum:
-            answer_text, links = await get_answer_prompt(question, sdk, True)
+            answer_text, links = await get_answer_prompt(question, sdk, True, greeting_style=greeting_style)
         else:
-            # Используем функцию для общих вопросов и новостей
-            answer_text = answer_from_news(question, dialog_history)
+            answer_text = answer_from_news(question, dialog_history, greeting_style=greeting_style)
     except Exception as e:
-        # ретраим
-        answer_text, links = await get_answer_prompt(question, sdk, False)
+        answer_text, links = await get_answer_prompt(question, sdk, False, greeting_style=greeting_style)
         print(f"Ошибка в pipeline: {e}, использован запасной ответ")
 
-    # print(f'answer_text: {answer_text}')
     bot.user_settings[str(user_id)]['memory']['questions'] = [
         question,
         memory['questions'][0],
