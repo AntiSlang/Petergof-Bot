@@ -58,19 +58,22 @@ class YandexEmbeddingFunction(EmbeddingFunction):
         return vectors
 
 
-def init_chroma():
+def init_chroma(remote: bool = False):
     """
     Инициализирует коллекцию Chroma (получает или создаёт).
     Устанавливает функцию для эмбеддингов (yandex_embeddings).
     """
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
     embd_model = sdk.models.text_embeddings("doc")
-    client = chromadb.PersistentClient(path="chroma_db")
-
+    if remote:
+        client = chromadb.HttpClient(host='158.160.179.7', port=8000)
+    else:
+        client = chromadb.PersistentClient(path="chroma_db")
+    print(f'collections: {client.list_collections()}')
     embedding_fn = YandexEmbeddingFunction(embd_model)
-
     collection = client.get_or_create_collection(
         name="peterhof_docs",
         embedding_function=embedding_fn
     )
-    return collection
+    print(collection)
+    return collection, client

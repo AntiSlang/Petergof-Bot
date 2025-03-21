@@ -381,10 +381,9 @@ def get_settings_keyboard(user_id: int):
 
 def get_route_keyboard():
     keyboard = InlineKeyboardMarkup()
-    button1 = InlineKeyboardButton('♻️', callback_data=f'route_yes')
-    button2 = InlineKeyboardButton('❌', callback_data=f'route_no')
-    button3 = InlineKeyboardButton('📍', callback_data=f'route_geo')
-    keyboard.row(button1, button2, button3)
+    keyboard.row(InlineKeyboardButton('♻️ Поменять маршрут', callback_data=f'route_yes'))
+    keyboard.row(InlineKeyboardButton('✅ Завершить маршрут', callback_data=f'route_no'))
+    keyboard.row(InlineKeyboardButton('📍 Выбрать начальную точку', callback_data=f'route_geo'))
     return keyboard
 
 
@@ -698,7 +697,8 @@ async def main():
             api_key=getenv('AUTH')
         )
     )
-    bot.chroma_collection = init_chroma()
+    bot.chroma_collection, client = init_chroma(remote=True)
+    print(bot.chroma_collection.count())
     # create_or_update_chroma_collection(bot.chroma_collection)
     asyncio.create_task(news_task())
     await dp.start_polling()
