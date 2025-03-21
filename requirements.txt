@@ -12,3 +12,4 @@ googletrans
 pymorphy2
 chromadb
 nltk
+pytz
