@@ -119,7 +119,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
             """
     elif greeting_style == "brief":
         greeting_instruction = """
-            Используй только очень краткое приветствие, если это первое сообщение в диалоге.
+            Используй краткое приветствие, если это первое сообщение в диалоге.
             В последующих сообщениях не используй приветствий вообще, если пользователь не поздоровался первым 
             Избегай чрезмерной эмоциональности и длинных фраз вежливости.
             """
@@ -185,7 +185,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
 
     is_first_interaction = all(q == '-' for q in memory['questions'])
 
-    greeting_style = "brief" if is_first_interaction else "none"
+    greeting_style = "brief"
 
     links = []
     try:
