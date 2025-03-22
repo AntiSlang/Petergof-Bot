@@ -1,6 +1,6 @@
 {
     "ru": {
-        "help": "[WIP]",
+        "help": "Список команд:\n\n/help — эта команда\n\n/settings — настройки: выбор русского / английского языка и включение / отключение меню\n\n/support — обращение в поддержку. Вы можете создать несколько тикетов, консультируясь в каждом из них по нужной теме\n\n/route — построение индивидуальных маршрутов. После его построения Вы можете его поменять, завершить его построение или выбрать начальную точку",
         "start": "Здравствуйте! Я ассистент по государственному музею-заповеднику \"Петергоф\". Попробуйте задать мне вопрос или использовать команду /route для составления маршрута. Подробнее о моей работе: /help",
         "language": "Язык: 🇷🇺Русский🇷🇺",
         "settings": "Настройки",
@@ -35,10 +35,13 @@
         "message": "Сообщение",
         "close_ticket": "Закрыть тикет",
         "new_ticket": "Новый тикет",
-        "see": "Посмотреть"
+        "see": "Посмотреть",
+        "route_keyboard_1": "♻\uFE0F Поменять маршрут",
+        "route_keyboard_2": "✅ Завершить маршрут",
+        "route_keyboard_3": "\uD83D\uDCCD Выбрать начальную точку"
     },
     "en": {
-        "help": "[WIP]",
+        "help": "List of commands:\n\n/help — this command\n\n/settings — settings: select Russian / English language and enable/disable menu\n\n/support — contact support. You can create several tickets, consulting in each of them on the desired topic\n\n/route — building individual routes. After building it, you can change it, complete its construction, or select a starting point",
         "start": "Hello! I am an assistant at the Peterhof State Museum-Reserve. Try asking me a question or using the /route command to create a route. Learn more about my work: /help",
         "language": "Language: 🇬🇧English🇬🇧",
         "settings": "Settings",
@@ -73,6 +76,9 @@
         "message": "Message",
         "close_ticket": "Close ticket",
         "new_ticket": "New ticket",
-        "see": "See"
+        "see": "See",
+        "route_keyboard_1": "♻\uFE0F Change route",
+        "route_keyboard_2": "✅ Finish route",
+        "route_keyboard_3": "\uD83D\uDCCD Select starting point"
     }
 }
