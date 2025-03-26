@@ -98,7 +98,7 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="brief"):
+async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="friendly"):
     results = bot.chroma_collection.query(
         query_texts=[question],
         n_results=3
@@ -107,57 +107,82 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
     relevant_context = "\n\n".join(retrieved_docs)
     links = get_links(relevant_context)
     llm_model = sdk.models.completions("yandexgpt")
+    llm_model = llm_model.configure(temperature=0.3)
 
-    random_route = '' if random.randint(1,
-                                        5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
+    greeting_patterns = {
+        'ru': re.compile(
+            r'^\s*(привет|здравствуй|добрый день|доброе утро|добрый вечер|здравствуйте|приветствую|доброго времени суток|здравия)\b',
+            re.IGNORECASE),
+        'en': re.compile(r'^\s*(hello|hi|good morning|good day|good evening|greetings|hey)\b', re.IGNORECASE)
+    }
+
+    user_greeting = bool(greeting_patterns['ru'].search(question) or greeting_patterns['en'].search(question))
 
     greeting_instruction = ""
-    if greeting_style == "none":
+
+    if greeting_style == "none" or not user_greeting:
         greeting_instruction = """
-            Важно: не используй никаких приветствий в начале сообщения, если пользователь не поздоровался первым 
-            Начинай ответ сразу с информации по существу вопроса.
-            Не используй фразы типа "Здравствуйте", "Привет", "Добрый день" и другие формы приветствий, если пользователь не поздоровался первым 
+            ВАЖНО: НЕ ИСПОЛЬЗУЙ никаких приветствий в начале ответа. Не начинай с фраз типа "Здравствуйте", 
+            "Привет", "Добрый день". Начинай ответ СРАЗУ с информации по существу вопроса.
+
+            НЕ ИСПОЛЬЗУЙ фразы типа "Я с радостью отвечу на ваши вопросы" или "Что вас интересует?".
+            НЕ ПРЕДСТАВЛЯЙСЯ и НЕ ПРЕДЛАГАЙ свою помощь - просто дай прямой ответ на вопрос.
             """
-    elif greeting_style == "brief":
+    elif user_greeting:
         greeting_instruction = """
-            не используй приветствий, если пользователь не поздоровался первым 
+            Пользователь поздоровался, поэтому кратко ответь на приветствие в начале ответа.
+            После приветствия СРАЗУ переходи к сути вопроса без лишних фраз о готовности помочь.
             """
+
+    # Базовые инструкции для всех типов ответов
+    base_instructions = """
+        Давай четкие, конкретные ответы БЕЗ длинных вводных фраз.
+
+        ЗАПРЕЩЕНО:
+        - Не используй фразы "Я с радостью отвечу", "Что вас интересует?", "Пожалуйста, спрашивайте"
+        - Не используй фразы "Согласно информации", "По данным", "Как указано в"
+        - Не предлагай незапрошенную информацию об объектах, которые не упомянуты в вопросе
+        - Не спрашивай в конце, есть ли еще вопросы или нужна ли дополнительная информация
+
+        ТРЕБУЕТСЯ:
+        - Отвечай ТОЛЬКО на заданный вопрос кратко и по существу
+        - Давай информацию в естественном разговорном стиле
+        - Если вопрос о конкретном объекте, фокусируйся только на нем
+    """
+
+    random_route = '' if random.randint(1, 10) != 1 else '''
+    В конце ответа можно предложить пользователю составить индивидуальный маршрут командой /route
+    '''
 
     if prompt_original:
         prompt = f'''
-        Контекст и цель:
-
-        Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
-
-        Цель:
-
-        Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
+        Ты - виртуальный помощник по музею-заповеднику Петергоф.
 
         {greeting_instruction}
+        {base_instructions}
 
-        Отвечай лаконично и по существу, избегая ненужных длинных введений.
+        Вопрос пользователя: "{question}"
 
-        Релевантный контекст для ответов:
-
+        Релевантный контекст для ответа:
         {relevant_context}
 
         {random_route}
         '''.strip()
     else:
         prompt = f'''
-        Контекст и цель:
-        Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
+        Ты - виртуальный помощник по музею-заповеднику Петергоф.
 
         {greeting_instruction}
+        {base_instructions}
 
-        Отвечай лаконично и по существу.
+        Вопрос пользователя: "{question}"
 
-        Релевантный контекст для ответов:
+        Контекст:
         {relevant_context}
         '''.strip()
 
     result = llm_model.run(prompt)
-    answer_text = result.alternatives[0].text
+    answer_text = result.alternatives[0].text.strip()
     return answer_text, links
 
 
