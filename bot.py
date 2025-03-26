@@ -27,7 +27,8 @@ from yandex_cloud_ml_sdk import YCloudML
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-from dialog_pipeline import answer_from_news, is_museum_question
+from dialog_pipeline import answer_from_news, is_museum_question, is_greeting_in_message, classify_question_type
+
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -97,7 +98,7 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="none"):
+async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="brief"):
     results = bot.chroma_collection.query(
         query_texts=[question],
         n_results=3
@@ -119,9 +120,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
             """
     elif greeting_style == "brief":
         greeting_instruction = """
-            Используй краткое приветствие, если это первое сообщение в диалоге.
-            В последующих сообщениях не используй приветствий вообще, если пользователь не поздоровался первым 
-            Избегай чрезмерной эмоциональности и длинных фраз вежливости.
+            не используй приветствий, если пользователь не поздоровался первым 
             """
 
     if prompt_original:
@@ -163,12 +162,6 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
 
 
 async def get_answer(question: str, user_id: int) -> tuple:
-    """
-    Enhanced main answer generation function that:
-    1. Uses the improved classifier
-    2. Controls greeting style based on conversation state
-    3. Tracks conversation depth to adjust behavior
-    """
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
 
     memory = bot.user_settings[str(user_id)]['memory']
@@ -185,14 +178,40 @@ async def get_answer(question: str, user_id: int) -> tuple:
 
     is_first_interaction = all(q == '-' for q in memory['questions'])
 
-    greeting_style = "brief"
+    user_language = bot.user_settings[str(user_id)]['language']
+    user_greeted = is_greeting_in_message(question, user_language)
+
+    if is_first_interaction:
+        greeting_style = "very_friendly"
+    elif user_greeted:
+        greeting_style = "friendly"
+    else:
+        greeting_style = "friendly"
 
     links = []
     try:
-        is_museum = is_museum_question(question, dialog_history)
+        question_type = classify_question_type(question, dialog_history)
 
-        if is_museum:
+        if question_type == "museum":
             answer_text, links = await get_answer_prompt(question, sdk, True, greeting_style=greeting_style)
+        elif question_type == "route":
+            from utils import create_json_chunks
+            data_chunks = create_json_chunks()
+            coordinates = ['59.891802', '29.913220']
+
+            if bot.route_data.get(user_id) is not None and bot.route_data[user_id]['geo'][0] is not None:
+                coordinates = bot.route_data[user_id]['geo']
+
+            answer_text, current_route_json = get_route_suggestion(user_dialogues, data_chunks,
+                                                                   initial_coordinates=coordinates)
+
+            if bot.route_data.get(user_id) is None:
+                bot.route_data[user_id] = {'geo': coordinates, 'request': question, 'json': current_route_json}
+            else:
+                bot.route_data[user_id]['request'] = question
+                bot.route_data[user_id]['json'] = current_route_json
+
+            answer_text = answer_text.replace('*', '')
         else:
             answer_text = answer_from_news(question, dialog_history, greeting_style=greeting_style)
     except Exception as e:
@@ -627,26 +646,50 @@ async def on_message(message: types.Message):
     msg = await message.reply(translation(message.from_user.id, 'loading'))
     try:
         answer, links = await get_answer(message.text, message.from_user.id)
-        # print(answer)
-        # links = get_links(answer)
-        # print("Очищенные ссылки:", links)
-        answer_split = answer.split('Оценка объекта')
-        # print("answer_split:", answer_split)
-        # print("Длина answer_split:", len(answer_split))
-        answer = answer_split[0].strip()
-        if len(answer_split) > 1 and '/route' in answer_split[1]:
-            answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
+
+        dialog_history = "\n".join([f"user: {q}" if q != '-' else "" for q in
+                                    bot.user_settings[str(message.from_user.id)]['memory']['questions']])
+        is_route = False
+        try:
+            from dialog_pipeline import classify_question_type
+            question_type = classify_question_type(message.text, dialog_history)
+            is_route = (question_type == "route")
+        except Exception as e:
+            print(f"Ошибка классификации: {e}")
+
+        reply_markup = None
+        if is_route:
+            reply_markup = get_route_keyboard()
+            answer = escape_text_except_links(answer)
+        else:
+            answer_split = answer.split('Оценка объекта')
+            answer = answer_split[0].strip()
+            if len(answer_split) > 1 and '/route' in answer_split[1]:
+                answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
     except Exception as e:
         await print_exception(e)
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
         return
+
     if len(links) == 0:
-        await msg.edit_text(shorten_text(answer, 4080))
+        try:
+            if is_route:
+                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
+            else:
+                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
+        except Exception as e:
+            print(f"Ошибка при отправке сообщения: {e}")
+            await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080))
         return
+
     try:
         answer_shorten = shorten_text(answer)
         if len(links) == 1:
-            await message.reply_photo(photo=links[0], caption=answer_shorten)
+            try:
+                await message.reply_photo(photo=links[0], caption=answer_shorten, reply_markup=reply_markup)
+            except Exception as e:
+                print(f"Ошибка при отправке фото: {e}")
+                await message.reply_photo(photo=links[0], caption=answer_shorten.replace('\\', ''))
         elif len(links) > 1:
             media_group = MediaGroup()
             for i, link in enumerate(links):
@@ -655,11 +698,18 @@ async def on_message(message: types.Message):
                 else:
                     media_group.attach_photo(photo=link)
             await message.reply_media_group(media=media_group)
+            if is_route:
+                await message.reply("Выберите действие с маршрутом:", reply_markup=reply_markup)
         await msg.delete()
         return
     except Exception as e:
-        print(e)
-    await msg.edit_text(shorten_text(answer, 4080))
+        print(f"Ошибка при отправке медиа: {e}")
+
+    try:
+        await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup)
+    except Exception as e:
+        print(f"Критическая ошибка в обработке сообщения: {e}")
+        await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
 
 
 @dp.message_handler(content_types=types.ContentType.VOICE)

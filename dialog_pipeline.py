@@ -16,40 +16,19 @@ load_dotenv()
 YANDEX_FOLDER_ID = getenv('FOLDER')
 YANDEX_AUTH = getenv('AUTH')
 
-# def is_museum_question(question: str, dialog_history: str) -> bool:
-#
-#     YANDEX_FOLDER_ID = os.getenv('FOLDER')
-#     YANDEX_AUTH = os.getenv('AUTH')
-#
-#     sdk = YCloudML(
-#         folder_id=YANDEX_FOLDER_ID,
-#         auth=YANDEX_AUTH,
-#     )
-#     model = sdk.models.completions(model_name="yandexgpt")
-#     model = model.configure(temperature=0.3)
-#
-#     prompt = f"""
-# Твоя задача — определить, требует ли следующий вопрос обращения к базе данных за информацией по отдельным объектам музея (например, конкретные экспонаты, памятники, маршруты, выставки), или же он носит общий характер про музей, его время работы или последние новости и не требует такого запроса в базу по объектам.
-#
-# Если вопрос пользователя требует получить подробные сведения об отдельных объектах музея для формирования ответа, выведи "True". Если же вопрос является общим, например, касается общей истории, значимости или описания музея, и не предполагает запрос к базе данных за информацией по конкретным объектам, выведи "False".
-#
-# Вопрос: "{question}"
-# История диалога: {dialog_history}
-# """
-#
-#
-#     result = model.run(prompt)
-#     answer = result.alternatives[0].text.strip().lower()
-#
-#     if "true" in answer or "да" in answer:
-#         return True
-#     return False
+GREETING_PATTERNS = {
+    'ru': re.compile(r'\b(привет|здравствуй|добрый день|доброе утро|добрый вечер|здравствуйте|приветствую)\b',
+                     re.IGNORECASE),
+    'en': re.compile(r'\b(hello|hi|greetings|good morning|good day|good evening)\b', re.IGNORECASE)
+}
 
 
-def is_museum_question(question: str, dialog_history: str) -> bool:
-    YANDEX_FOLDER_ID = os.getenv('FOLDER')
-    YANDEX_AUTH = os.getenv('AUTH')
+def is_greeting_in_message(text, language='ru'):
+    pattern = GREETING_PATTERNS.get(language, GREETING_PATTERNS['en'])
+    return bool(pattern.search(text))
 
+
+def classify_question_type(question: str, dialog_history: str) -> str:
     sdk = YCloudML(
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
@@ -58,31 +37,37 @@ def is_museum_question(question: str, dialog_history: str) -> bool:
     model = model.configure(temperature=0.1)
 
     prompt = f"""
-Задача: Определить, требует ли вопрос пользователя информации о конкретных экспонатах музея-заповедника "Петергоф".
+Задача: Определить тип вопроса пользователя по отношению к музею-заповеднику "Петергоф".
 
-Примеры вопросов, требующих информации о конкретных объектах музея (ответ "True"):
-1. "Расскажи о Большом каскаде в Петергофе"
-2. "Где находится павильон Эрмитаж?"
-3. "Какие экспонаты можно увидеть в музее Императорских яхт?"
-4. "Какие фонтаны запускают в летний сезон?"
-5. "Как выглядит Большой дворец?"
-6. "Расскажи про Монплезир"
-7. "Что интересного в парке Александрия?"
+Возможные типы вопросов:
+1. "museum" - вопрос о конкретных объектах музея (фонтаны, павильоны, экспонаты, скульптуры)
+2. "route" - вопрос о маршрутах или явная просьба помочь с составлением маршрута
+3. "general" - общие вопросы о музее, режиме работы, билетах, новостях и т.д.
 
-Примеры общих вопросов, НЕ требующих информации о конкретных объектах (ответ "False"):
-1. "Когда открывается музей?"
-2. "Сколько стоит вход в парк?"
-3. "Есть ли сегодня какие-то мероприятия?"
-5. "Привет! Как ты можешь мне помочь?"
-6. "Где находится туалет в парке?"
-7. "Можно ли с собакой в парк?"
-8. "Есть ли в музее кафе?"
-9. "Работает ли музей в понедельник?"
+Примеры вопросов типа "museum":
+- "Расскажи о Большом каскаде в Петергофе"
+- "Где находится павильон Эрмитаж?"
+- "Какие экспонаты можно увидеть в музее Императорских яхт?"
+- "Что представляет собой фонтан Самсон?"
 
-Важное примечание: вопросы о режиме работы, ценах билетов, общей истории музея, как добраться, погоде, удобствах (кафе, туалеты) — считаются общими.
-Вопросы о конкретных фонтанах, экспонатах, садах, парках, скульптурах — считаются требующими информации о конкретных объектах.
+Примеры вопросов типа "route":
+- "Помоги составить маршрут по парку"
+- "Как лучше обойти все основные фонтаны за 3 часа?"
+- "Предложи маршрут для посещения дворцов"
+- "Какой маршрут посоветуешь для первого посещения?"
+- "Составь для меня план прогулки по парку"
+- "Куда лучше пойти в первую очередь?"
+- "Что стоит посмотреть в первую очередь?"
 
-Проанализируй следующий вопрос и историю диалога. Ответь только "True" или "False".
+Примеры вопросов типа "general":
+- "Когда открывается музей?"
+- "Сколько стоит вход в парк?"
+- "Есть ли сегодня какие-то мероприятия?"
+- "Где находится туалет в парке?"
+- "Можно ли с собакой в парк?"
+- "Есть ли в музее кафе?"
+
+Проанализируй следующий вопрос и историю диалога. Ответь только "museum", "route" или "general".
 
 Вопрос: "{question}"
 История диалога: {dialog_history}
@@ -90,13 +75,27 @@ def is_museum_question(question: str, dialog_history: str) -> bool:
 
     result = model.run(prompt)
     answer = result.alternatives[0].text.strip().lower()
-    print(answer)
-    if "true" in answer or "да" in answer:
-        return True
-    return False
+    print(f"Классификация вопроса: {answer}")
+
+    if "museum" in answer:
+        return "museum"
+    elif "route" in answer:
+        return "route"
+    else:
+        return "general"
 
 
-def answer_from_news(question: str, dialog_history: str, greeting_style="normal", news_file_path="news.json") -> str:
+def is_museum_question(question: str, dialog_history: str) -> bool:
+    question_type = classify_question_type(question, dialog_history)
+    return question_type == "museum"
+
+
+def is_route_question(question: str, dialog_history: str) -> bool:
+    question_type = classify_question_type(question, dialog_history)
+    return question_type == "route"
+
+
+def answer_from_news(question: str, dialog_history: str, greeting_style="friendly", news_file_path="news.json") -> str:
     try:
         with open(news_file_path, "r", encoding="utf-8") as f:
             news_data = json.load(f)
@@ -119,6 +118,17 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="normal"
             В последующих сообщениях не используй приветствий вообще, если пользователь не поздоровался первым 
             Избегай чрезмерной эмоциональности и длинных фраз вежливости.
             """
+    elif greeting_style == "friendly":
+        greeting_instruction = """
+            Используй дружелюбный, но профессиональный тон в ответе. 
+            Если пользователь поприветствовал тебя, обязательно ответь на приветствие.
+            Если это первое взаимодействие или пользователь задаёт новую тему, можешь использовать краткое
+            приветствие, чтобы установить дружелюбный тон.
+            """
+    elif greeting_style == "very_friendly":
+        greeting_instruction = """
+            Используй очень дружелюбный и тёплый тон. Обязательно начни с приветствия.
+            """
 
     is_first_message = dialog_history.count('user:') <= 1
 
@@ -129,6 +139,13 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="normal"
         которую ты уже сообщал ранее. Отвечай по существу нового вопроса.
         """
 
+    user_greeting = is_greeting_in_message(question)
+    greeting_response = ""
+    if user_greeting:
+        greeting_response = """
+        Пользователь поприветствовал тебя, обязательно ответь на приветствие в начале своего сообщения.
+        """
+
     prompt = f"""
     У тебя есть следующие последние новости:
     {news_content}
@@ -136,9 +153,10 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="normal"
     Ты бот-помощник по музею-заповеднику "Петергоф". Твоя задача - отвечать на вопросы посетителей.
 
     {greeting_instruction}
+    {greeting_response if user_greeting else ""}
     {continuity_instruction}
 
-    Отвечай лаконично и по существу, избегая ненужных длинных введений и чрезмерной вежливости.
+    Отвечай лаконично и по существу, избегая ненужных длинных введений, но сохраняя дружелюбный тон.
     Предоставляй точную и полезную информацию, которая требуется пользователю.
 
     Вопрос пользователя: "{question}"
@@ -153,35 +171,3 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="normal"
     model = model.configure(temperature=0.4)
     result = model.run(prompt)
     return result.alternatives[0].text.strip()
-
-
-#
-#
-# def classify_and_answer(user_question: str, user_dialogues: list, data_chunks: list) -> str:
-#
-#     if is_museum_question(user_question, user_dialogues):
-#         route_description, _ = get_route_suggestion(user_dialogues, data_chunks)
-#         return route_description
-#     else:
-#         return answer_from_news(user_question, user_dialogues)
-
-
-# if __name__ == "__main__":
-#     user_question = input("Введите ваш вопрос: ")
-#
-#     user_dialogues = [
-#         {"user": "Расскажи, какие объекты музея сейчас работают?"}
-#     ]
-#     data_chunks = [
-#         {
-#             "name": "Павильон Большой Фонтан",
-#             "description": "Интересное здание с уникальными фонтанами...",
-#             "coordinates": {"lat": "59.8920", "lon": "29.9135"},
-#             "score": 0.95
-#         },
-#
-#     ]
-#
-#     answer = classify_and_answer(user_question, user_dialogues, data_chunks)
-#     print("Ответ бота:")
-#     print(answer)
