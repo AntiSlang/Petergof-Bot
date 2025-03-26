@@ -292,9 +292,11 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
     res_final = res.replace('*', '')
     if bot.user_settings[str(user_id)]['language'] == 'en':
         res_translated = await ru_to_en(res_final)
-        res_final = ''
+        '''res_final = ''
         for i in res_translated.split('\n'):
             res_final += f'{i}\n' if 'yandex.ru' not in i else i.replace(' ', '')
+        res_final = res_final.replace('LinkYandexMaps', 'LinkYandexMaps')'''
+        res_final = res_translated.replace(' ~ ', '~').replace(' & ', '&').replace(' = ', '=').replace('] ', ']')
     res_final = escape_text_except_links(res_final).replace(r'%2С', r'%2C')
     print(res_final)
     return res_final
@@ -305,7 +307,7 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
 async def route(message: types.Message):
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     await msg.edit_text(await get_route(message.from_user.id), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
 
 
 async def news_task():
@@ -398,11 +400,11 @@ def get_settings_keyboard(user_id: int):
     return InlineKeyboardMarkup().add(button1).add(button2)
 
 
-def get_route_keyboard():
+def get_route_keyboard(user_id: int):
     keyboard = InlineKeyboardMarkup()
-    keyboard.row(InlineKeyboardButton('♻️ Поменять маршрут', callback_data=f'route_yes'))
-    keyboard.row(InlineKeyboardButton('✅ Завершить маршрут', callback_data=f'route_no'))
-    keyboard.row(InlineKeyboardButton('📍 Выбрать начальную точку', callback_data=f'route_geo'))
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_1'), callback_data=f'route_yes'))
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_2'), callback_data=f'route_no'))
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_3'), callback_data=f'route_geo'))
     return keyboard
 
 
@@ -415,7 +417,7 @@ async def handle_location(message: types.Message, state: FSMContext):
     else:
         bot.route_data[message.from_user.id]['geo'] = [latitude, longitude]
     await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
     await state.finish()
 
 
@@ -581,14 +583,14 @@ def get_route_text(user_id):
 
 @dp.message_handler(state=RouteForm.name)
 async def route_finish(message: types.Message, state: FSMContext):
+    await state.finish()
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     if bot.route_data.get(message.from_user.id) is None:
         bot.route_data[message.from_user.id] = {'geo': [None, None], 'request': message.text, 'json': None}
     else:
         bot.route_data[message.from_user.id]['request'] = message.text
     await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
-    await state.finish()
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
 
 
 def text_v2(text):
@@ -747,8 +749,7 @@ async def main():
             api_key=getenv('AUTH')
         )
     )
-    bot.chroma_collection, client = init_chroma(remote=True)
-    print(bot.chroma_collection.count())
+    bot.chroma_collection = init_chroma(remote=True)
     # create_or_update_chroma_collection(bot.chroma_collection)
     asyncio.create_task(news_task())
     await dp.start_polling()

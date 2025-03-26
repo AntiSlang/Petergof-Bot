@@ -76,4 +76,5 @@ def init_chroma(remote: bool = False):
         embedding_function=embedding_fn
     )
     print(collection)
-    return collection, client
+    print(collection.count())
+    return collection
