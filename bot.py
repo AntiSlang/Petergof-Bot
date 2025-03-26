@@ -98,7 +98,7 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="brief"):
+async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="friendly"):
     results = bot.chroma_collection.query(
         query_texts=[question],
         n_results=3
@@ -114,13 +114,19 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
     greeting_instruction = ""
     if greeting_style == "none":
         greeting_instruction = """
-            Важно: не используй никаких приветствий в начале сообщения, если пользователь не поздоровался первым 
+            Не используй приветствий в начале сообщения.
             Начинай ответ сразу с информации по существу вопроса.
-            Не используй фразы типа "Здравствуйте", "Привет", "Добрый день" и другие формы приветствий, если пользователь не поздоровался первым 
             """
-    elif greeting_style == "brief":
+    elif greeting_style == "friendly":
         greeting_instruction = """
-            не используй приветствий, если пользователь не поздоровался первым 
+            Используй дружелюбный, но профессиональный тон в ответе. 
+            Если пользователь поприветствовал тебя, обязательно ответь на приветствие.
+            Если это первое взаимодействие или пользователь задаёт новую тему, можешь использовать краткое
+            приветствие, чтобы установить дружелюбный тон.
+            """
+    elif greeting_style == "very_friendly":
+        greeting_instruction = """
+            Используй очень дружелюбный и тёплый тон. Обязательно начни с приветствия.
             """
 
     if prompt_original:
@@ -135,7 +141,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
 
         {greeting_instruction}
 
-        Отвечай лаконично и по существу, избегая ненужных длинных введений.
+        Отвечай лаконично и по существу, при этом оставаясь дружелюбным и приветливым.
 
         Релевантный контекст для ответов:
 
@@ -150,7 +156,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
 
         {greeting_instruction}
 
-        Отвечай лаконично и по существу.
+        Отвечай лаконично и по существу, при этом оставаясь дружелюбным и приветливым.
 
         Релевантный контекст для ответов:
         {relevant_context}
@@ -159,7 +165,6 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
     result = llm_model.run(prompt)
     answer_text = result.alternatives[0].text
     return answer_text, links
-
 
 async def get_answer(question: str, user_id: int) -> tuple:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
