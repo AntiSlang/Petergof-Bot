@@ -7,7 +7,6 @@ import re
 import sys
 from pathlib import Path
 from traceback import format_exception
-
 import pytz
 from aiogram import types
 from aiogram import Bot, Dispatcher
@@ -28,8 +27,7 @@ from yandex_cloud_ml_sdk import YCloudML
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
-
-from dialog_pipeline import answer_from_news, is_museum_question
+from dialog_pipeline import answer_from_news, is_museum_question, is_greeting_in_message, classify_question_type
 
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
@@ -100,7 +98,95 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer(question: str, user_id: int) -> str:
+async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="friendly"):
+    results = bot.chroma_collection.query(
+        query_texts=[question],
+        n_results=3
+    )
+    retrieved_docs = results.get('documents', [[]])[0]
+    relevant_context = "\n\n".join(retrieved_docs)
+    links = get_links(relevant_context)
+    llm_model = sdk.models.completions("yandexgpt")
+    llm_model = llm_model.configure(temperature=0.3)
+
+    greeting_patterns = {
+        'ru': re.compile(
+            r'^\s*(привет|здравствуй|добрый день|доброе утро|добрый вечер|здравствуйте|приветствую|доброго времени суток|здравия)\b',
+            re.IGNORECASE),
+        'en': re.compile(r'^\s*(hello|hi|good morning|good day|good evening|greetings|hey)\b', re.IGNORECASE)
+    }
+
+    user_greeting = bool(greeting_patterns['ru'].search(question) or greeting_patterns['en'].search(question))
+
+    greeting_instruction = ""
+
+    if greeting_style == "none" or not user_greeting:
+        greeting_instruction = """
+            ВАЖНО: НЕ ИСПОЛЬЗУЙ никаких приветствий в начале ответа. Не начинай с фраз типа "Здравствуйте", 
+            "Привет", "Добрый день". Начинай ответ СРАЗУ с информации по существу вопроса.
+
+            НЕ ИСПОЛЬЗУЙ фразы типа "Я с радостью отвечу на ваши вопросы" или "Что вас интересует?".
+            НЕ ПРЕДСТАВЛЯЙСЯ и НЕ ПРЕДЛАГАЙ свою помощь - просто дай прямой ответ на вопрос.
+            """
+    elif user_greeting:
+        greeting_instruction = """
+            Пользователь поздоровался, поэтому кратко ответь на приветствие в начале ответа.
+            После приветствия СРАЗУ переходи к сути вопроса без лишних фраз о готовности помочь.
+            """
+
+    # Базовые инструкции для всех типов ответов
+    base_instructions = """
+        Давай четкие, конкретные ответы БЕЗ длинных вводных фраз.
+
+        ЗАПРЕЩЕНО:
+        - Не используй фразы "Я с радостью отвечу", "Что вас интересует?", "Пожалуйста, спрашивайте"
+        - Не используй фразы "Согласно информации", "По данным", "Как указано в"
+        - Не предлагай незапрошенную информацию об объектах, которые не упомянуты в вопросе
+        - Не спрашивай в конце, есть ли еще вопросы или нужна ли дополнительная информация
+
+        ТРЕБУЕТСЯ:
+        - Отвечай ТОЛЬКО на заданный вопрос кратко и по существу
+        - Давай информацию в естественном разговорном стиле
+        - Если вопрос о конкретном объекте, фокусируйся только на нем
+    """
+
+    random_route = '' if random.randint(1, 10) != 1 else '''
+    В конце ответа можно предложить пользователю составить индивидуальный маршрут командой /route
+    '''
+
+    if prompt_original:
+        prompt = f'''
+        Ты - виртуальный помощник по музею-заповеднику Петергоф.
+
+        {greeting_instruction}
+        {base_instructions}
+
+        Вопрос пользователя: "{question}"
+
+        Релевантный контекст для ответа:
+        {relevant_context}
+
+        {random_route}
+        '''.strip()
+    else:
+        prompt = f'''
+        Ты - виртуальный помощник по музею-заповеднику Петергоф.
+
+        {greeting_instruction}
+        {base_instructions}
+
+        Вопрос пользователя: "{question}"
+
+        Контекст:
+        {relevant_context}
+        '''.strip()
+
+    result = llm_model.run(prompt)
+    answer_text = result.alternatives[0].text.strip()
+    return answer_text, links
+
+
+async def get_answer(question: str, user_id: int) -> tuple:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
 
     memory = bot.user_settings[str(user_id)]['memory']
@@ -113,60 +199,48 @@ async def get_answer(question: str, user_id: int) -> str:
             user_dialogues.append({'bot': memory['answers'][i]})
 
     user_dialogues.append({'user': question})
-
     dialog_history = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items()])
 
+    is_first_interaction = all(q == '-' for q in memory['questions'])
+
+    user_language = bot.user_settings[str(user_id)]['language']
+    user_greeted = is_greeting_in_message(question, user_language)
+
+    if is_first_interaction:
+        greeting_style = "very_friendly"
+    elif user_greeted:
+        greeting_style = "friendly"
+    else:
+        greeting_style = "friendly"
+
+    links = []
     try:
-        if is_museum_question(question, dialog_history):
-            results = bot.chroma_collection.query(
-                query_texts=[question],
-                n_results=3
-            )
-            retrieved_docs = results.get('documents', [[]])[0]
-            relevant_context = "\n\n".join(retrieved_docs)
+        question_type = classify_question_type(question, dialog_history)
 
-            llm_model = sdk.models.completions("yandexgpt")
-            random_route = '' if random.randint(1,
-                                                5) != 1 else 'Также обязательно предложите пользователю составить индивидуальный маршрут и упомяните точную команду: /route'
-            prompt = f'''
-Контекст и цель:
+        if question_type == "museum":
+            answer_text, links = await get_answer_prompt(question, sdk, True, greeting_style=greeting_style)
+        elif question_type == "route":
+            from utils import create_json_chunks
+            data_chunks = create_json_chunks()
+            coordinates = ['59.891802', '29.913220']
 
-Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
+            if bot.route_data.get(user_id) is not None and bot.route_data[user_id]['geo'][0] is not None:
+                coordinates = bot.route_data[user_id]['geo']
 
-Цель:
+            answer_text, current_route_json = get_route_suggestion(user_dialogues, data_chunks,
+                                                                   initial_coordinates=coordinates)
 
-Предоставлять исчерпывающие ответы на вопросы пользователей относительно объектов музея, маршрутов, билетов, сайта и других аспектов посещения, основываясь на доступной базе данных. Стремитесь поддерживать интерес посетителя к посещению музея.
+            if bot.route_data.get(user_id) is None:
+                bot.route_data[user_id] = {'geo': coordinates, 'request': question, 'json': current_route_json}
+            else:
+                bot.route_data[user_id]['request'] = question
+                bot.route_data[user_id]['json'] = current_route_json
 
-Релевантный контекст для ответов:
-
-{relevant_context}
-
-{random_route}
-'''.strip()
-            result = llm_model.run(prompt)
-            answer_text = result.alternatives[0].text
+            answer_text = answer_text.replace('*', '')
         else:
-            # Используем функцию для общих вопросов и новостей
-            answer_text = answer_from_news(question, dialog_history)
+            answer_text = answer_from_news(question, dialog_history, greeting_style=greeting_style)
     except Exception as e:
-        # ретраим
-        results = bot.chroma_collection.query(
-            query_texts=[question],
-            n_results=3
-        )
-        retrieved_docs = results.get('documents', [[]])[0]
-        relevant_context = "\n\n".join(retrieved_docs)
-
-        llm_model = sdk.models.completions("yandexgpt")
-        prompt = f'''
-Контекст и цель:
-Вы являетесь виртуальным помощником для посетителей музея-заповедника Петергоф.
-
-Релевантный контекст для ответов:
-{relevant_context}
-'''.strip()
-        result = llm_model.run(prompt)
-        answer_text = result.alternatives[0].text
+        answer_text, links = await get_answer_prompt(question, sdk, False, greeting_style=greeting_style)
         print(f"Ошибка в pipeline: {e}, использован запасной ответ")
 
     bot.user_settings[str(user_id)]['memory']['questions'] = [
@@ -175,7 +249,7 @@ async def get_answer(question: str, user_id: int) -> str:
         memory['questions'][1]
     ]
     bot.user_settings[str(user_id)]['memory']['answers'] = [
-        answer_text.split('image_url')[0].strip(),
+        answer_text,
         memory['answers'][0],
         memory['answers'][1]
     ]
@@ -185,7 +259,7 @@ async def get_answer(question: str, user_id: int) -> str:
     if bot.user_settings[str(user_id)]['language'] == 'en':
         result_text = await ru_to_en(result_text)
 
-    return result_text
+    return result_text, links
 
 
 async def is_news_useful(question: str) -> str:
@@ -226,25 +300,28 @@ def escape_text_except_links(text):
 async def get_route(user_id: int, request: str = None, latitude: str = None, longitude: str = None):
     data_chunks = create_json_chunks()
     coordinates = ['59.891802' if latitude is None else latitude, '29.913220' if longitude is None else longitude]
+    dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
+    dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
+    user_dialogues = [
+        {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
+        {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
+    ]
     if request is None:
-        dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
-        dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
-        user_dialogues = [
-            {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
-            {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
-        ]
-        res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates, objects_number=5)
+        res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates)
     else:
-        res, current_route_json = change_route_by_message(request, bot.route_data[user_id]['json'], data_chunks, initial_coordinates=coordinates)
+        res, current_route_json = change_route_by_message(request, bot.route_data[user_id]['json'], data_chunks, user_dialogues, initial_coordinates=coordinates)
+    user_dialogues.append({'bot': res})
     if bot.route_data.get(user_id) is None:
         bot.route_data[user_id] = {'geo': [None, None], 'request': None, 'json': None}
     bot.route_data[user_id]['json'] = current_route_json
     res_final = res.replace('*', '')
     if bot.user_settings[str(user_id)]['language'] == 'en':
         res_translated = await ru_to_en(res_final)
-        res_final = ''
+        '''res_final = ''
         for i in res_translated.split('\n'):
             res_final += f'{i}\n' if 'yandex.ru' not in i else i.replace(' ', '')
+        res_final = res_final.replace('LinkYandexMaps', 'LinkYandexMaps')'''
+        res_final = res_translated.replace(' ~ ', '~').replace(' & ', '&').replace(' = ', '=').replace('] ', ']')
     res_final = escape_text_except_links(res_final).replace(r'%2С', r'%2C')
     print(res_final)
     return res_final
@@ -255,7 +332,7 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
 async def route(message: types.Message):
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     await msg.edit_text(await get_route(message.from_user.id), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
 
 
 async def news_task():
@@ -348,12 +425,11 @@ def get_settings_keyboard(user_id: int):
     return InlineKeyboardMarkup().add(button1).add(button2)
 
 
-def get_route_keyboard():
+def get_route_keyboard(user_id: int):
     keyboard = InlineKeyboardMarkup()
-    button1 = InlineKeyboardButton('♻️', callback_data=f'route_yes')
-    button2 = InlineKeyboardButton('❌', callback_data=f'route_no')
-    button3 = InlineKeyboardButton('📍', callback_data=f'route_geo')
-    keyboard.row(button1, button2, button3)
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_1'), callback_data=f'route_yes'))
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_2'), callback_data=f'route_no'))
+    keyboard.row(InlineKeyboardButton(translation(user_id, 'route_keyboard_3'), callback_data=f'route_geo'))
     return keyboard
 
 
@@ -366,7 +442,7 @@ async def handle_location(message: types.Message, state: FSMContext):
     else:
         bot.route_data[message.from_user.id]['geo'] = [latitude, longitude]
     await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
     await state.finish()
 
 
@@ -532,14 +608,14 @@ def get_route_text(user_id):
 
 @dp.message_handler(state=RouteForm.name)
 async def route_finish(message: types.Message, state: FSMContext):
+    await state.finish()
     msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     if bot.route_data.get(message.from_user.id) is None:
         bot.route_data[message.from_user.id] = {'geo': [None, None], 'request': message.text, 'json': None}
     else:
         bot.route_data[message.from_user.id]['request'] = message.text
     await msg.edit_text(await get_route(message.from_user.id, bot.route_data[message.from_user.id]['request'], bot.route_data[message.from_user.id]['geo'][0], bot.route_data[message.from_user.id]['geo'][1]), parse_mode='MarkdownV2')
-    await msg.edit_reply_markup(get_route_keyboard())
-    await state.finish()
+    await msg.edit_reply_markup(get_route_keyboard(message.from_user.id))
 
 
 def text_v2(text):
@@ -596,27 +672,51 @@ async def print_exception(e: Exception):
 async def on_message(message: types.Message):
     msg = await message.reply(translation(message.from_user.id, 'loading'))
     try:
-        answer = await get_answer(message.text, message.from_user.id)
-        print(answer)
-        links = get_links(answer)
-        print("Очищенные ссылки:", links)
-        answer_split = answer.split('image_url')
-        print("answer_split:", answer_split)
-        print("Длина answer_split:", len(answer_split))
-        answer = answer_split[0].strip()
-        if len(answer_split) > 1 and '/route' in answer_split[1]:
-            answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
+        answer, links = await get_answer(message.text, message.from_user.id)
+
+        dialog_history = "\n".join([f"user: {q}" if q != '-' else "" for q in
+                                    bot.user_settings[str(message.from_user.id)]['memory']['questions']])
+        is_route = False
+        try:
+            from dialog_pipeline import classify_question_type
+            question_type = classify_question_type(message.text, dialog_history)
+            is_route = (question_type == "route")
+        except Exception as e:
+            print(f"Ошибка классификации: {e}")
+
+        reply_markup = None
+        if is_route:
+            reply_markup = get_route_keyboard(message.from_user.id)
+            answer = escape_text_except_links(answer)
+        else:
+            answer_split = answer.split('Оценка объекта')
+            answer = answer_split[0].strip()
+            if len(answer_split) > 1 and '/route' in answer_split[1]:
+                answer += '\n' * 2 + [i for i in answer_split[1].split('\n') if '/route' in i][0]
     except Exception as e:
         await print_exception(e)
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
         return
+
     if len(links) == 0:
-        await msg.edit_text(shorten_text(answer, 4080))
+        try:
+            if is_route:
+                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
+            else:
+                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
+        except Exception as e:
+            print(f"Ошибка при отправке сообщения: {e}")
+            await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080))
         return
+
     try:
         answer_shorten = shorten_text(answer)
         if len(links) == 1:
-            await message.reply_photo(photo=links[0], caption=answer_shorten)
+            try:
+                await message.reply_photo(photo=links[0], caption=answer_shorten, reply_markup=reply_markup)
+            except Exception as e:
+                print(f"Ошибка при отправке фото: {e}")
+                await message.reply_photo(photo=links[0], caption=answer_shorten.replace('\\', ''))
         elif len(links) > 1:
             media_group = MediaGroup()
             for i, link in enumerate(links):
@@ -625,11 +725,18 @@ async def on_message(message: types.Message):
                 else:
                     media_group.attach_photo(photo=link)
             await message.reply_media_group(media=media_group)
+            if is_route:
+                await message.reply("Выберите действие с маршрутом:", reply_markup=reply_markup)
         await msg.delete()
         return
     except Exception as e:
-        print(e)
-    await msg.edit_text(shorten_text(answer, 4080))
+        print(f"Ошибка при отправке медиа: {e}")
+
+    try:
+        await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup)
+    except Exception as e:
+        print(f"Критическая ошибка в обработке сообщения: {e}")
+        await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
 
 
 @dp.message_handler(content_types=types.ContentType.VOICE)
@@ -642,7 +749,7 @@ async def handle_voice_message(message: types.Message):
     text = recognize(local_file)
     text = text if text is not None and text != '' and len(text) >= 2 else '-'
     remove(local_file)
-    await msg.edit_text(f'Ваш вопрос: {quote_text(text)}\n\n{(await get_answer(text, message.from_user.id)).split("image_url")[0].strip()}', parse_mode='HTML')
+    await msg.edit_text(f'Ваш вопрос: {quote_text(text)}\n\n{(await get_answer(text, message.from_user.id))[0].strip()}', parse_mode='HTML')
 
 
 @dp.message_handler(content_types=[types.ContentType.ANY])
@@ -667,7 +774,7 @@ async def main():
             api_key=getenv('AUTH')
         )
     )
-    bot.chroma_collection = init_chroma()
+    bot.chroma_collection = init_chroma(remote=True)
     # create_or_update_chroma_collection(bot.chroma_collection)
     asyncio.create_task(news_task())
     await dp.start_polling()
