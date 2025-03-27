@@ -686,7 +686,7 @@ async def on_message(message: types.Message):
 
         reply_markup = None
         if is_route:
-            reply_markup = get_route_keyboard()
+            reply_markup = get_route_keyboard(message.from_user.id)
             answer = escape_text_except_links(answer)
         else:
             answer_split = answer.split('Оценка объекта')
