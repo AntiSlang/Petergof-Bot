@@ -28,6 +28,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 from dialog_pipeline import answer_from_news, is_museum_question, is_greeting_in_message, classify_question_type
+import requests
+from PyPDF2 import PdfReader
 
 load_dotenv()
 bot = Bot(token=getenv('TOKEN'))
@@ -106,7 +108,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
     retrieved_docs = results.get('documents', [[]])[0]
     relevant_context = "\n\n".join(retrieved_docs)
     links = get_links(relevant_context)
-    llm_model = sdk.models.completions("yandexgpt")
+    llm_model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     llm_model = llm_model.configure(temperature=0.3)
 
     greeting_patterns = {
@@ -186,6 +188,20 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
     return answer_text, links
 
 
+async def shorten_links(links: list, question: str, answer: str):
+    sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
+    llm_model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
+    result = llm_model.run(f'Тебе подаётся вопрос пользователя и ответ бота по теме музея. Оцени количество упоминаемых объекто на открытом воздухе (примеры объектов: дворцы, парки, фонтаны, музеи) и напиши только число. Вопрос: {question}; ответ: {answer}')
+    print(result.alternatives[0].text)
+    try:
+        length = int(result.alternatives[0].text)
+    except Exception as e:
+        length = 1
+        await print_exception(e)
+    links = links[:min(len(links), length)]
+    return links
+
+
 async def get_answer(question: str, user_id: int) -> tuple:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
 
@@ -219,6 +235,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
 
         if question_type == "museum":
             answer_text, links = await get_answer_prompt(question, sdk, True, greeting_style=greeting_style)
+            links = await shorten_links(links, question, answer_text)
         elif question_type == "route":
             from utils import create_json_chunks
             data_chunks = create_json_chunks()
@@ -227,8 +244,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
             if bot.route_data.get(user_id) is not None and bot.route_data[user_id]['geo'][0] is not None:
                 coordinates = bot.route_data[user_id]['geo']
 
-            answer_text, current_route_json = get_route_suggestion(user_dialogues, data_chunks,
-                                                                   initial_coordinates=coordinates)
+            answer_text, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates)
 
             if bot.route_data.get(user_id) is None:
                 bot.route_data[user_id] = {'geo': coordinates, 'request': question, 'json': current_route_json}
@@ -241,6 +257,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
             answer_text = answer_from_news(question, dialog_history, greeting_style=greeting_style)
     except Exception as e:
         answer_text, links = await get_answer_prompt(question, sdk, False, greeting_style=greeting_style)
+        links = await shorten_links(links, question, answer_text)
         print(f"Ошибка в pipeline: {e}, использован запасной ответ")
 
     bot.user_settings[str(user_id)]['memory']['questions'] = [
@@ -264,7 +281,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
 
 async def is_news_useful(question: str) -> str:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
-    llm_model = sdk.models.completions("yandexgpt")
+    llm_model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     result = llm_model.run(f'Оцени полезность новости для посетителя музея от 1 до 10. В ответ напиши ТОЛЬКО число без лишнего текста. Полезность заключается в том, поможет ли эта новость непосредственному посетителю музея в Санкт-Петербурге, она не должна касаться каких-то людей и других мест/городов. Новость: {question}')
     return result.alternatives[0].text
 
@@ -368,7 +385,20 @@ async def add_news():
             data["number"] += 1
         except Exception:
             b = False
-    print('method add_news ended')
+    try:
+        url = "https://peterhofmuseum.ru/special/print?subobj"
+        pdf_path = "data.pdf"
+        response = requests.get(url)
+        with open(pdf_path, "wb") as f:
+            f.write(response.content)
+        reader = PdfReader("data.pdf")
+        pdf_text = [page.extract_text() for page in reader.pages]
+        pdf_text = [i for i in pdf_text if i]
+        Path("tickets.json").write_text(
+            json.dumps({"data": pdf_text}, ensure_ascii=False, sort_keys=False, indent=4), encoding='utf-8')
+    except Exception as e:
+        await print_exception(e)
+    print('method add_news ended and pdf')
     write_dictionary(data, 'news.json')
 
 
@@ -435,7 +465,7 @@ def get_route_keyboard(user_id: int):
 
 @dp.message_handler(state=GeoForm.name, content_types=['location'])
 async def handle_location(message: types.Message, state: FSMContext):
-    msg = await message.reply(translation(message.from_user.id, 'creating_route_geo'), disable_web_page_preview=True)
+    msg = await message.reply(get_route_text(message.from_user.id), disable_web_page_preview=True)
     latitude, longitude = str(message.location.latitude), str(message.location.longitude)
     if bot.route_data.get(message.from_user.id) is None:
         bot.route_data[message.from_user.id] = {'geo': [latitude, longitude], 'request': None, 'json': None}
@@ -700,10 +730,7 @@ async def on_message(message: types.Message):
 
     if len(links) == 0:
         try:
-            if is_route:
-                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
-            else:
-                await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup)
+            await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup, parse_mode='MarkdownV2' if is_route else None)
         except Exception as e:
             print(f"Ошибка при отправке сообщения: {e}")
             await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080))
@@ -711,6 +738,7 @@ async def on_message(message: types.Message):
 
     try:
         answer_shorten = shorten_text(answer)
+        print(links)
         if len(links) == 1:
             try:
                 await message.reply_photo(photo=links[0], caption=answer_shorten, reply_markup=reply_markup)
@@ -730,10 +758,11 @@ async def on_message(message: types.Message):
         await msg.delete()
         return
     except Exception as e:
-        print(f"Ошибка при отправке медиа: {e}")
+        print(f"Ошибка при отправке медиа:")
+        await print_exception(e)
 
     try:
-        await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup)
+        await msg.edit_text(shorten_text(answer, 4080) if is_route else shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup, parse_mode='MarkdownV2' if is_route else None)
     except Exception as e:
         print(f"Критическая ошибка в обработке сообщения: {e}")
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))

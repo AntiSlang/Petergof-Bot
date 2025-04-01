@@ -26,7 +26,7 @@ def create_or_update_chroma_collection(collection):
 
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
     embd = sdk.models.text_embeddings("doc")
-    model = sdk.models.completions("yandexgpt")
+    model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     de = DataEnlarger(llm=model, embd=embd, data_path='data.json')
     chunks = de.chunks
 

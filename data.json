@@ -1,100 +1,4 @@
 {
-    "imgFolder": "/images/w252-h252/",
-    "coreImgFolder": "/files/pav/img/",
-    "logo": {
-        "image": "logo.png",
-        "img_coords": {
-            "mobile": {
-                "x": 50,
-                "y": 9
-            },
-            "desktop": {
-                "x": 50,
-                "y": 18
-            }
-        },
-        "title": "Расписание и цены на",
-        "title_coords": {
-            "mobile": {
-                "x": 50,
-                "y": 28
-            },
-            "desktop": {
-                "x": 50,
-                "y": 38
-            }
-        },
-        "spb": "СПб",
-        "spb_coords": {
-            "mobile": {
-                "x": 98,
-                "y": 38
-            },
-            "desktop": {
-                "x": 99,
-                "y": 74
-            }
-        },
-        "kron": "Кронштадт",
-        "kron_coords": {
-            "mobile": {
-                "x": 1.5,
-                "y": 33
-            },
-            "desktop": {
-                "x": 1,
-                "y": 48
-            }
-        }
-    },
-    "parksMaps": {
-        "desktop": "m_huge.png",
-        "mobile": "m_mobile.svg"
-    },
-    "texts": {
-        "popular": "Рекомендуем посетить",
-        "search": "Найти парк или музей",
-        "searchInvite": "Поиск",
-        "searchRes": "Результаты",
-        "searchFail": "Такой музей не найден среди объектов Петергофа.Попробуйте ввести другой запрос или изменить фильтры",
-        "searchHint": "Попробуйте ввести любые слова из названия или описания объекта",
-        "today": "сегодня",
-        "no": "Расписания на эту дату пока нет",
-        "loading": "Загрузка расписания, пожалуйста, подождите",
-        "casses": "Кассы",
-        "open": "Время посещения",
-        "sanitary": "Санитарный день",
-        "tiers": "Cтоимость билетов",
-        "tierRF": "Для граждан РФ",
-        "tierRFAndEAEU": "Для граждан РФ и ЕАЭС",
-        "tierSale": "Льготный",
-        "tierStudents": "Учащиеся",
-        "tierEAEU": "Для граждан ЕАЭС",
-        "tierFull": "Полная стоимость",
-        "tierFree": "льготный 0₽",
-        "free": "Бесплатно",
-        "tiersRFSale": "льготные — %price%₽",
-        "tiersRFSaleZero": "0₽",
-        "aboutPrices": "Подробнее о льготных билетах и правилах посещения",
-        "hintEAEU": "Категория билетов для граждан стран Евразийского экономического союза (ЕАЭС): Армения, Беларусь, Казахстан, Кыргызстан, Россия; для сотрудников посольств и консульств иных государств, аккредитованных в Российской Федерации, и членов их семей.</p>",
-        "prefRf": "— граждане и налоговые резиденты Российской Федерации</p>— граждане Республики Беларусь</p>— держатели «Пушкинской карты» в возрасте от 18 до 22 лет</p>Право на приобретение билета в данной категории дается посетителям при предъявлении </strong>документов</strong></a>, подтверждающих гражданство или соответствующий категории статус.</strong></p></strong></p>",
-        "prefSale": "— учащиеся от 14 до 18 лет Российской Федерации и Республики Беларусь</p>— держатели «Пушкинской карты» в возрасте от 14 до 18 лет</p>Право на приобретение билета по льготной стоимости дается при предъявлении билета учащегося или документа, подтверждающего возраст до 18 лет</strong></p></strong></p>",
-        "prefFree": "\n\t— дети до 7 лет</p>\n\t— дошкольники и школьники до 14 лет (только граждане РФ и </em>Беларуси</em>)</p>— члены многодетных семей (только граждане РФ и Беларуси)</p>\n\t— Герои Советского Союза, Герои Российской Федерации и полные кавалеры Ордена Славы с правом на внеочередное приобретение билетов</p>\n\t— ветераны Великой Отечественной войны и ветераны боевых действий</p>\n\t— члены семей погибших (умерших) инвалидов войны, участников Великой Отечественной войны и ветеранов боевых действий – вдова/вдовец, родители, несовершеннолетние дети</p>\n\t— военнослужащие срочной службы Российской Федерации по призыву – солдаты, матросы, старшины</p>\n\t— участники специальной военной операции и члены их семей – супруг/супруга, родители, несовершеннолетние дети</p>\n\t— посетители с инвалидностью I группы, II группы, на колясках, дети с инвалидностью с правом на внеочередное приобретение билетов и предоставлением бесплатного билета одному сопровождающему (только граждане РФ и Беларуси)</em></p>\n\t— дети-сироты с предоставлением бесплатного билета одному сопровождающему опекуну (только граждане РФ и Беларуси)</em></p>\n\t— сотрудники государственных музеев (только граждане РФ и Беларуси)</em></p>\n\t— посетители по Карте почетного гостя музея-заповедника «Петергоф»</p>\n\t— посетители программ музейного центра «Новая ферма»</p>\n\tВторое воскресенье каждого месяца</strong></p>— дети до 18 лет(только граждане РФ </em>и Беларуси</em>)</em></p>\n\t— студенты учебных заведений РФ</p>— пенсионеры(только граждане РФ и Беларуси)</em></p>\n\tКаждый четверг</strong></p>\n\t— воспитанники Суворовских военных училищ, Нахимовских военно-морских училищ, кадеты</p>\n\tПраво на приобретение бесплатного билета дается посетителям при предъявлении </strong>соответствующих подтверждающих документов</strong></a>(кроме детей дошкольного возраста)</strong></p>",
-        "clearSearch": "Очистить поиск и фильтры",
-        "filters": "Фильтры: ",
-        "buyTicket": "Купить билет",
-        "mapPreloading": "Загрузка общей карты парков...",
-        "openThatDay": "Открыты",
-        "categories": "категории"
-    },
-    "images": {
-        "close": "close.png",
-        "tickets": "tickets.png",
-        "open": "open.png",
-        "price": "price.png",
-        "back": "back.png",
-        "v": "3"
-    },
     "places": [
         {
             "title": "Нижний парк",
@@ -399,7 +303,7 @@
             "context": "Даты постройки: 1721 – 1722 гг.Архитектор Николо Микетти (1675-1759), художник – Луи Каравак (1684-1754).С восточной и западной стороны от фонтана \"Солнце\" находятся два легких деревянных павильона – Вольеры. Эти двенадцатигранные беседки, увенчанные куполами и световыми фонариками, необычайно живописны своим чередованием полос серого туфа, черной изгари и морских раковин. В летнее время в них развешивались клетки с птицами. В восточном Вольере обитали попугаи, а в западном – певчие пернатые: соловьи, дрозды, чижи, зяблики и снегири. В зимнее время \"певцов\" перемещали в отапливаемые избы. Эти садовые \"игрушки\" петровского времени, созданные архитектором Николо Микетти, чудом уцелели в вихре столетий. Внутри сохранилась первоначальная роспись, выполненная французским художником Л. Каравакком. Петергофские Вольеры напоминают о многих исчезнувших садовых постройках первой четверти XVIII столетия. Сегодня, как и прежде, в них звучат голоса птиц.",
             "ticketUrl": "",
             "rate": 45,
-            "image_url_v2": "https://rekord-plast.com/wp-content/uploads/2019/11/6-500x500-1.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/f249b52ae18288db3ff64464db1dcad5.jpg"
         },
         {
             "title": "Музей «Императорские яхты»",
@@ -414,7 +318,7 @@
             "context": "Петергоф – единственная приморская резиденция российских императоров, поэтому вполне естественным стало открытие в 2004 году на берегу Финского залива музея \"Императорские яхты\".Экспозиция демонстрирует малознакомые страницы жизни императорской семьи. Здесь можно увидеть морскую шинель и шкиперскую куртку Петра I, мундирное платье по форме флота императрицы Екатерины II, фотографии и модели императорских и великокняжеских яхт, которые были настоящими \"плавающими\" дворцами, яхтенные сервизы, живопись и графику, разнообразные предметы декоративно-прикладного искусства, посвященные славной истории Балтийского и Невского флотов.История российских императорских яхт восходит к петровскому времени. С детских лет будущий император грезил морем, затем, во время путешествия по Европе, овладел в числе прочих и профессией корабела. Выход России к морю и утверждение её на Балтийском побережье привели к бурному развитию российского кораблестроительства. С 1702 года придворные яхты строили на Воронежской верфи. После первых побед в Северной войне царь приступил к созданию Балтийского флота. В 1703–1704 гг. были построены несколько фрегатов и парусно–гребных шняв, особый интерес среди которых представляет \"Мункер\", выполненный по чертежам самого Петра (модель представлена в музее).Строительство яхт набирает силу во времена правления Екатерины II, а особый расцвет начинается в царствование Николая I. Среди 22 императорских, великокняжеских и должностных яхт, созданных в XIXвеке на русских и иностранных верфях, были как небольшие парусники со скромным оформлением, так и комфортабельные суда с роскошной внутренней отделкой. Для каждой яхты создавалось особое убранство, специальная мебель и не повторяющие друг друга сервизы.Во второй половине XIX века начали строить большие комфортабельные яхты для дальнего плавания, в том числе и специально для наследников престола. Среди них заложенная в 1893 году в Копенгагене яхта \"Штандарт\", строительство которой завершилось через три года. Это была самая большая океаническая и самая совершенная по инженерно-техническим характеристикам яхта, принадлежавшая цесаревичу Алексею, о чем свидетельствуют многочисленные фотографии.Послереволюционная судьба императорских яхт сложилась печально: многие из них были разобраны или превращены в мишени для испытания противокорабельных снарядов. Музей \"Императорские яхты\" предоставляет уникальную возможность увидеть их вновь.",
             "ticketUrl": "",
             "rate": 11,
-            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsbZXaMkOFNHM_qoQUDdeq8oxJyRsLsOfL3A&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_83\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHPOX5m2LpJT6VXJCOwGNEww-lQE56mq3iBQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_93\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGgDXlKh519WTbIi7hgL_p1bI7xz2QGJ9Cwg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_191\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRus-yrYcP5K7NsLaHFoPaFhCOancrfz5pGDg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_195\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndf0BqUHdhozgSdpy_pKycGEkMSu5Ae-coA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_205\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlI6WKJOtzhfoAufym9ooCNT2ukKVJfxWLlQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_231\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN8hJwsZi2RG5z_xhaiqFhlrzzOTuTgIGIGQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_235\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0aPc2HYid6Q1Sdqo8-KaWdo85EifgSUvxEg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_327\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGDyLpIe87BCCGNGPaz7CFuSi6YIHTmJ-eiQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_325\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrTrd_lWAISuXasVJIkELjQu-O_mRJlcIBg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_321\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0T6SGJiJoyD2KcjsJkfD_Da-eAfwazAruGg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_315\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgbK_fejiMf1xyLvVGDfBObF3p8Qt6oMlBRw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_307\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyfBcW3rrgyvL0OSMwloCjI9lEjetwQIdp_w&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_301\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYZePbEOLpY365qG0M16uQn1M-fKrTZGPB4w&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_311\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5sgaZCfM5_7kSVUcJSjTZ2FIeX9XDt6pHyQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_359\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Kv60ItgmeyVqhwBGJ2Kv0b5hzzbQs6zFbg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_289\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwDlfJtIG7oulAIHx1OXYT5qOa5FZi60FWg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_367\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYoCzCYZZTXMtrsoOjopnzOKr_FWbN1InF6Q&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_286\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU8HCee0GfkYGMZCF5OldUNHFvyYKFUInUQQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_279\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBDfILc_Ou1Hdq_yVc6uM4N-TUJ5JGQAh1OQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_389\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmlcjJdqeYWgGyFb5Q5k0gLgSKVNuLHDHNNQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_261\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRoOyuXQJs7iHCOIcx4apILc4uWE759krYoA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_259\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXRWS3baJdl4HoY4tuDdVZvFeFY-VAiHuoZg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_255\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Ve721c-X7NBl0wnJKKhlbcwSn4Z2aMA3rg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_253\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ED2LxgGkB9AdzBAzDWEIkM6iTvXJFFKCbQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_247\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlubnHcdCHPZhWwtu2t0eG20xum4T995VUdw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyX5ZMQkxemPv7fMSFob_xa_pFXFc7bUWRnQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_11\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTKQG1Y0NVKYWPH-OX5Uzd5WiYAzVT7TG2vQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_51\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgSlc89S05GY2JKofxolkirKgBun4npIZnzw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_55\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1ndFHDNkcl2ausNEVWscFUFeUs3RWEI5AwA&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_89\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwqgDcCEe69yIwuFc6AFM26ve4GCGo0UE0Kg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_95\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9X7bD1hpIYI3jito2vplPH63C972CQQqImw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_129\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWDZaUonznz2Q7OiwbtR0Hb5UO1q5m9lvjdw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_189\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOgTg6AXK8XFzXP85RxeEfILM8dqhWwwUNmw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_193\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKJTsI9XTslaXQHWswlzgNEUKs7VnDPqzxkw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeWqBPD-YqR60vPI0rZHqAuUc85qrfF-swEg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP01nSXGBIVc9JGNcsxvAbY7a-sawrvCnPYw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_215\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT7zp1zzJwh5_TydnQjLV2OJ8JB0toEWRMKQ&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_217\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfVnBn7TmCKa6_-hEbQheGdXStIy9lt_mAJg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH-rQl-4VwR3izHAVmZK8RLAawa0H4kUzevw&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtO7TY7jpCYZYCDp_pCEDXoL79nHPzY_LAwg&s\",\"dimg_KD9-Z6uoC_6hwPAPg7fJiQs_169\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsE0QmGiXvkLCBYFuudH2tbfKZNivZYK-png"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220330/e5821ec32b34f3a0418bf4678f0bffdd.jpg"
         },
         {
             "title": "Большой каскад",
@@ -452,7 +356,7 @@
             "context": "1735 г., скульптор Б. К. Растрелли.1802 г., скульптор М. И. Козловский.1947 г., скульпторы В. Л. Симонов, Н. В. Михайлов.Идейным центром Большого каскада является скульптурная группа \"Самсон, разрывающий пасть льва\" – памятник великим русским победам. Она была установлена в честь 25-й годовщины Полтавской битвы – решающего сражения Северной войны. 27 июня 1709 года, в день памяти Святого Сампсония Странноприимца, считавшегося покровителем русского войска, шведская армия была разгромлена.Петра I еще при жизни сравнивали с другим Самсоном – библейским богатырем, первый подвиг которого, описанный в 14-ой главе \"Книги Судей\", заключался в победе над молодым разъяренным львом. Лев, как часть шведского герба, символизировал Швецию и ее короля Карла XII. Многозначительные совпадения легли в основу образного решения памятника. Трехметровая скала служит постаментом скульптурной группе. Могучим и спокойным движением богатырь останавливает прыжок зверя, осевшего на задние лапы, и разрывает его оскаленную пасть, из которой в бессильной ярости вырывается, как последний рык, мощный водяной столб высотой 20 м. Восемь дельфинов, символизирующих спокойное море, резвятся вокруг Самсона, торжествуя вместе с героем и взметая вверх водяные струи, образующие сверкающий венок. А львы, олицетворяющие стороны света, изумленно выглядывают из скальных ниш, внимая шуму борьбы, решающей судьбы России и Европы.Скульптурная группа, отлитая из свинца по модели Б. К. Растрелли и установленная в ковше в 1735 году, к концу XVIII века, из-за непрочности свинца, потеряла свой блеск. В 1802 году ее заменили бронзовой скульптурой, созданной М. И. Козловским, который сохранил первоначальный идейный замысел и композицию. Во время Великой Отечественной войны \"Самсон\" был утрачен. После освобождения Ленинграда скульптор В. Л. Симонов с помощником Н. В. Михайловым воссоздали монумент по довоенным фотографиями и старым изображениям. Новый \"Самсон\" был установлен на пьедестале в 1947 году, став не только символом победы над врагом, но и известной всему миру визитной карточкой Петергофа.",
             "ticketUrl": "",
             "rate": 70,
-            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkCFJ8ncWTQf6fypJzTQW2jOx5IFjSMbgm_A&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_129\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg4APK3VIBrMvirwv8KvDFxQbfHlkX0OBSiw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaqCMdxRHWXa2d324FVNntY9cvKHi1RoX_mQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_203\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxJVkNLT_RW5GfaqRVouZwXJJy1Mtut1xQhA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_209\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_XIDYlhkXTqjpaBFpwmZhCxrWwEk9sJ6mxA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_245\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgFly1PyNyk_mb-zVP1f66f2rWDde59BAypg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_265\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9ZSbHOe9jkxhtqTdFMzNhARNMCSaES-PKqg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_271\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ36zrgpXbBa_38XTNMgshep97jnp9xc9EJZw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_281\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsfbfD95Mxh9QcJs01vDIZrFmDAzEiEteYow&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_283\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VvjmoxvKkkmCJP3c-iOatS5CW4mqtOprGA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_293\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWZAyFXwz_3hn5sHdc8pCA0Srld5PtjX3JBw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_295\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2e4-KAGcJ8tuqKYYt8P_81HEq6P8zf74NA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_343\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqi6_NorMX2Fy-QDPZiKIkIeEdhuaHMq7Pmg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_353\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw2BujcyWGNEFZltNVOOnAn35TcCMTtoP4bw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_365\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQB8nZ5SAo6Ku4NjsZAp42r-lUgx7GY6pvpA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_385\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3BQ-WIpivZnM9QVt3IueOc-FtbxJfl-LMTg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_381\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTfOmy6iodgSeXMIpViVaafl_3NTwY6BN9CA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_383\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5E3eADrLW7np8Ek156_a-BlCjuJfTZNnwPw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_377\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4jQ7USLcfsbppUwPuPCPR65AeCRRkTBGo-A&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_333\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDP_6WsKhVhx3JEUgbXI6OYWDMSrcONob9Sw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_331\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaU3OXLMo1vlOjd_4AXamFMoQR2yHr3KoTlA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_329\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_OaSR7GTU_IG3fQm0KZoyhFRNMVWSxu_ZxRLSIfVyUd2cThKqZl4A&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_355\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIC3-p_pmW7HhNLYJVso-JnORtZ4a1Lo3x8D9hVzOKNvI5XV7-dM1V&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_351\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQV9aKBMuHBTl_evY68QiqVG94SSimb5NBHsXaSBqF1JcW6eMeOGyw&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_423\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMiV_1LFAc2tI4fDlCyYQMq-SzE4s6KOH0TQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_319\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxmc1LiiJPxWa_OMSRO9iWf0cpWbgAXgsCTg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_313\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsMqR9fvq01hazQhv7fIL_N19MUYqP1NruHw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_27\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzkvipRoJaFPEiftMvd1CUHcUX5-73w_3g_Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_53\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4qFzHm7EEJb---JGB_Nyk3bn_stavgBREcA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_51\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQasESWXdyk4Dh-8O1Jlyt2RxOC30wSwIcyPQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_59\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8dBKgBpl2kIz9Y-DGKZy1jDCMClcnDaooew&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_61\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz0KO_beY-htyBilMDN1e0d-KywIJk_ki-w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_95\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnjXiklyTgHn2egE70HuBe1dD4Tu7mwZVxKQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_87\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReOpjbcun4p6YCIEjI2HoStOrtiOx70H0usg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_153\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjeQ1H5BQiitWNAAqS17bMeyBKHUc68QW9Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_155\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtH6jdB26SQ-ym4NZAzlJvsteS7d0-xeaYdw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_191\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRnF4VTe1NmtFOXB4AKmTgUGpSIofiQeUEzg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBV-TxqTxbetaaY37-u8C8AihAXIWaacFsw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_205\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTlujARBhCja5Mtoif8lp5bUNg5aHiXXCyEw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_215\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF0Blze2mwQ4otrQoPQoeRMIlLWzPBvNvCLQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_231\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmceeKoH2qlpPcyGDyzgsLlWoGkt7uk2_dSg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_251\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ7gAwyBQC2sUAKpqfFRjZrd5t1ZYtgUOaXA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuhyfazbxLEx-3ZYu8qvqd8-6IDv7p_3SYeA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_247\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd5hZuSr1o2lts97qh0QrLmh2GttPq-O7lAg&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_267\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9DNQ8D-ftc9pNRhXDE2e5_45M18Mnl3W6SA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_229\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYUcP2f7iEgj9PGUV_w1mDyktwXbTCFQFZ7g&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_219\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoHhvmt2zmNmJDOCDUz6aBcntrgfkqSUV9RA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_189\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQPybbZLSeM-Hq9rMA9poNsx7v-mTcLv-B6Q&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQV9aKBMuHBTl_evY68QiqVG94SSimb5NBHsXaSBqF1JcW6eMeOGyw&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_213\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIC3-p_pmW7HhNLYJVso-JnORtZ4a1Lo3x8D9hVzOKNvI5XV7-dM1V&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNK8NYDT40m3xTh4wtInQOiAkkTinTdqyw-nm3c8xmwnau2tWFIMy-&s=0\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_173\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA74YiwzWwhhSfwCZVkc8n9iKqgYDfoGY6xA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_171\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1ZXnbR0arqI6_gug054gplABbaHu5uFeJ0w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_163\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIEESKbKd2V_JCCLAj92Gn8n9N47cNuKThQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_165\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_5pil7uNEcB5rq6RDcd84i_rRCVlrA2WuNQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_159\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSifvEdZOwbMHmpIgKpiiv-7afQ5roDTOk1Tw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_157\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBK47xmB4unzZbEQzsJB0zOzLZ1jEq3cg7w&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_341\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7x-DWrzxQukypaaradqUGYWC07_4yG4d8XQ&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_139\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnpIZRtDlR_I4Y93NLDA5LOvIcFm4x1EXQlA&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_135\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTp2bf8O_lMOFehkqFQWn7GHDwlRO4LQ6MWw&s\",\"dimg_MD9-Z8_jH7azi-gP8ci1qAQ_137\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtwec_9EJhqLbmp"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/662e0754936813987773e8ccfb84ac43.jpg"
         },
         {
             "title": "Фонтаны «Чаши»",
@@ -533,7 +437,7 @@
             "context": "1725 г., архитектор М. ЗемцовПо замыслу Петра I вдоль Морского канала планировалось создать серию \"фабольных\" фонтанов на сюжеты поучительных басен Эзопа, имевших актуальный политический смысл. Напоминанием об этой идее служит созданный М. Земцовым в 1725 году фонтан \"Фаворитка\", скрытый за западной Воронихинской колоннадой. В глубоком бассейне по кругу движутся четыре утки, которых пытается догнать собачка Фаворитка. Фигуры животных сначала вырезали из дуба, позже отлили из меди. Из утиных клювов и пасти мопса вылетают водяные струи. Действие сопровождается лаем Фаворитки и кряканьем уток. В XVIII веке звуки производились за счет вибрации пластинок в медных трубках, вмонтированных в фигуры. В камере под бассейном фонтана находится водяное колесо, которое, вращаясь под действием падающей воды, приводило фигуры в движение.В годы немецкой оккупации фонтан был разрушен, исчезли все скульптуры, за исключением одной уточки, найденной в 1946 году на территории парка. На обнаруженной в земле скульптуре сохранилась даже раскраска. В 1957 году фонтан был восстановлен. И теперь вновь, как и много лет назад, утки весело кружат по бассейну, а Фаворитка, заливаясь лаем, все никак не может их догнать.",
             "ticketUrl": "",
             "rate": 24,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/5/54/%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%2C_%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA._%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD_%C2%AB%D0%A4%D0%B0%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D0%BA%D0%B0%C2%BB_1.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/655e6eac2e3990a65fd993be75d81fe6.jpg"
         },
         {
             "title": "Лабиринт",
@@ -552,7 +456,7 @@
             "context": "1722-1724 гг., арх. Ж.-Б. ЛеблонЛабиринт, созданный в первой четверти XVIII века по распоряжению Петра I, находится в восточной части Нижнего парка, вблизи Марлинской аллеи. В плане он представляет собой прямоугольный участок с овальной площадкой в центре. Восемь аллей, расходящиеся от центра, пересекаются кольцевой дорожкой, образуя боскеты. Все дорожки и границы лабиринта обрамлены шпалерами из кустовой липы, растущей вдоль деревянных решеток. В боскетах высажены яблони и устроены небольшие площадки с нишами для садовых скамеек.В центре лабиринта находится бассейн с фонтаном менажерного типа. Хотя фонтан был изображен еще на первоначальном плане Ж.-Б. Леблона, он появился лишь в середине XVIII века, когда новый план декоративного убранства Лабиринта был создан Ф. Б. Растрелли. Архитектор, не изменяя размеров и планировки, предложил украсить бассейн фонтаном со скульптурой, дельфинами, барельефами, кронштейнами и вазами. Однако проект Ф. Б. Растрелли не был полностью осуществлен, так как требовал значительных вложений.Утраченный к началу XX столетия, лабиринт был воссоздан на основании археологических исследований и сохранившихся архивных документов.",
             "ticketUrl": "",
             "rate": 42,
-            "image_url_v2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsf9ZYkp9J2D6btqJ9cdrVIt11dAU68bccQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_171\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf-DpFc8Uayrsmi3MUuk9sQBUlV6KUVz4MQA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_207\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzyRMPZF6cRyhGcY5rSv-eKEq1TPZpS8woEQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_211\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRujJbmXAglVtDi6mkT_HLLc1cNbGbvabxZtA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_249\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcaEIRlKcMHNANm-niV4-H6ZjAXqocAGSfOQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_271\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZjNyTKmqXnV2MFy0RHkfjOWVZWARa75Z-fw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_267\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uf8KRoheTaOxeLq4Q7CH5_3NsFMdCTlP0A&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_295\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFucKx1plEZMk5g_v0fIBaeoQ0n4QrDYSfPA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_291\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIOvMIFYAhTlyEnocLDT5KEzs7TFKYn6cGQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_301\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFFAzAxGbQRGNq_9Rjiwv47qgYDNeOqiOmZA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_303\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0FfH0Lcx2R03YCrhkK3Go-0px_D8Z0boV5g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_343\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2s9xEvmq9i0s0GWXFp8J0buHMSBObtGcZvw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_351\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV4piHXGBbyceXrIBVArf9PqdHzrQtNQSQzg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_353\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZQ_YbCazvvyPUj2W6xIn9ySTfS4kZYfDkg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_383\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-CG8stCgrMJ-ZFB-lJZ7M0CKSUpiqrbOyQQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_385\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWLc0xwik_qk5FFejoc_FMAlbVLv_XyyMlFA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_389\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbPT0XK7USGWopdUkOSYk7SWj915Jy7RY_SA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_377\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5G-9eXg4waBL8cTTDSHwIiIAuPInSQOwwVQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_411\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgLmUtmpRrSB34gz4tZ7kIgXkR4wxveuMrNw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_341\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOddq7Gqow9RxUQ35NZdyyw6IjurBBPQnL_g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_339\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtuoHskXq3C6_YHqMOnkmMtY7Q4OC7gZU1nii2Cy2cm0nK5q3RG-6&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_373\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGtuoHskXq3C6_YHqMOnkmMtY7Q4OC7gZU1nii2Cy2cm0nK5q3RG-6&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_355\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsaJR5_JNXZIBra85zCsibRabCMNANuQiBAVEnDKSk&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_417\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbNVyVA91WExsPGJesgLyAaRbI-UVj599mHA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_327\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQALK5AhZKSIc8VdHCGjpbiAh0KO_SQsHO1rg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_319\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXeIte3nVDkmuHu0RDEt7_XG5IuSKMMd9tHg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_21\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz-_q3ywMXj-XYFG1QCkvOTSJbcIQJml3tVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_53\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHIRVdJ2MfI1gz4d4s4Atfz2Ne8fqyNSqFSA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_55\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT20mY03ukMpRYD-tWX-zvlvy8PTCEOKq6oVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_59\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl8hCabc-oUqjtI6JDMBzzdxe5zY8e3slbxw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_87\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7PAr0JbIjSY9YEMzJrteq4Ubd9u9ZOIvlog&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_93\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8lpF4tKvU1jByOTZkT53UXtZIxRxosb9Xg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_90\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl9H9x8RRY_L8gNy-85MxAVtZ0tv-Xq6nwIQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_139\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc1_NegB77rKfkE6REu_81lOGtKykYOkPr8g&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_145\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe6L5hh6foeeR0mc56vp-7cyG5K7IV2FnFZw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_197\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDxxg9USa5XA7HFXmYBxSmblaTxdTPMCZpVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_201\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7lcvv6w1vJaFDDldHTV_2jysUn2_HWSWwFw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_209\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGIWsDWd7CseMsdcOPxmNX5hKZBG_PktojmA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_219\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRmTz7G_c5h5fLn4iHlM28imrYqohWfWvdAw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_229\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKWYFIgBa4gspvSezO_FB1iCGMNU30FXRURA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_253\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmaLeqUoANGFsLW2DSwwaG1Djtf86IuAMMUQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_255\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrOHjFK-674qwa65bnwnZPvSEtLvi8HgbfIw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_243\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRKkL97tG2ul8ICFUuDGO2Q-LopTzB_xPshQ&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_237\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrDlzxJm8lqnWgfQvcTmORid7Rb55eXQ9tg&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_269\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn07ef_CIOYuAhB-VI6vs--XXOU0CLYHYK9Q&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_274\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwsBZJa-qpsfMr05UKCfe1qY2nWQUr2gf8ig&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_199\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1srk_sxu9fGe0rikUp4HHb_q5O1xXpSUJVA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_187\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Oa8uawd33IFDx_DMet3BFewqos5eBu0KpXyEF72xcE8SlLNlT3vu&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_203\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtGF86HioJqdDhcWN_EP7HTGwC1Ev4XarhlagRHObKHA73z9pgnhq&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_195\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsoOHBakWPlvqh95jzZopR4qSSOo8V55RelI0MoJE6sPZaXH7xagLt&s=0\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_175\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmbH09xRS3dJbeJo1hTrS0MFCNgjohict1qA&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_179\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj11zkFsxVzGO5KPMvh6cRcgosPgJfTR607Q&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_169\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiRADSfb777-IEivSOln4gUF5hpf-BcWuUGw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_167\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSTExUYUKJAdNbTol4BHqCdGDlhsyOv6nKsw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_165\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGm-X28cPM_yR6t39-R03LaBlOSDlsBGeZyw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_163\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwtLkzqMMujU_3S47omS17hirhwMYxHO6dfw&s\",\"dimg_Pz9-Z8TyAsWfi-gPuu244A0_159\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtYbmp"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/e4df9255779a28a6b06ffbf887d61918.jpg"
         },
         {
             "title": "Террасные фонтаны",
@@ -653,7 +557,7 @@
             "context": "1 этап постройки: 1739 год. Архитекторы И. Я. Бланк, И. П. Давыдов.2 этап постройки: 1800 год. Архитектор Ф. П. Броуэр.Гидротехническое устройство фонтанов – П. Суалем.Маскароны – 1817 г., скульптор И. П. Мартос.С северной стороны площадь перед каскадом \"Шахматная гора\" оформляют два одинаковых симметричных фонтана. Название \"Римские\" связано с тем, что они по композиции напоминают каменные водометы на площади перед собором Святого Петра в Риме.Их замысел восходит к I четверти XVIII столетия, но появились они лишь в 1739 году по проекту архитекторов И. Я. Бланка и И. П. Давыдова. Первоначально фонтаны были выполнены из дерева, но в 1800 году архитектор Ф. П. Броуэр перестроил их в граните и мраморе.\"Римские фонтаны\" представляют собой распространенный в XVIII веке тип двухъярусных фонтанов. Высокие струи пяти водометов, падая и дробясь о края мраморных чаш, скрывают в водяной белоснежной пряже массивные многогранные постаменты и золоченые рельефные украшения: гирлянды, лавровые венки, раковины и маскароны.С южной стороны от \"Римских фонтанов\" в середине XVIII века садовник Бернгард Фок создал цветочные партеры, расположенные в заниженном газоне – \"буленгрине\". Очертания партеров в точности повторяли форму фонтанных бассейнов.",
             "ticketUrl": "",
             "rate": 35,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/8/81/RimskyFountains_Peterhof.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/2e9a180b8b3e13b5638c7e2b339554ef.jpg"
         },
         {
             "title": "Фонтан «Пирамида»",
@@ -672,7 +576,7 @@
             "context": "1721-1723 гг., архитектор Н. Микетти1724 г., архитектор М. Г. ЗемцовГидротехническое устройство: 1721-1724 гг., П. СуалемФонтан \"Пирамида\" – один из самых красивых и оригинальных фонтанов Петергофа. Он считается самым многоводным среди фонтанов Нижнего парка, так как за одну секунду расходует около 100 литров воды.\"Пирамиду водяную с малыми каскадами\" начали строить по указу Петра I и утвержденному им чертежу Н. Микетти. В 1724 году М. Г. Земцов закончил сооружение фонтана, который только в конце XVIII столетия получил мраморное обрамление. Фонтан представляет собой четырехгранную семиступенчатую пирамиду, которую образуют 505 водяных струй. Форма четырехгранного обелиска полностью создается водой. Красивейший из фонтанов Петергофа имеет глубоко символическое значение. В начале XVIII века в русской армии существовала традиция – в конечных пунктах своего движения и в местах сражений устанавливать деревянные или каменные обелиски, по форме напоминающие пирамиду. Таким образом, фонтан на берегу Финского залива, представляющий собой белоснежную пенящуюся массу воды, издали напоминающую триумфальный обелиск, является своеобразным памятником в честь победы русских войск, освободивших этот край от шведского владычества в ходе Северной войны.С первого дня существования этого сложнейшего с технической точки зрения фонтана принцип его действия остается неизменным.",
             "ticketUrl": "",
             "rate": 34,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/ru/3/35/Petergof-piramida.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/dae9d1d6bcee6c5fecc2b261860bb4d0.jpg"
         },
         {
             "title": "Фонтан «Солнце»",
@@ -891,7 +795,7 @@
             "context": "1799-1801 гг., архитектор А. Н. Воронихин1854-1857 гг., архитектор А. И. ШтакеншнейдерСогласно замыслу Петра I, каждому дворцу в Нижнем парке должен был соответствовать свой каскад, поэтому идея строительства нового каскада рядом с Эрмитажем возникла одновременно с возведением самого павильона. Первоначальный проект этого фонтанного сооружения выполнил архитектор Н. Микетти в 1720 году, но реализовать этот проект не удалось. Петровская идея создания каскада воплотилась лишь в 1801 году, когда неподалеку от павильона был построен Эрмитажный каскад по проекту архитектора А. Н. Воронихина: бассейн с водопадными уступами из пудостского камня, украшенный двумя бронзовыми скульптурами сторожевых львов, отлитых по модели И. Прокофьева. Каскад стал называться \"Эрмитажным\" по своему расположению или \"Львиным\" – по своему декору.В 50-е годы XIX века Эрмитажный каскад из-за сильного разрушения был разобран. На его месте по проекту архитектора А. И. Штакеншнейдера был построен новый каскад, за которым закрепилось название \"Львиный\". Прежние скульптуры львов были помещены по сторонам колоннады, выполненной из гранита и мрамора. В центре бассейна, на гранитной скале установлена созданная по модели Ф. П. Толстого статуя нимфы Аганиппы – покровительницы одноименного источника у подножия горы Геликон. Согласно легенде, люди, пьющие из этого источника, поэтически вдохновлялись.Львиный каскад – это единственный из четырех каскадов Нижнего парка, расположенный не на склоне, а на нижней террасе. Реставрация Львиного каскада в 2000 году завершила послевоенное восстановление фонтанных сооружений Нижнего парка.",
             "ticketUrl": "",
             "rate": 22,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/6/64/%D0%9B%D1%8C%D0%B2%D0%B8%D0%BD%D1%8B%D0%B9_%28%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B9%29_%D0%BA%D0%B0%D1%81%D0%BA%D0%B0%D0%B4_%28%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%29.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1200-h1200/20220831/06fbf68cbb1532ca987b75e0fd18a79c.jpg"
         },
         {
             "title": "Фонтаны «Менажерные»",
@@ -912,7 +816,7 @@
             "context": "1722-1724 гг., архитектор Н. МикеттиМенажерные фонтаны украшают партеры у подножия каскада \"Золотая гора\". Пятнадцатиметровые водяные столбы производят мощное впечатление, при этом вода в них расходуется экономно. Само слово \"Менажерный\" происходит от французского \"menager\" – экономить.Секрет этих фонтанов заключается в особой конструкции фонтанной насадки, которая была предложена самим Петром I и изготовлена по его собственноручному чертежу. В трубу диаметром 30 см на выходе струи вложен опрокинутый медный конус. Вода, обтекая конус, бьет под большим давлением через узкую кольцевую щель, образуя полый столб, производящий впечатление необычайной мощности. Эта конструкция насадок используется и в наше время.Во второй половине XVIII века водяные столбы фонтанов поднимали и поддерживали на своих вершинах золоченные медные шары, которые при выключении фонтанов опускались в медную сетку.",
             "ticketUrl": "",
             "rate": 21,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/4/4e/%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B3%D0%BE%D1%84%2C_%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%BF%D0%B0%D1%80%D0%BA._%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD%D1%8B_%C2%AB%D0%9C%D0%B5%D0%BD%D0%B0%D0%B6%D0%B5%D1%80%D0%BD%D1%8B%D0%B5%C2%BB_%28%D0%B4%D0%B2%D0%B0%29_1.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/aef6cdcee83f536dc5d85881161925f9.jpg"
         },
         {
             "title": "Фонтаны «Тритоны-колокола»",
@@ -983,7 +887,7 @@
             "context": "1721-1724 гг., арх. Ж-Б. Леблон.1737 г., скульптор Б. К. Растрелли.1798-1799 гг., арх. Ф. П. Броуэр; скульпторы Х. Риттер, Г. Швейгер, И. Эйслер.Фонтан \"Нептун\" находится в самом большом центральном бассейне Верхнего сада. На гранитном постаменте возвышается бронзовая фигура бога морей с короной на голове и трезубцем в руке. Гранитный пьедестал статуи окружают всадники на морских конях и трубящие в раковины тритоны на крылатых драконах и дельфинах.Бассейн, созданный при Петре I, в 1730-х годах был декорирован золоченой свинцовой скульптурой, отлитой по моделям Б. К. Растрелли. В центре бассейна появилась грандиозная многофигурная композиция \"Колесница Нептуна\", а трехступенчатый каскад на южной стороне бассейна украсила статуя \"Зима\".В конце XVIII века на месте утратившей былую красоту \"Колесницы Нептуна\" была установлена бронзовая композиция с фигурами морского бога и его свиты, приобретенная Павлом I в Германии в 1797 году. Отлитая в 1650-х годах скульпторами Х. Риттером, Г. Швейгером и И. Эйслером, она является одним из самых выдающихся произведений западноевропейского искусства XVII века. Место \"Зимы\" на каскаде бассейна заняла бронзовая копия античной статуи Аполлона Бельведерского.В годы Великой Отечественной войны скульптуры были похищены и вывезены в Германию. Впоследствии, по требованию советского правительства, их вернули, установили на прежнее место, а статую Аполлона воссоздали по гипсовому слепку.",
             "ticketUrl": "",
             "rate": 18,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Neptune_fountain_in_Peterhof_DS32131.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/ec632160d4060311ece57860423b1b2d.jpg"
         },
         {
             "title": "Фонтаны Квадратных прудов",
@@ -1013,7 +917,7 @@
             "context": "1737-1738 гг., архитекторы И.Я. Бланк, И.П. Давыдов, скульптор Б. К. Растрелли, фонтанный мастер П. Суалем.1773-1775 гг., архитектор И.Е. Яковлев.Фонтан \"Межеумный\", декорированный бронзовыми фигурами морского дракона и четырех дельфинов, из пастей которых взлетают струи воды, расположен на центральной оси Верхнего сада, вблизи главных ворот.Название \"Межеумный\" или \"Неопределенный\" связано с тем, что скульптурный декор фонтана часто менялся. В бассейне, созданном в 1730-х годах, первоначально была установлена многофигурная свинцовая скульптурная группа \"Андромеда\". К концу XVIII столетия на ее месте возникла композиция с морским драконом и четырьмя дельфинами. В XIX веке фонтанный декор менялся дважды, и, в конце концов, при послевоенном восстановлении, на свои места вернулись выполненные в бронзе дракон и дельфины.",
             "ticketUrl": "",
             "rate": 16,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/9/92/Uncertainty_Fountain_at_Upper_Garden_of_Peterhof.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/501297f76f0a9ad462a35bd0e5203273.jpg"
         },
         {
             "title": "Фонтан «Дубовый»",
@@ -1028,7 +932,7 @@
             "context": "1719 г. - устройство пруда, арх. Ж.-Б. Леблон.1734-1738 гг., арх. И. Я. Бланк, И. П. Давыдов, скульптор Б. К. Растрелли.1929 г. – дополнен скульптурой Д. Росси (1809).На центральной оси Верхнего сада, ближе всего к Большому дворцу, находится фонтан \"Дубовый\". В круглом бассейне, на туфовом островке в виде морской звезды, гостей парка встречает \"Амур, надевающий маску\". Эту скульптуру в 1809 году выполнил скульптор Д. Росси. Амур окружен шестью дельфинами, помещенными на лучах звезды, из пастей которых бьют тонкие струйки воды.Название фонтана \"Дубовый\" связано с тем, что бассейн, созданный в 1730-х годах, поначалу украшал свинцовый золоченый дуб, окруженный тритонами и дельфинами. Дерево, созданное Б. К. Растрелли, в середине XVIII века из бассейна убрали и впоследствии использовали в Нижнем парке при создании фонтана-шутихи \"Дубок\". Композиция фонтана неоднократно менялась, и сейчас лишь название напоминает о первоначальном убранстве. Партер Верхнего сада вблизи фонтана \"Дубовый\" украшают выразительные и экспрессивные мраморные фигуры работы итальянского скульптора А. Бонацца, созданные в 1757 г.: Флора, Зефир, Вертумн, Помона.Со времен императрицы Елизаветы Петровны в бассейне Дубового фонтана ежегодно 1 августа (14 августа по новому стилю) совершался ритуал водосвятия и окропления святой водой полковых знамен всех военных частей, расположенных в Петергофе. В настоящее время эта традиция возрождена.",
             "ticketUrl": "",
             "rate": 17,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/1/19/%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD_%22%D0%94%D1%83%D0%B1%D0%BE%D0%B2%D1%8B%D0%B9%22.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/97b84093297a852d2bac405991876e02.jpg"
         },
         {
             "title": "Сады на островах Колонистского парка",
@@ -1190,7 +1094,7 @@
             "context": "Дата постройки: 1831-1834 гг.Архитекторы К. Ф. Шинкель (1781-1841), А. Менелас (1753-1831), И. И. Шарлемань (1782-1861).Одна из дорожек к западу от дворца Коттедж через Руинный мост мимо Фермерского дворца ведет к изящному зданию – домовой церкви семьи Николая I, место для которой выбрал сам император. В июле 1834 года церковь была освящена во имя Святого Благоверного Великого князя Александра Невского. Созданная в средневековом готическом стиле, она получила название Готической капеллы (одно из значений слова \"капелла\" - маленькая домашняя церковь для молитв одной семьи). Проект был заказан выдающемуся немецкому зодчему К. Ф. Шинкелю. Строительством на начальном этапе руководил А. Менелас, закончил работу И. И. Шарлемань.Напоминающая средневековый готический собор в миниатюре, капелла служит эффектной романтической декорацией парка. Северный, западный и южный фасады церкви оформлены одинаково. В центре – стрельчатые порталы, над ними – круглые окна-розы с витражами. К восточному фасаду примыкает трехгранный выступ – апсида. Над её боковыми стенами размещены звонницы – перекладины с тремя колоколами с каждой стороны. Восемь шпилей увенчаны золочеными православными крестами. Здание богато декорировано кружевным чугунным литьем и скульптурой. Сорок три статуи, созданные из выколотной меди по моделям скульптора В. И. Демут-Малиновского, изображают ангелов, святых апостолов, евангелистов и Богоматерь с младенцем.Массивные дубовые двери ведут прямо в церковный зал. Внутри, как и снаружи, церковь оформлена в неоготическом стиле: стрельчатые арки, устремленные ввысь своды, круглые окна с витражами. Но по устройству это православный храм. С восточной стороны находится алтарь, отделенный от церковного зала иконостасом. Все иконы были выполнены придворным живописцем Тимофеем Неффом.Со времени освящения Готическая капелла служила домашней церковью четырех поколений российских императоров – Николая I, Александра II, Александра III и Николая II. Регулярные богослужения совершались в летнее время. Посещение императорской семьей Готической Капеллы называли \"Малым выходом\". В дни особых торжеств совершались \"Большие выходы\" в церковь Святых апостолов Петра и Павла Большого Петергофского дворца.В годы Второй мировой войны здание уцелело, сохранилось чугунное литье на фасадах и большая часть скульптур, однако отделка была сильно повреждена.Осенью 2006 года, после завершения реставрации, Готическую капеллу вновь освятили, приурочив это событие к церемонии перезахоронения останков российской императрицы Марии Федоровны, супруги императора Александра III. Ее прах повторил тот же путь из Дании в Санкт-Петербург через Кронштадт и Петергоф, который будущая императрица совершила, впервые прибыв в Россию. В Готической капелле состоялось богослужение в присутствии членов королевского дома Дании и потомков императорской семьи Романовых.",
             "ticketUrl": "",
             "rate": 10,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Gothic_Chapel_Peterhof_tonemapped.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220330/7e53bb38108a0de6f49c542bf71ff777.jpg"
         },
         {
             "title": "Парк Ораниенбаум",
@@ -1301,7 +1205,7 @@
             "context": "Дата постройки: конец 1750-х  - 1768 гг.Архитектор: Антонио Ринальди (1709-1794)Китайский дворец, расположенный в глубине Верхнего парка и со всех сторон окруженный зеленью, является частью грандиозного дворцово-паркового комплекса \"Собственной дачи\" императрицы Екатерины II. Определение \"собственный\" в придворной терминологии означало, что то или иное здание, павильон или сад, предназначались для императорских особ, и сюда приглашались лишь избранные лица. Так обстояло дело и с Китайским дворцом и его окружением – личной резиденцией Екатерины II.Возведенный в 1762–1768 годах по проекту итальянского архитектора А. Ринальди, дворец был одноэтажным и только в середине XIX века приобрел новые черты. По проекту архитекторов Л. Л. Бонштедта и А. И. Штакеншнейдера надстроили второй этаж, застеклили галерею, подведенную под появившийся тогда же балкон и соединившую с южной стороны два ризалита, с востока и запада пристроили небольшие помещения-антикамеры.Длительное время дворец, подобно \"Монплезиру\", именовался \"Голландским домиком\". Лишь в 1774 году в камер-фурьерском журнале появилось название \"Китайский дворец\", возникшее потому, что ряд интерьеров дворца был декорирован в духе эстетики Китая или с использованием подлинных произведений китайского искусства.Несмотря на внешнюю сдержанность и некоторую строгость, внутренняя отделка дворца оформлена изысканно и удивительно нарядно. В средней части находится анфилада парадных покоев: Стеклярусный кабинет, Штофная опочивальня, Зал муз, Голубая и Розовая Гостиные, Большой и Малый китайские кабинеты. Сами эти названия говорят об исключительности и неординарности дворцовых помещений. Большую анфиладу дополняют малые анфилады: в западной находятся жилые покои Екатерины II, в восточной – комнаты великого князя Павла. Во дворце нет повторяющихся обрамлений дверных проемов, панелей, створок, каждый интерьер совершенно самостоятелен.Главной знаменитостью Китайского дворца является Стеклярусный кабинет, сохранивший подлинную отделку 1760-х годов. Стены комнаты декорированы двенадцатью стеклярусными панно. Это холсты, на основе которых сделана вышивка стеклярусом (трубочками молочного стекла) и разноцветным ворсистым шелком – синелью. На искрящемся фоне представлены сложные композиции с изображением фантастических птиц, растений, порхающих бабочек. Панно заключены в рамы с золоченой резьбой, имитирующей стволы деревьев, увитых листьями, цветами и гроздьями винограда.Для убранства интерьеров дворца приобретали первоклассные произведения изобразительного и прикладного искусства. Самую значимую часть живописной коллекции составляют плафоны, написанные специально для Китайского дворца. Подобным собранием плафонов не располагает ни один из сохранившихся русских дворцов. Большинство были исполнены по специальному заказу в Венеции ведущими мастерами Академии живописи и скульптуры. Два крупных итальянских живописца Стефано Торелли и Серафино Бароцци работали над росписью таких обширных интерьеров, как Зал муз, Большой китайский кабинет, кабинеты Екатерины II и Павла, Будуар и др.Уникальны по своему художественному значению паркеты дворца общей площадью 722 кв. метра. Они набраны из отечественных и \"заморских\" древесных пород – красного и черного дерева, амаранта, самшита, персидского ореха, клена, березы, дуба. В отдельных наборах насчитывается до 15 различных пород дерева. По богатству и разнообразию древесных пород, по сложности рисунка набора и мастерству исполнения паркеты Китайского дворца не имеют себе равных в мире.Китайский дворец воплотил в себе модные влияния и эстетические пристрастия XVIII века. Убранство дворца выполнено европейскими и русскими художниками-мастерами с исключительным мастерством и не имеет аналогий. \"Подлинное чудо, полное чудес восемнадцатого века\", – сказал искусствовед И. Э. Грабарь о Китайском дворце.",
             "ticketUrl": "",
             "rate": 50,
-            "image_url_v2": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Chinese_Palace_in_Oranienbaum.jpg"
+            "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20220329/c03c30c7e235f18bc18ef7e447f4680c.jpg"
         },
         {
             "title": "Павильон «Китайская кухня»",
@@ -1369,152 +1273,5 @@
             "rate": 3,
             "image_url_v2": "https://peterhofmuseum.ru/images/w1000-h1000/20150419/d1ba3a63338d647bf464e0b5b17002e9.jpg"
         }
-    ],
-    "parks": [
-        {
-            "id": 1,
-            "title": "Петергоф",
-            "color": "CC9900",
-            "dot_coords": {
-                "mobile": {
-                    "x": 36.875,
-                    "y": 64.8
-                },
-                "desktop": {
-                    "x": 48.5,
-                    "y": 74.5
-                }
-            },
-            "title_coords": {
-                "desktop": {
-                    "x": 48.5,
-                    "y": 83.5
-                },
-                "mobile": {
-                    "x": 36.875,
-                    "y": 72.8
-                }
-            }
-        },
-        {
-            "id": 7,
-            "title": "Александрия",
-            "color": "003366",
-            "dot_coords": {
-                "mobile": {
-                    "x": 59.06249999999999,
-                    "y": 74.8
-                },
-                "desktop": {
-                    "x": 64,
-                    "y": 69.5
-                }
-            },
-            "title_coords": {
-                "desktop": {
-                    "x": 64,
-                    "y": 78.5
-                },
-                "mobile": {
-                    "x": 53.125,
-                    "y": 82.8,
-                    "shift": 1
-                }
-            }
-        },
-        {
-            "id": 3,
-            "title": "Ораниенбаум",
-            "color": "0099CC",
-            "dot_coords": {
-                "mobile": {
-                    "x": 9.375,
-                    "y": 57.199999999999996
-                },
-                "desktop": {
-                    "x": 15,
-                    "y": 63
-                }
-            },
-            "title_coords": {
-                "desktop": {
-                    "x": 15,
-                    "y": 72
-                },
-                "mobile": {
-                    "x": 5.625,
-                    "y": 48,
-                    "shift": 1
-                }
-            }
-        },
-        {
-            "id": 5,
-            "title": "Стрельна",
-            "color": "99CCFF",
-            "dot_coords": {
-                "mobile": {
-                    "x": 84.0625,
-                    "y": 64.8
-                },
-                "desktop": {
-                    "x": 82.5,
-                    "y": 82.5
-                }
-            },
-            "title_coords": {
-                "desktop": {
-                    "x": 82.5,
-                    "y": 91.5
-                },
-                "mobile": {
-                    "x": 84.0625,
-                    "y": 55.6
-                }
-            }
-        }
-    ],
-    "sanitary": [
-        [
-            0,
-            ".8..260..36..259..72..269..9..263..11..262..83..266..82..274..81..273..341..80..271..12..264..78..265..74..270..75..267..77..275..79..272..35..258..44..282..45..283..47..276..48..285..64..300..54..281..46..284..49..286..50..287..51..288..52..289..53..290..55..291..57..292..58..293..59..294..60..295..61..296..62..297..84..298..63..299..65..301..66..302..67..303..87..312..68..304..85..306..20..308..30..315..69..305..18..307..27..319..76..261..21..310..25..318..31..320..41..280..26..314..38..277..326..339..340..15..323..22..311..29..316..32..321..39..278..16..324..19..309..28..317..33..322..40..279..88..325."
-        ],
-        [
-            1,
-            ""
-        ],
-        [
-            2,
-            ".34..257..73..268."
-        ],
-        [
-            3,
-            ".24..313."
-        ],
-        [
-            4,
-            ""
-        ],
-        [
-            5,
-            ""
-        ],
-        [
-            96,
-            "Санитарный день"
-        ],
-        [
-            97,
-            "Closed for maintenance"
-        ],
-        [
-            98,
-            "2024-10-14"
-        ],
-        [
-            99,
-            "2025-04-25"
-        ]
-    ],
-    "error": ""
+    ]
 }

@@ -19,17 +19,18 @@ load_dotenv()
 YANDEX_FOLDER_ID = getenv('FOLDER')
 YANDEX_AUTH = getenv('AUTH')
 
+
 def parse_json_output(text):
     text = text.strip()
     if '```json' in text:
-        text = text[text.rfind('```json')  + len('```json'): text.rfind('```')]
+        text = text[text.rfind('```json') + len('```json'): text.rfind('```')]
     else:
-        text = text[text.find('```')  + len('```'): text.rfind('```')]
+        text = text[text.find('```') + len('```'): text.rfind('```')]
 
     return text.strip()
 
-def update_route(user_message, route_json, relevant_objects, model):
 
+def update_route(user_message, route_json, relevant_objects, model):
     objects_names = ", ".join([obj["name"] for obj in route_json])
 
     # print("mentioned objects:")
@@ -89,14 +90,17 @@ def calculate_distance(coord1, coord2):
     R = 6371000
     return R * c
 
+
 def normilize_text(text):
     text = text.replace('ё', 'е').replace('Ё', 'е')
     text = re.sub(r'[^A-Za-zА-Яа-я]', '', text)
     return stem_text(text.lower())
 
+
 def stem_text(text):
     stemmer = RussianStemmer()
     return ' '.join(stemmer.stem(word) for word in text.split())
+
 
 def sort_json_by_distance(initial, json_list):
     return sorted(
@@ -106,19 +110,21 @@ def sort_json_by_distance(initial, json_list):
         )
     )
 
+
 def filter_route_by_distance(route, max_distance=5000):
     if not route:
         return []
     filtered_route = [route[0]]
     for obj in route[1:]:
         obj_coords = (float(obj['coordinates']['lat']), float(obj['coordinates']['lon']))
-        if any(calculate_distance(obj_coords, (float(existing['coordinates']['lat']), float(existing['coordinates']['lon']))) <= max_distance
+        if any(calculate_distance(obj_coords, (
+        float(existing['coordinates']['lat']), float(existing['coordinates']['lon']))) <= max_distance
                for existing in filtered_route):
             filtered_route.append(obj)
     return filtered_route
 
-def generate_yandex_maps_route_url(coordinates, start_location_coordinates):
 
+def generate_yandex_maps_route_url(coordinates, start_location_coordinates):
     route_param = '%2C'.join(start_location_coordinates) + '~'
     for coord in coordinates:
         route_param += (coord[0] + '%2C' + coord[1] + '~')
@@ -126,9 +132,11 @@ def generate_yandex_maps_route_url(coordinates, start_location_coordinates):
     route_url = f"{base_url}{route_param[:-1]}&rtt=auto)"
     return f"[Ссылка Яндекс Карты]{route_url}"
 
+
 def lemmatize_text(text):
     morph = pymorphy2.MorphAnalyzer()
     return ' '.join(morph.parse(word)[0].normal_form for word in text.split())
+
 
 def suggest_route_by_gpt(model, route_description, link, dialog, last_message=None):
     prompt = f"""
@@ -145,6 +153,7 @@ def suggest_route_by_gpt(model, route_description, link, dialog, last_message=No
         prompt += f"Ранее ты уже предлагал маршрут но пользователь решил его поменять. Вот его по: {last_message}"
     result = model.run(prompt)
     return result.alternatives[0].text
+
 
 def change_route_by_gpt(model, route_description, link, last_message, user_dialog):
     prompt = f"""
@@ -166,6 +175,7 @@ def change_route_by_gpt(model, route_description, link, last_message, user_dialo
 
     result = model.run(prompt)
     return result.alternatives[0].text
+
 
 def check_on_positivity(model, user_dialogues, mentioned_objects):
     dialogue_str = "\n".join([d.get("user", d.get("bot", "")) for d in user_dialogues])
@@ -216,6 +226,7 @@ def check_on_positivity(model, user_dialogues, mentioned_objects):
         response_json = {"start": "", "end": "", "others": []}
     return response_json
 
+
 def cluster_by_distance(objects, max_distance=5000):
     clusters = []
     for obj in objects:
@@ -232,13 +243,16 @@ def cluster_by_distance(objects, max_distance=5000):
             clusters.append([obj])
     return clusters
 
+
 def select_cluster(clusters, min_objects):
     suitable = [cluster for cluster in clusters if len(cluster) >= min_objects]
     if suitable:
         return max(suitable, key=lambda c: len(c))
     return max(clusters, key=lambda c: len(c))
 
-def build_route_with_boundaries(candidate_route, start_obj=None, end_obj=None, initial_coordinates=["59.891802", "29.913220"]):
+
+def build_route_with_boundaries(candidate_route, start_obj=None, end_obj=None,
+                                initial_coordinates=["59.891802", "29.913220"]):
     if start_obj is None and end_obj is None:
         return candidate_route
 
@@ -281,7 +295,7 @@ def get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=["59.8
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
     )
-    model = sdk.models.completions(model_name="yandexgpt")
+    model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     model = model.configure(temperature=0.6)
 
     all_objects_names = []
@@ -309,18 +323,21 @@ def get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=["59.8
 
     additional_candidates = [obj for obj in data_chunks if obj not in candidate_route]
     additional_candidates_sorted = sorted(additional_candidates, key=lambda x: x["score"], reverse=True)[:20]
-    retrieved_context = "\n\n".join([f"{obj['name']} - {obj['description'][:300]}" for obj in additional_candidates_sorted])
+    retrieved_context = "\n\n".join(
+        [f"{obj['name']} - {obj['description'][:300]}" for obj in additional_candidates_sorted])
     current_old_names = [obj["name"] for obj in candidate_route]
     user_message = user_dialogues[-1]["user"]
     user_dialog = "\n".join([d.get("user", d.get("bot", "")) for d in user_dialogues])
 
     # print("Finding new objects----------------------------------------")
-    new_objects_response = select_new_routes_by_gpt(model, retrieved_context, current_old_names, user_message, user_dialog)
+    new_objects_response = select_new_routes_by_gpt(model, retrieved_context, current_old_names, user_message,
+                                                    user_dialog)
     norm_new_names = normilize_text(new_objects_response)
     new_objects = []
     for chunk in data_chunks:
         lemmatized_chunk_name = normilize_text(chunk["name"])
-        if norm_new_names and lemmatized_chunk_name in norm_new_names and lemmatized_chunk_name not in normilize_text(" ".join(current_old_names)):
+        if norm_new_names and lemmatized_chunk_name in norm_new_names and lemmatized_chunk_name not in normilize_text(
+                " ".join(current_old_names)):
             new_objects.append(chunk)
 
     candidate_route += new_objects[:max(0, objects_number - len(candidate_route))]
@@ -345,19 +362,18 @@ def get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=["59.8
         if end_obj:
             candidate_route.append(end_obj)
 
-    final_route = build_route_with_boundaries(candidate_route, start_obj=start_obj, end_obj=end_obj, initial_coordinates=initial_coordinates)
+    final_route = build_route_with_boundaries(candidate_route, start_obj=start_obj, end_obj=end_obj,
+                                              initial_coordinates=initial_coordinates)
 
     route_description = ""
     for index, obj in enumerate(final_route):
-        route_description += f"{index+1}. {obj['name']} - {obj['description'][:250]}...\n"
+        route_description += f"{index + 1}. {obj['name']} - {obj['description'][:250]}...\n"
     coordinates_list = [[obj["coordinates"]["lat"], obj["coordinates"]["lon"]] for obj in final_route]
     link = generate_yandex_maps_route_url(coordinates_list,
-                                          initial_coordinates if start_obj is None else [start_obj["coordinates"]["lat"], start_obj["coordinates"]["lon"]])
+                                          initial_coordinates if start_obj is None else [
+                                              start_obj["coordinates"]["lat"], start_obj["coordinates"]["lon"]])
     route_description = suggest_route_by_gpt(model, route_description, link, user_dialogues)
     return route_description, final_route
-
-
-
 
 
 def select_new_routes_by_gpt(model, retrieved_context, current_old_names, user_message, user_dialog):
@@ -394,7 +410,6 @@ def select_new_routes_by_gpt(model, retrieved_context, current_old_names, user_m
     "new_objects": "<названия объектов через запятую или пустая строка ('')>"
 }}
 """
-
 
     result = model.run(prompt)
     output = result.alternatives[0].text
@@ -441,6 +456,7 @@ def filter_unwanted_objects(message, current_route_json, model):
     res_json = json.loads(res)
     return res_json['remaining_objects']
 
+
 def rephrase(model, message):
     prompt = f""" Ты бот музея Петергоф
     Мне нужно перефразировать запрос от пользователя, чтобы он не содержал вещей в негативном ключе, а только в позитивном.
@@ -449,7 +465,7 @@ def rephrase(model, message):
     <Запрос от пользователя>
     {message}
     </Запрос от пользователя>
-    
+
     Твоя более хорошая переформулировка только с позитивными объектами, местами, желаниями: 
     """
 
@@ -460,14 +476,15 @@ def rephrase(model, message):
     return res
 
 
-
-def change_route_by_message(message, current_route_json, data_chunks, user_dialog, initial_coordinates=["59.891802", "29.913220"],
-                            objects_number=20, initial_max_distance=500, max_distance_limit=1000, distance_increment=100):
+def change_route_by_message(message, current_route_json, data_chunks, user_dialog,
+                            initial_coordinates=["59.891802", "29.913220"],
+                            objects_number=20, initial_max_distance=500, max_distance_limit=1000,
+                            distance_increment=100):
     sdk = YCloudML(
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
     )
-    model = sdk.models.completions(model_name="yandexgpt")
+    model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     model = model.configure(temperature=0.1)
 
     chroma_collection = init_chroma()

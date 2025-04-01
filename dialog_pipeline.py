@@ -33,7 +33,7 @@ def classify_question_type(question: str, dialog_history: str) -> str:
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
     )
-    model = sdk.models.completions(model_name="yandexgpt")
+    model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     model = model.configure(temperature=0.1)
 
     prompt = f"""
@@ -60,6 +60,7 @@ def classify_question_type(question: str, dialog_history: str) -> str:
 - "Что стоит посмотреть в первую очередь?"
 
 Примеры вопросов типа "general":
+- "Режим работы объекта?"
 - "Когда открывается музей?"
 - "Сколько стоит вход в парк?"
 - "Есть ли сегодня какие-то мероприятия?"
@@ -95,7 +96,7 @@ def is_route_question(question: str, dialog_history: str) -> bool:
     return question_type == "route"
 
 
-def answer_from_news(question: str, dialog_history: str, greeting_style="friendly", news_file_path="news.json") -> str:
+def answer_from_news(question: str, dialog_history: str, greeting_style="friendly", news_file_path="news.json", tickets_file_path="tickets.json") -> str:
     try:
         with open(news_file_path, "r", encoding="utf-8") as f:
             news_data = json.load(f)
@@ -104,6 +105,15 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
 
     news_list = news_data.get("news", [])
     news_content = "\n".join(news_list) if news_list else "Нет актуальных новостей."
+
+    try:
+        with open(tickets_file_path, "r", encoding="utf-8") as f:
+            tickets_data = json.load(f)
+    except Exception as e:
+        return f"Ошибка при чтении файла билетов: {e}"
+
+    tickets_list = tickets_data.get("data", [])
+    tickets_content = "\n".join(tickets_list) if tickets_list else "Нет актуальной информации по билетам и расписаниям."
 
     greeting_instruction = ""
     if greeting_style == "none":
@@ -149,6 +159,9 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
     prompt = f"""
     У тебя есть следующие последние новости:
     {news_content}
+    
+    Также у тебя есть информация по билетам и расписаниям:
+    {tickets_content}
 
     Ты бот-помощник по музею-заповеднику "Петергоф". Твоя задача - отвечать на вопросы посетителей.
 
@@ -167,7 +180,7 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
         folder_id=YANDEX_FOLDER_ID,
         auth=YANDEX_AUTH,
     )
-    model = sdk.models.completions(model_name="yandexgpt")
+    model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
     model = model.configure(temperature=0.4)
     result = model.run(prompt)
     return result.alternatives[0].text.strip()

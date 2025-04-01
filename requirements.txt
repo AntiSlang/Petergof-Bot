@@ -13,3 +13,4 @@ pymorphy2
 chromadb
 nltk
 pytz
+PyPDF2
