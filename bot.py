@@ -730,7 +730,7 @@ async def on_message(message: types.Message):
 
     if len(links) == 0:
         try:
-            await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup, parse_mode='MarkdownV2' if is_route else None)
+            await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if is_route else None)
         except Exception as e:
             print(f"Ошибка при отправке сообщения: {e}")
             await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080))
@@ -762,7 +762,7 @@ async def on_message(message: types.Message):
         await print_exception(e)
 
     try:
-        await msg.edit_text(shorten_text(answer, 4080) if is_route else shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup, parse_mode='MarkdownV2' if is_route else None)
+        await msg.edit_text(shorten_text(answer, 4080) if is_route else shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if is_route else None)
     except Exception as e:
         print(f"Критическая ошибка в обработке сообщения: {e}")
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
