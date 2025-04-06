@@ -40,7 +40,7 @@ def classify_question_type(question: str, dialog_history: str) -> str:
 Задача: Определить тип вопроса пользователя по отношению к музею-заповеднику "Петергоф".
 
 Возможные типы вопросов:
-1. "museum" - вопрос о конкретных объектах музея (фонтаны, павильоны, экспонаты, скульптуры)
+1. "museum" - вопрос о конкретных объектах музея (фонтаны, павильоны, экспонаты, скульптуры) не связанные с их режимом работы, расписанием, открытием
 2. "route" - вопрос о маршрутах или явная просьба помочь с составлением маршрута
 3. "general" - общие вопросы о музее, режиме работы, билетах, новостях и т.д.
 
@@ -60,6 +60,8 @@ def classify_question_type(question: str, dialog_history: str) -> str:
 - "Что стоит посмотреть в первую очередь?"
 
 Примеры вопросов типа "general":
+- "Расписание работы объекта?"
+- "Открыт ли фонтан/музей/дворец?"
 - "Режим работы объекта?"
 - "Когда открывается музей?"
 - "Сколько стоит вход в парк?"
@@ -76,7 +78,7 @@ def classify_question_type(question: str, dialog_history: str) -> str:
 
     result = model.run(prompt)
     answer = result.alternatives[0].text.strip().lower()
-    print(f"Классификация вопроса: {answer}")
+    print(f"Классификация вопроса {question}: {answer}")
 
     if "museum" in answer:
         return "museum"
@@ -104,7 +106,7 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
         return f"Ошибка при чтении новостного файла: {e}"
 
     news_list = news_data.get("news", [])
-    news_content = "\n".join(news_list) if news_list else "Нет актуальных новостей."
+    news_content = '\n'.join([f'{i + 1}) {j}' for i, j in enumerate(news_list)]) if news_list else "Нет актуальных новостей."
 
     try:
         with open(tickets_file_path, "r", encoding="utf-8") as f:
@@ -157,10 +159,10 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
         """
 
     prompt = f"""
-    У тебя есть следующие последние новости:
+    У тебя есть следующие последние новости - всегда прикладывай ссылку на используемую новость!:
     {news_content}
     
-    Также у тебя есть информация по билетам и расписаниям:
+    Также у тебя есть информация по билетам и расписаниям - если по объекту есть конкретное расписание на сегодняшнее число, то упомяни это:
     {tickets_content}
 
     Ты бот-помощник по музею-заповеднику "Петергоф". Твоя задача - отвечать на вопросы посетителей.
@@ -170,7 +172,7 @@ def answer_from_news(question: str, dialog_history: str, greeting_style="friendl
     {continuity_instruction}
 
     Отвечай лаконично и по существу, избегая ненужных длинных введений, но сохраняя дружелюбный тон.
-    Предоставляй точную и полезную информацию, которая требуется пользователю.
+    Предоставляй точную и полезную информацию, которая требуется пользователю. Если ты используешь новость, то обязательно приложи ссылку на неё!
 
     Вопрос пользователя: "{question}"
     История диалога: {dialog_history}
