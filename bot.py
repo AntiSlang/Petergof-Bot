@@ -46,51 +46,6 @@ COLLECTION_NAME = "peterhof_docs"
 bot.chroma_collection = None
 
 
-'''async def files_delete():
-    async for file in bot.sdk.files.list():
-        await file.delete()
-
-
-async def files_create():
-    sdk = YCloudML(
-        folder_id=getenv('FOLDER'),
-        auth=getenv('AUTH'),
-    )
-
-    embd = sdk.models.text_embeddings('doc')
-    model = sdk.models.completions('yandexgpt')
-
-    path = 'data.json'
-    de = DataEnlarger(llm=model, embd=embd, data_path=path)
-    docs = de.chunks
-
-    files = []
-    for i, doc in enumerate(docs):
-        print(len(doc))
-        file_name = f'temp_doc_{i}.txt'
-        with open(file_name, 'w', encoding='utf-8') as f:
-            f.write(doc)
-        file = await bot.sdk.files.upload(file_name)
-        files.append(file)
-        remove(file_name)
-    return files
-
-
-async def files_create():
-    with open('data.json', 'r', encoding='utf-8') as file:
-        data = json.load(file)
-    docs = [f'{place["context"]}\n\nimage_url для {place["title"]}: {place["image_url_v2"]}' for place in data['places']]
-    files = []
-    for i, doc in enumerate(docs):
-        file_name = f'temp_doc_{i}.txt'
-        with open(file_name, 'w', encoding='utf-8') as f:
-            f.write(doc)
-        file = await bot.sdk.files.upload(file_name)
-        files.append(file)
-        remove(file_name)
-    return files'''
-
-
 def translation(user_id, key):
     return bot.texts[bot.user_settings[str(user_id)]['language']][key]
 
@@ -100,11 +55,21 @@ async def ru_to_en(text):
         return (await translator.translate(text, src='ru', dest='en')).text.replace('Image_url', 'image_url')
 
 
-async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style="friendly"):
+async def get_image_question(question: str, history: str) -> str:
+    sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
+    llm_model = sdk.models.completions(model_name="yandexgpt", model_version="rc")
+    result = llm_model.run(f'Тебе подаётся на вход вопрос и история диалога пользователя с ботом. Если вопрос, используя местоимения, ссылается на историю диалога (например, \"их\", \"они\" и другие), то составь вопрос так, чтобы контекст был в него включён. В ПРОТИВНОМ СЛУЧАЕ ВЕРНИ ВОПРОС БЕЗ ИЗМЕНЕНИЙ. Вопрос: {question}, история: {history}')
+    return result.alternatives[0].text
+
+
+async def get_answer_prompt(question, history, sdk, prompt_original=True, greeting_style="friendly"):
+    image_question = await get_image_question(question, history)
+    print(f'image_question {image_question}')
     results = bot.chroma_collection.query(
-        query_texts=[question],
+        query_texts=[image_question],
         n_results=3
     )
+    print(history)
     retrieved_docs = results.get('documents', [[]])[0]
     relevant_context = "\n\n".join(retrieved_docs)
     links = get_links(relevant_context)
@@ -163,7 +128,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
         {greeting_instruction}
         {base_instructions}
 
-        Вопрос пользователя: "{question}"
+        Вопрос пользователя: "{image_question}"
 
         Релевантный контекст для ответа:
         {relevant_context}
@@ -177,7 +142,7 @@ async def get_answer_prompt(question, sdk, prompt_original=True, greeting_style=
         {greeting_instruction}
         {base_instructions}
 
-        Вопрос пользователя: "{question}"
+        Вопрос пользователя: "{image_question}"
 
         Контекст:
         {relevant_context}
@@ -204,18 +169,23 @@ async def shorten_links(links: list, question: str, answer: str):
 
 async def get_answer(question: str, user_id: int) -> tuple:
     sdk = YCloudML(folder_id=getenv('FOLDER'), auth=getenv('AUTH'))
+    question_type = ""
 
     memory = bot.user_settings[str(user_id)]['memory']
 
     user_dialogues = []
     for i in range(min(3, len(memory['questions']))):
-        if memory['questions'][i] != '-':
+        if memory['questions'][i] != '-' and memory['answers'][i] != '-':
+            user_dialogues.append({'user': memory['questions'][i], 'bot': memory['answers'][i]})
+        elif memory['questions'][i] != '-':
             user_dialogues.append({'user': memory['questions'][i]})
-        if memory['answers'][i] != '-':
+        elif memory['answers'][i] != '-':
             user_dialogues.append({'bot': memory['answers'][i]})
 
     user_dialogues.append({'user': question})
     dialog_history = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items()])
+    # dialog_history_user_only = "\n".join([f"{k}: {v}" for d in user_dialogues for k, v in d.items() if k == 'user'])
+    dialog_history_2 = '; '.join([f"{k}: {v}" for k, v in user_dialogues[0].items()])
 
     is_first_interaction = all(q == '-' for q in memory['questions'])
 
@@ -234,7 +204,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
         question_type = classify_question_type(question, dialog_history)
 
         if question_type == "museum":
-            answer_text, links = await get_answer_prompt(question, sdk, True, greeting_style=greeting_style)
+            answer_text, links = await get_answer_prompt(question, dialog_history_2, sdk, True, greeting_style=greeting_style)
             links = await shorten_links(links, question, answer_text)
         elif question_type == "route":
             from utils import create_json_chunks
@@ -256,7 +226,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
         else:
             answer_text = answer_from_news(question, dialog_history, greeting_style=greeting_style)
     except Exception as e:
-        answer_text, links = await get_answer_prompt(question, sdk, False, greeting_style=greeting_style)
+        answer_text, links = await get_answer_prompt(question, dialog_history_2, sdk, False, greeting_style=greeting_style)
         links = await shorten_links(links, question, answer_text)
         print(f"Ошибка в pipeline: {e}, использован запасной ответ")
 
@@ -276,7 +246,7 @@ async def get_answer(question: str, user_id: int) -> tuple:
     if bot.user_settings[str(user_id)]['language'] == 'en':
         result_text = await ru_to_en(result_text)
 
-    return result_text, links
+    return result_text, links, question_type
 
 
 async def is_news_useful(question: str) -> str:
@@ -319,10 +289,15 @@ async def get_route(user_id: int, request: str = None, latitude: str = None, lon
     coordinates = ['59.891802' if latitude is None else latitude, '29.913220' if longitude is None else longitude]
     dialogue_user = bot.user_settings[str(user_id)]['memory']['questions'][0]
     dialogue_bot = bot.user_settings[str(user_id)]['memory']['answers'][0]
-    user_dialogues = [
-        {'user': dialogue_user if dialogue_user != '-' else dialogue_user},
-        {'bot': dialogue_bot if dialogue_bot != '-' else dialogue_bot}
-    ]
+    memory = bot.user_settings[str(user_id)]['memory']
+    user_dialogues = []
+    for i in range(min(3, len(memory['questions']))):
+        if memory['questions'][i] != '-' and memory['answers'][i] != '-':
+            user_dialogues.append({'user': memory['questions'][i], 'bot': memory['answers'][i]})
+        elif memory['questions'][i] != '-':
+            user_dialogues.append({'user': memory['questions'][i]})
+        elif memory['answers'][i] != '-':
+            user_dialogues.append({'bot': memory['answers'][i]})
     if request is None:
         res, current_route_json = get_route_suggestion(user_dialogues, data_chunks, initial_coordinates=coordinates)
     else:
@@ -379,27 +354,65 @@ async def add_news():
                 usefulness = int(await is_news_useful(text))
             except ValueError:
                 usefulness = 5
+            text = f'Ссылка на новость: {news}. Новость: {text};'
             print(f'{news}: {usefulness}')
             if usefulness >= 5:
                 data['news'] = [text] + ([data['news']][:9] if len(data['news']) == 10 else data['news'])
             data["number"] += 1
         except Exception:
             b = False
+    write_dictionary(data, 'news.json')
+    print('News task done (add_news)')
     try:
-        url = "https://peterhofmuseum.ru/special/print?subobj"
-        pdf_path = "data.pdf"
-        response = requests.get(url)
-        with open(pdf_path, "wb") as f:
-            f.write(response.content)
-        reader = PdfReader("data.pdf")
-        pdf_text = [page.extract_text() for page in reader.pages]
-        pdf_text = [i for i in pdf_text if i]
-        Path("tickets.json").write_text(
-            json.dumps({"data": pdf_text}, ensure_ascii=False, sort_keys=False, indent=4), encoding='utf-8')
+        await tickets_pdf()
+        await tickets_to_data()
     except Exception as e:
         await print_exception(e)
-    print('method add_news ended and pdf')
-    write_dictionary(data, 'news.json')
+    print('Tickets task done (add_news)')
+
+
+async def tickets_pdf():
+    url = "https://peterhofmuseum.ru/special/print?subobj"
+    pdf_path = "data.pdf"
+    response = requests.get(url)
+    with open(pdf_path, "wb") as f:
+        f.write(response.content)
+    reader = PdfReader("data.pdf")
+    pdf_text = [page.extract_text() for page in reader.pages]
+    pdf_text = [i for i in pdf_text if i]
+    Path("tickets.json").write_text(json.dumps({"data": pdf_text}, ensure_ascii=False, sort_keys=False, indent=4), encoding='utf-8')
+
+
+'''async def tickets_to_data():
+    data = load_dictionary('data.json')
+    today = datetime.datetime.today().strftime("%d.%m.%Y")
+    for i in range(len(data['places'])):
+        ticket_url = f"{data['places'][i]['ticket_url']}{today}"
+        html = requests.get(ticket_url).text
+        soup = BeautifulSoup(html, 'html.parser')
+        target_div = soup.find('div', class_='objects-mode_content-item_info')
+        schedule = target_div.get_text(strip=True, separator=' ')
+        data['places'][i]['context_v2'] = data['places'][i]['context'] + schedule
+    create_or_update_chroma_collection(bot.chroma_collection)'''
+
+
+async def tickets_to_data():
+    data = load_dictionary('data.json')
+    today = datetime.datetime.today().strftime("%d.%m.%Y")
+    data_tickets = load_dictionary('tickets.json')
+    for i in range(len(data['places'])):
+        try:
+            ticket_url = f"{data['places'][i]['ticket_url']}{today}"
+            html = requests.get(ticket_url).text
+            soup = BeautifulSoup(html, 'html.parser')
+            target_div = soup.find('div', class_='objects-mode_content-item_info')
+            schedule = target_div.get_text(strip=True, separator=' ')
+            data_tickets['data'].insert(0,
+                                        f"Расписание \"{data['places'][i]['title']}\" на сегодняшнее число: {schedule}")
+        except Exception as e:
+            print(data['places'][i]['title'])
+            await print_exception(e)
+    write_dictionary(data_tickets, 'tickets.json')
 
 
 @dp.edited_message_handler(lambda message: message.chat.type == 'private', commands=['start'])
@@ -702,22 +715,23 @@ async def print_exception(e: Exception):
 async def on_message(message: types.Message):
     msg = await message.reply(translation(message.from_user.id, 'loading'))
     try:
-        answer, links = await get_answer(message.text, message.from_user.id)
+        answer, links, question_type = await get_answer(message.text, message.from_user.id)
 
         dialog_history = "\n".join([f"user: {q}" if q != '-' else "" for q in
                                     bot.user_settings[str(message.from_user.id)]['memory']['questions']])
         is_route = False
         try:
-            from dialog_pipeline import classify_question_type
-            question_type = classify_question_type(message.text, dialog_history)
+            question_type = question_type if question_type != "" else classify_question_type(message.text, dialog_history)
             is_route = (question_type == "route")
         except Exception as e:
             print(f"Ошибка классификации: {e}")
+        markdown = is_route or ('](http' in answer)
+        if markdown:
+            answer = escape_text_except_links(answer).replace(r'%2С', r'%2C')
 
         reply_markup = None
         if is_route:
             reply_markup = get_route_keyboard(message.from_user.id)
-            answer = escape_text_except_links(answer)
         else:
             answer_split = answer.split('Оценка объекта')
             answer = answer_split[0].strip()
@@ -730,7 +744,7 @@ async def on_message(message: types.Message):
 
     if len(links) == 0:
         try:
-            await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if is_route else None)
+            await msg.edit_text(shorten_text(answer, 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if markdown else None)
         except Exception as e:
             print(f"Ошибка при отправке сообщения: {e}")
             await msg.edit_text(shorten_text(answer.replace('\\', ''), 4080))
@@ -762,7 +776,7 @@ async def on_message(message: types.Message):
         await print_exception(e)
 
     try:
-        await msg.edit_text(shorten_text(answer, 4080) if is_route else shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if is_route else None)
+        await msg.edit_text(shorten_text(answer, 4080) if is_route else shorten_text(answer.replace('\\', ''), 4080), reply_markup=reply_markup if is_route else None, parse_mode='MarkdownV2' if markdown else None)
     except Exception as e:
         print(f"Критическая ошибка в обработке сообщения: {e}")
         await msg.edit_text(translation(message.from_user.id, 'unexpected_error'))
@@ -804,6 +818,7 @@ async def main():
         )
     )
     bot.chroma_collection = init_chroma(remote=True)
+    # await add_news()
     # create_or_update_chroma_collection(bot.chroma_collection)
     asyncio.create_task(news_task())
     await dp.start_polling()
