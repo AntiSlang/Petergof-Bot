@@ -1,0 +1,19 @@
+{
+  "id": 164,
+  "question": "Переставь местами посещение Марли и Монплезира.",
+  "history": "",
+  "expected_type": "route",
+  "route_type": "modify",
+  "classification": {
+    "predicted_type": "route",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "",
+    "evaluation": "",
+    "rating": null,
+    "error": "string indices must be integers"
+  },
+  "answer_type": "route"
+}

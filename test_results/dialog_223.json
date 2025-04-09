@@ -1,0 +1,17 @@
+{
+  "id": 223,
+  "question": "Какое расписание работы у фонтанов в \"Петергофе\"?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "Фонтаны в музее-заповеднике «Петергоф» закрыты на зимний период. Более подробную информацию можно найти в новости по ссылке: https://peterhofmuseum.ru/news/2025/1506.",
+    "evaluation": "1",
+    "rating": 1
+  },
+  "answer_type": "news"
+}

@@ -1,0 +1,17 @@
+{
+  "id": 231,
+  "question": "Какова продолжительность экскурсии по Нижнему парку?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "Продолжительность экскурсии по Нижнему парку не указана в доступных данных.",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

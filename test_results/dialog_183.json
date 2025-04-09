@@ -1,0 +1,17 @@
+{
+  "id": 183,
+  "question": "Какова стоимость посещения музеев \"Петергофа\" для детей до 3 лет?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "Дети до 7 лет (вне зависимости от гражданства) имеют право на бесплатное посещение музея-заповедника «Петергоф».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

@@ -1,0 +1,17 @@
+{
+  "id": 195,
+  "question": "Есть ли в \"Петергофе\" сувенирные магазины?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных новостях и расписаниях нет информации о сувенирных магазинах в «Петергофе».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

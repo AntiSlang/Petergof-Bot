@@ -1,0 +1,46 @@
+{
+  "total_tests": 30,
+  "classification": {
+    "correct": 29,
+    "accuracy": 96.66666666666667
+  },
+  "answer_quality": {
+    "rating_0": 2,
+    "rating_1": 12,
+    "rating_2": 11,
+    "average": 1.36
+  },
+  "by_type": {
+    "museum": {
+      "count": 10,
+      "classification_accuracy": 100.0,
+      "answer_quality": {
+        "rating_0": 0,
+        "rating_1": 4,
+        "rating_2": 6,
+        "average": 1.6
+      }
+    },
+    "route": {
+      "count": 10,
+      "classification_accuracy": 100.0,
+      "answer_quality": {
+        "rating_0": 2,
+        "rating_1": 3,
+        "rating_2": 0,
+        "average": 0.6
+      }
+    },
+    "general": {
+      "count": 10,
+      "classification_accuracy": 90.0,
+      "answer_quality": {
+        "rating_0": 0,
+        "rating_1": 5,
+        "rating_2": 5,
+        "average": 1.5
+      }
+    }
+  },
+  "timestamp": "2025-04-09T14:46:49.860354"
+}

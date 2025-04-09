@@ -1,0 +1,17 @@
+{
+  "id": 190,
+  "question": "Какова стоимость посещения музеев \"Петергофа\" для иностранных туристов?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "Стоимость посещения музеев музея-заповедника «Петергоф» для иностранных туристов не была указана в предоставленных данных.",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}
