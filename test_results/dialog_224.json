@@ -1,0 +1,17 @@
+{
+  "id": 224,
+  "question": "Есть ли в \"Петергофе\" аудиогиды на иностранных языках?",
+  "history": "user: Как долго длится экскурсия по Большому дворцу?\nbot: Экскурсия по Большому дворцу длится около 1 часа.",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных новостях нет информации об аудиогидах на иностранных языках в музее-заповеднике «Петергоф».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

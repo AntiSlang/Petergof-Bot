@@ -1,0 +1,17 @@
+{
+  "id": 130,
+  "question": "Какова стоимость парковки на территории \"Петергофа\"?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных данных нет информации о стоимости парковки на территории «Петергофа».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

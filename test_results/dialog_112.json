@@ -1,0 +1,17 @@
+{
+  "id": 112,
+  "question": "Есть ли в \"Петергофе\" специальные предложения для туристических групп?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "Некоторые музеи Петергофа работают по предварительной заявке при наличии туристической группы от 30 человек. Телефон экскурсионного отдела: 8 (812) 450-58-06.",
+    "evaluation": "1",
+    "rating": 1
+  },
+  "answer_type": "news"
+}

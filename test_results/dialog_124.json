@@ -1,0 +1,17 @@
+{
+  "id": 124,
+  "question": "Какова площадь Нижнего парка в \"Петергофе\"?",
+  "history": "user: Есть ли в Петергофе ночные экскурсии?\nbot: В летний период проводятся ночные экскурсии с подсветкой фонтанов.",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных данных нет информации о площади Нижнего парка в «Петергофе».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}

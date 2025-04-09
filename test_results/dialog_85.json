@@ -1,0 +1,19 @@
+{
+  "id": 85,
+  "question": "Сократи маршрут до 2,5 часов.",
+  "history": "user: Есть ли в парке детская площадка?\nbot: Да, в парке есть несколько детских площадок для маленьких посетителей.",
+  "expected_type": "route",
+  "route_type": "modify",
+  "classification": {
+    "predicted_type": "route",
+    "validation": "Неверно. Правильная классификация: general",
+    "is_correct": false
+  },
+  "answer_test": {
+    "bot_answer": "",
+    "evaluation": "",
+    "rating": null,
+    "error": "string indices must be integers"
+  },
+  "answer_type": "route"
+}

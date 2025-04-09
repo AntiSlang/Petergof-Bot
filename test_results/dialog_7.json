@@ -1,0 +1,19 @@
+{
+  "id": 7,
+  "question": "Увеличь время на осмотр фонтана \"Пирамида\".",
+  "history": "",
+  "expected_type": "route",
+  "route_type": "modify",
+  "classification": {
+    "predicted_type": "route",
+    "validation": "Неверно. Правильная классификация: museum",
+    "is_correct": false
+  },
+  "answer_test": {
+    "bot_answer": "",
+    "evaluation": "",
+    "rating": null,
+    "error": "string indices must be integers"
+  },
+  "answer_type": "route"
+}

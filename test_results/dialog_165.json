@@ -1,0 +1,17 @@
+{
+  "id": 165,
+  "question": "Есть ли в \"Петергофе\" парковка для автомобилей?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных новостях и расписаниях нет информации о наличии парковки для автомобилей в музее-заповеднике «Петергоф».",
+    "evaluation": "1",
+    "rating": 1
+  },
+  "answer_type": "news"
+}

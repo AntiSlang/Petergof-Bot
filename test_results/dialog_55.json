@@ -1,0 +1,17 @@
+{
+  "id": 55,
+  "question": "Какова стоимость аренды аудиогида в \"Петергофе\"?",
+  "history": "",
+  "expected_type": "general",
+  "classification": {
+    "predicted_type": "general",
+    "validation": "Верно",
+    "is_correct": true
+  },
+  "answer_test": {
+    "bot_answer": "В предоставленных данных нет информации о стоимости аренды аудиогида в музее-заповеднике «Петергоф».",
+    "evaluation": "2",
+    "rating": 2
+  },
+  "answer_type": "news"
+}
